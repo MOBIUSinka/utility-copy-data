@@ -9,5 +9,5 @@ public class UtilityCopyDataApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UtilityCopyDataApplication.class, args);
 	}
-// привет
+// приветик
 }

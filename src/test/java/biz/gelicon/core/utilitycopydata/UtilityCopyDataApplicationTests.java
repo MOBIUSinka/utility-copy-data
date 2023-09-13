@@ -8,6 +8,7 @@ class UtilityCopyDataApplicationTests {
 
 	@Test
 	void contextLoads() {
+		int a = 5 + 2;
 	}
 
 }

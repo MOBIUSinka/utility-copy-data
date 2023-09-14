@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
+
+    @Override
+    boolean existsById(Long id);
 }

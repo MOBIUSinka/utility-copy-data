@@ -1,7 +1,6 @@
-package biz.gelicon.core.utilitycopydata.repository;
+package biz.gelicon.core.utilitycopydata.mainrepository;
 
-import biz.gelicon.core.utilitycopydata.model.Department;
-import biz.gelicon.core.utilitycopydata.model.ProguserGroup;
+import biz.gelicon.core.utilitycopydata.mainmodel.ProguserGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

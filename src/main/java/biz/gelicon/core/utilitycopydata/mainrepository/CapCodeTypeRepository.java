@@ -1,6 +1,6 @@
-package biz.gelicon.core.utilitycopydata.repository;
+package biz.gelicon.core.utilitycopydata.mainrepository;
 
-import biz.gelicon.core.utilitycopydata.model.CapCodeType;
+import biz.gelicon.core.utilitycopydata.mainmodel.CapCodeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

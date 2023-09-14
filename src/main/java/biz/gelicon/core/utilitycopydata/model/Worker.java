@@ -150,8 +150,24 @@ public class Worker {
             String workerFamily,
             String workerShortname,
             String workerSurname,
-
+            String workerPosition,
+            String workerEmail,
+            Integer workerStatus,
+            Integer departmentId,
+            Integer workerReportId,
+            String workerFamilyName,
+            String workerPhone
     ) {
-
+        this.workerId = workerId;
+        this.workerFamily = workerFamily;
+        this.workerShortname = workerShortname;
+        this.workerSurname = workerSurname;
+        this.workerPosition = workerPosition;
+        this.workerEmail = workerEmail;
+        this.workerStatus = workerStatus;
+        this.departmentId = departmentId;
+        this.workerReportId = workerReportId;
+        this.workerFamilyName = workerFamilyName;
+        this.workerPhone = workerPhone;
     }
 }

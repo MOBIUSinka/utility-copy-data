@@ -56,6 +56,7 @@ public class MainController {
 
     // *
 
+    // узнать пол по отчеству
     public static Integer getGenderByPatronymic(String patronymic) {
         String patronymicLower = patronymic.toLowerCase();
         if (patronymicLower.endsWith("ович") ||

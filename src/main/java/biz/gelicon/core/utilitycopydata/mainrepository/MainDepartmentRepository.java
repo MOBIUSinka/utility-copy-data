@@ -1,11 +1,11 @@
 package biz.gelicon.core.utilitycopydata.mainrepository;
 
-import biz.gelicon.core.utilitycopydata.mainmodel.Department;
+import biz.gelicon.core.utilitycopydata.mainmodel.MainDepartment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, Long> {
+public interface MainDepartmentRepository extends JpaRepository<MainDepartment, Long> {
 
     boolean existsById(Integer id);
 }

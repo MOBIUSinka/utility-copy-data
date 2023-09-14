@@ -5,7 +5,11 @@ import biz.gelicon.core.utilitycopydata.mainrepository.ProjectRepository;
 import biz.gelicon.core.utilitycopydata.mainrepository.WorkGroupRepository;
 import biz.gelicon.core.utilitycopydata.mainrepository.WorkerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
+
+import javax.xml.crypto.Data;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -47,4 +51,10 @@ public class MainController {
     // *
 
 
+    public void existenceCheckData(
+            JpaRepository<?, ?> mainRepo,
+            JpaRepository<?, ?> testRepo
+    ) {
+
+    }
 }

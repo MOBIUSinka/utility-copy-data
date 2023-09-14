@@ -3,6 +3,7 @@ package biz.gelicon.core.utilitycopydata.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 @Table(name = "department")
 public class Department {
@@ -12,9 +13,11 @@ public class Department {
     public Integer departmentId;
 
     @Column(name = "department_code", nullable = true)
+    @Size(max = 15)
     public String departmentCode;
 
     @Column(name = "department_name", nullable = false)
+    @Size(max = 250)
     public String departmentName;
 
     @Column(name = "department_report_id", nullable = true)

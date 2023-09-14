@@ -13,22 +13,27 @@ public class Worker {
     public Integer workerId;
 
     @Column(name = "worker_family", nullable = false)
-    @Size
+    @Size(max = 30)
     public String workerFamily;
 
     @Column(name = "worker_shortname", nullable = false)
+    @Size(max = 30)
     public String workerShortname;
 
     @Column(name = "worker_surname", nullable = true)
+    @Size(max = 30)
     public String workerSurname;
 
     @Column(name = "worker_position", nullable = false)
+    @Size(max = 50)
     public String workerPosition;
 
     @Column(name = "worker_email", nullable = true)
+    @Size(max = 50)
     public String workerEmail;
 
     @Column(name = "worker_status", nullable = false)
+    @Size(max = 10)
     public Integer workerStatus;
 
     @Column(name = "department_id", nullable = false)
@@ -38,12 +43,15 @@ public class Worker {
     public Integer workerReportId;
 
     @Column(name = "worker_familyname", nullable = false)
+    @Size(max = 30)
     public String workerFamilyName;
 
     @Column(name = "worker_firstname", nullable = false)
+    @Size(max = 30)
     public String workerFirstname;
 
     @Column(name = "worker_phone", nullable = true)
+    @Size(max = 30)
     public String workerPhone;
 
     public Integer getWorkerId() {

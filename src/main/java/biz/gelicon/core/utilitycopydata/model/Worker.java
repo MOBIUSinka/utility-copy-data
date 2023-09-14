@@ -10,49 +10,49 @@ public class Worker {
 
     @Id
     @Column(name = "worker_id", nullable = false)
-    public Integer workerId;
+    private Integer workerId;
 
     @Column(name = "worker_family", nullable = false)
     @Size(max = 30)
-    public String workerFamily;
+    private String workerFamily;
 
     @Column(name = "worker_shortname", nullable = false)
     @Size(max = 30)
-    public String workerShortname;
+    private String workerShortname;
 
     @Column(name = "worker_surname", nullable = true)
     @Size(max = 30)
-    public String workerSurname;
+    private String workerSurname;
 
     @Column(name = "worker_position", nullable = false)
     @Size(max = 50)
-    public String workerPosition;
+    private String workerPosition;
 
     @Column(name = "worker_email", nullable = true)
     @Size(max = 50)
-    public String workerEmail;
+    private String workerEmail;
 
     @Column(name = "worker_status", nullable = false)
     @Size(max = 10)
-    public Integer workerStatus;
+    private Integer workerStatus;
 
     @Column(name = "department_id", nullable = false)
-    public Integer departmentId;
+    private Integer departmentId;
 
     @Column(name = "worker_report_id", nullable = true)
-    public Integer workerReportId;
+    private Integer workerReportId;
 
     @Column(name = "worker_familyname", nullable = false)
     @Size(max = 30)
-    public String workerFamilyName;
+    private String workerFamilyName;
 
     @Column(name = "worker_firstname", nullable = false)
     @Size(max = 30)
-    public String workerFirstname;
+    private String workerFirstname;
 
     @Column(name = "worker_phone", nullable = true)
     @Size(max = 30)
-    public String workerPhone;
+    private String workerPhone;
 
     public Integer getWorkerId() {
         return workerId;

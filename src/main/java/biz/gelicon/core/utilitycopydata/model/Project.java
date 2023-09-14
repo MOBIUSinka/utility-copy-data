@@ -9,25 +9,25 @@ public class Project {
 
     @Id
     @Column(name = "project_id", nullable = false)
-    public Integer projectId;
+    private Integer projectId;
 
     @Column(name = "project_code", nullable = true)
-    public String projectCode;
+    private String projectCode;
 
     @Column(name = "project_name", nullable = false)
-    public String projectName;
+    private String projectName;
 
     @Column(name = "project_status", nullable = false)
-    public Integer projectStatus;
+    private Integer projectStatus;
 
     @Column(name = "department_id", nullable = false)
-    public Integer departmentId;
+    private Integer departmentId;
 
     @Column(name = "worker_id", nullable = true)
-    public Integer workerId;
+    private Integer workerId;
 
     @Column(name = "project_notmodel", nullable = false)
-    public Integer projectNotmodel;
+    private Integer projectNotmodel;
 
     public Integer getProjectId() {
         return projectId;

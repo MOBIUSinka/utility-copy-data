@@ -10,18 +10,18 @@ public class Department {
 
     @Id
     @Column(name = "department_id", nullable = false)
-    public Integer departmentId;
+    private Integer departmentId;
 
     @Column(name = "department_code", nullable = true)
     @Size(max = 15)
-    public String departmentCode;
+    private String departmentCode;
 
     @Column(name = "department_name", nullable = false)
     @Size(max = 250)
-    public String departmentName;
+    private String departmentName;
 
     @Column(name = "department_report_id", nullable = true)
-    public Integer departmentReportId;
+    private Integer departmentReportId;
 
     public Integer getDepartmentId() {
         return departmentId;

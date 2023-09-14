@@ -1,12 +1,16 @@
 package biz.gelicon.core.utilitycopydata.controller;
 
-import biz.gelicon.core.utilitycopydata.mainrepository.*;
+import biz.gelicon.core.utilitycopydata.mainmodel.MainDepartment;
+import biz.gelicon.core.utilitycopydata.mainrepository.MainDepartmentRepository;
+import biz.gelicon.core.utilitycopydata.mainrepository.ProjectRepository;
+import biz.gelicon.core.utilitycopydata.mainrepository.WorkGroupRepository;
+import biz.gelicon.core.utilitycopydata.mainrepository.WorkerRepository;
+import biz.gelicon.core.utilitycopydata.model.Department;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 
-import javax.xml.crypto.Data;
 import java.util.List;
+
 
 @Controller
 public class MainController {
@@ -15,7 +19,7 @@ public class MainController {
     // - main db repositories
     //
     @Autowired
-    DepartmentRepository mainDepartmentRepository;
+    MainDepartmentRepository mainDepartmentRepository;
 
     @Autowired
     ProjectRepository mainProjectRepository;
@@ -26,20 +30,6 @@ public class MainController {
     @Autowired
     WorkGroupRepository mainWorkGroupRepository;
 
-    ///
-
-    @Autowired
-    CapCodeRepository maincapCodeRepository;
-
-    @Autowired
-    CapCodeTypeRepository maincapCodeTypeRepository;
-
-    @Autowired
-    ProguserRepository mainproguserRepository;
-
-    @Autowired
-    ProguserGroupRepository mainproguserGroupRepository;
-
     // *
 
 
@@ -47,6 +37,7 @@ public class MainController {
     //
     // - test db repositories
     //
+
     @Autowired
     biz.gelicon.core.utilitycopydata.repository.DepartmentRepository departmentRepository;
 
@@ -59,27 +50,20 @@ public class MainController {
     @Autowired
     biz.gelicon.core.utilitycopydata.repository.WorkGroupRepository workGroupRepository;
 
-    ///
-
-    @Autowired
-    biz.gelicon.core.utilitycopydata.repository.CapCodeRepository capCodeRepository;
-
-    @Autowired
-    biz.gelicon.core.utilitycopydata.repository.CapCodeTypeRepository capCodeTypeRepository;
-
-    @Autowired
-    biz.gelicon.core.utilitycopydata.repository.ProguserRepository proguserRepository;
-
-    @Autowired
-    biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
-
     // *
 
 
-    public void existenceCheckData(
-            JpaRepository<?, ?> mainRepo,
-            JpaRepository<?, ?> testRepo
-    ) {
-
+    public void copyData() {
+        List<Department> departmentList = departmentRepository.findAll();
+        for(Department department : departmentList) {
+            Integer departmentId = department.getDepartmentId();
+            if (!mainDepartmentRepository.existsById(departmentId)) {
+                MainDepartment mainDepartment = new MainDepartment();
+                mainDepartment.setDepartmentId(department.getDepartmentId());
+                mainDepartment.setDepartmentCode(department.getDepartmentCode());
+                mainDepartment.setDepartmentName(department.getDepartmentName());
+                mainDepartment.setDepartmentReportId(department.getDepartmentReportId());
+            }
+        }
     }
 }

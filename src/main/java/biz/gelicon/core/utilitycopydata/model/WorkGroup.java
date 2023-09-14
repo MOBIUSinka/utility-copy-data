@@ -9,13 +9,13 @@ public class WorkGroup {
 
     @Id
     @Column(name = "workgroup_id", nullable = false)
-    public Integer workGroupId;
+    private Integer workGroupId;
 
     @Column(name = "department_id", nullable = false)
-    public Integer departmentId;
+    private Integer departmentId;
 
     @Column(name = "department_owner_id", nullable = true)
-    public Integer departmentOwnerId;
+    private Integer departmentOwnerId;
 
     public Integer getWorkGroupId() {
         return workGroupId;

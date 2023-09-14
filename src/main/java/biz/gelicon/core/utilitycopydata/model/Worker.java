@@ -10,40 +10,49 @@ public class Worker {
 
     @Id
     @Column(name = "worker_id", nullable = false)
-    public Integer workerId;
+    private Integer workerId;
 
     @Column(name = "worker_family", nullable = false)
-    public String workerFamily;
+    @Size(max = 30)
+    private String workerFamily;
 
     @Column(name = "worker_shortname", nullable = false)
-    public String workerShortname;
+    @Size(max = 30)
+    private String workerShortname;
 
     @Column(name = "worker_surname", nullable = true)
-    public String workerSurname;
+    @Size(max = 30)
+    private String workerSurname;
 
     @Column(name = "worker_position", nullable = false)
-    public String workerPosition;
+    @Size(max = 50)
+    private String workerPosition;
 
     @Column(name = "worker_email", nullable = true)
-    public String workerEmail;
+    @Size(max = 50)
+    private String workerEmail;
 
     @Column(name = "worker_status", nullable = false)
-    public Integer workerStatus;
+    @Size(max = 10)
+    private Integer workerStatus;
 
     @Column(name = "department_id", nullable = false)
-    public Integer departmentId;
+    private Integer departmentId;
 
     @Column(name = "worker_report_id", nullable = true)
-    public Integer workerReportId;
+    private Integer workerReportId;
 
     @Column(name = "worker_familyname", nullable = false)
-    public String workerFamilyName;
+    @Size(max = 30)
+    private String workerFamilyName;
 
     @Column(name = "worker_firstname", nullable = false)
-    public String workerFirstname;
+    @Size(max = 30)
+    private String workerFirstname;
 
     @Column(name = "worker_phone", nullable = true)
-    public String workerPhone;
+    @Size(max = 30)
+    private String workerPhone;
 
     public Integer getWorkerId() {
         return workerId;
@@ -150,8 +159,24 @@ public class Worker {
             String workerFamily,
             String workerShortname,
             String workerSurname,
-
+            String workerPosition,
+            String workerEmail,
+            Integer workerStatus,
+            Integer departmentId,
+            Integer workerReportId,
+            String workerFamilyName,
+            String workerPhone
     ) {
-
+        this.workerId = workerId;
+        this.workerFamily = workerFamily;
+        this.workerShortname = workerShortname;
+        this.workerSurname = workerSurname;
+        this.workerPosition = workerPosition;
+        this.workerEmail = workerEmail;
+        this.workerStatus = workerStatus;
+        this.departmentId = departmentId;
+        this.workerReportId = workerReportId;
+        this.workerFamilyName = workerFamilyName;
+        this.workerPhone = workerPhone;
     }
 }

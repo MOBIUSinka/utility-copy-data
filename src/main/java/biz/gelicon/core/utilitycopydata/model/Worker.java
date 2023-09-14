@@ -13,6 +13,7 @@ public class Worker {
     public Integer workerId;
 
     @Column(name = "worker_family", nullable = false)
+    @Size
     public String workerFamily;
 
     @Column(name = "worker_shortname", nullable = false)

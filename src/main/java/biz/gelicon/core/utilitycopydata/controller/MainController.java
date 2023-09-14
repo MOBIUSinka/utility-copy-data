@@ -1,9 +1,6 @@
 package biz.gelicon.core.utilitycopydata.controller;
 
-import biz.gelicon.core.utilitycopydata.mainrepository.DepartmentRepository;
-import biz.gelicon.core.utilitycopydata.mainrepository.ProjectRepository;
-import biz.gelicon.core.utilitycopydata.mainrepository.WorkGroupRepository;
-import biz.gelicon.core.utilitycopydata.mainrepository.WorkerRepository;
+import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
@@ -29,6 +26,20 @@ public class MainController {
     @Autowired
     WorkGroupRepository mainWorkGroupRepository;
 
+    ///
+
+    @Autowired
+    CapCodeRepository maincapCodeRepository;
+
+    @Autowired
+    CapCodeTypeRepository maincapCodeTypeRepository;
+
+    @Autowired
+    ProguserRepository mainproguserRepository;
+
+    @Autowired
+    ProguserGroupRepository mainproguserGroupRepository;
+
     // *
 
 
@@ -47,6 +58,20 @@ public class MainController {
 
     @Autowired
     biz.gelicon.core.utilitycopydata.repository.WorkGroupRepository workGroupRepository;
+
+    ///
+
+    @Autowired
+    biz.gelicon.core.utilitycopydata.repository.CapCodeRepository capCodeRepository;
+
+    @Autowired
+    biz.gelicon.core.utilitycopydata.repository.CapCodeTypeRepository capCodeTypeRepository;
+
+    @Autowired
+    biz.gelicon.core.utilitycopydata.repository.ProguserRepository proguserRepository;
+
+    @Autowired
+    biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
 
     // *
 

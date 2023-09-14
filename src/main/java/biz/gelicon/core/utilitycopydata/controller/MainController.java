@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MainController {
 
+    //
     // - main db repositories
+    //
     @Autowired
     DepartmentRepository mainDepartmentRepository;
 
@@ -23,9 +25,11 @@ public class MainController {
     @Autowired
     WorkGroupRepository mainWorkGroupRepository;
 
+    // *
 
-
+    //
     // - test db repositories
+    //
     @Autowired
     biz.gelicon.core.utilitycopydata.repository.DepartmentRepository departmentRepository;
 
@@ -37,4 +41,6 @@ public class MainController {
 
     @Autowired
     biz.gelicon.core.utilitycopydata.repository.WorkGroupRepository workGroupRepository;
+
+    // *
 }

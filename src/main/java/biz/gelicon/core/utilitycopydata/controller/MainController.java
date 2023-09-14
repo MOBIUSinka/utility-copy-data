@@ -1,7 +1,9 @@
 package biz.gelicon.core.utilitycopydata.controller;
 
+import biz.gelicon.core.utilitycopydata.mainmodel.MainCapCode;
 import biz.gelicon.core.utilitycopydata.mainmodel.MainDepartment;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
+import biz.gelicon.core.utilitycopydata.model.CapCode;
 import biz.gelicon.core.utilitycopydata.model.Department;
 import biz.gelicon.core.utilitycopydata.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +81,25 @@ public class MainController {
 
         // *
 
+    // Просвирнин
+        public void compareAndTransferRecords() {
 
+            List<CapCode> capCodeList = capCodeRepository.findAll();
+            for (CapCode capCode : capCodeList) {
+                Integer CapCodeId = capCode.getCapCodeId();
+                if(!maincapCodeRepository.existsById(CapCodeId)){
+                    MainCapCode mainCapCode = new MainCapCode();
+                    mainCapCode.setCapCodeId(capCode.getCapCodeId());
+                    mainCapCode.setCapCodeName(capCode.getCapCodeName());
+                    mainCapCode.setCapCodeCode(capCode.getCapCodeCode());
+                    mainCapCode.setCapCodeText(capCode.getCapCodeText());
+                    mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
+                    mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
+                }
+            }
+        }
+
+    // Юшков
     public void copyData() {
         List<Department> departmentList = departmentRepository.findAll();
         for(Department department : departmentList) {

@@ -10,5 +10,5 @@ class UtilityCopyDataApplicationTests {
 	void contextLoads() {
 		int a = 5 + 2;
 	}
-// ттеееессстт
+
 }

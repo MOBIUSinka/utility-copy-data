@@ -1,4 +1,4 @@
-package biz.gelicon.core.utilitycopydata.model;
+package biz.gelicon.core.utilitycopydata.mainmodel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -8,10 +8,9 @@ import jakarta.validation.constraints.Size;
 @Table(name = "CapCode")
 public class CapCode {
     @Id
-    @Size(max = 10)
     @Column(name = "CapCode_Id", nullable = false)
     private Integer CapCodeId;
-    @Size(max = 10)
+
     @Column(name = "CapCodeType_Id", nullable = false)
     private String CapCodeTypeId;
     @Size(max = 10)

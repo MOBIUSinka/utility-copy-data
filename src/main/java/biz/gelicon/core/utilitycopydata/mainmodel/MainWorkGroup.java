@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Table(name = "workgroup")
+@Table(name = "workgroupgits")
 public class MainWorkGroup {
 
     @Id

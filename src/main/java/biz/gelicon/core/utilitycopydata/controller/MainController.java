@@ -97,22 +97,7 @@ public class MainController {
         }
 
     // Юшков
-    // узнать пол по отчеству
-    public static Integer getGenderByPatronymic(String patronymic) {
-        String patronymicLower = patronymic.toLowerCase();
-        if (patronymicLower.endsWith("ович") ||
-                patronymicLower.endsWith("евич") ||
-                patronymicLower.endsWith("ич")) {
-            return 0; // мужской пол
-        } else if (patronymicLower.endsWith("овна") ||
-                patronymicLower.endsWith("евна") ||
-                patronymicLower.endsWith("ична") ||
-                patronymicLower.endsWith("инична")) {
-            return 1; // женский пол
-        } else {
-            return 2; // неизвестно
-        }
-    }
+
 
     public void copyDepartmentData() {
         List<Department> departmentList = departmentRepository.findAll();
@@ -141,6 +126,34 @@ public class MainController {
         }
     }
 
+    // поиск и возвращение табельного номера сотрудника
+    public String searchWorkerTabNumber(
+            String family,
+            String firstname,
+            String surname,
+            Integer reportId
+    ) {
+            String fio = (family.charAt(0) + firstname.charAt(0) + surname.charAt(0) + String.valueOf(reportId));
+            return fio;
+    }
+
+    // узнать пол по отчеству
+    public static Integer getGenderByPatronymic(String patronymic) {
+        String patronymicLower = patronymic.toLowerCase();
+        if (patronymicLower.endsWith("ович") ||
+                patronymicLower.endsWith("евич") ||
+                patronymicLower.endsWith("ич")) {
+            return 0; // мужской пол
+        } else if (patronymicLower.endsWith("овна") ||
+                patronymicLower.endsWith("евна") ||
+                patronymicLower.endsWith("ична") ||
+                patronymicLower.endsWith("инична")) {
+            return 1; // женский пол
+        } else {
+            return 2; // неизвестно
+        }
+    }
+
     public void copyWorkerData() {
         List<Worker> workerList = workerRepository.findAll();
         for(Worker worker : workerList) {
@@ -149,11 +162,16 @@ public class MainController {
                 MainWorker mainWorker = new MainWorker();
                 mainWorker.setWorkerId(worker.getWorkerId());
 
-                String fio = (worker.getWorkerFamily().charAt(0) +
-                        worker.getWorkerFirstname().charAt(0) +
-                        worker.getWorkerSurname().charAt(0) +
-                        String.valueOf(worker.getWorkerReportId()));
-                mainWorker.setWorkerTabNumber(fio);
+//                String fio = (worker.getWorkerFamily().charAt(0) +
+//                        worker.getWorkerFirstname().charAt(0) +
+//                        worker.getWorkerSurname().charAt(0) +
+//                        String.valueOf(worker.getWorkerReportId()));
+
+                mainWorker.setWorkerTabNumber(searchWorkerTabNumber(worker.getWorkerFamily(),
+                        worker.getWorkerFirstname(),
+                        worker.getWorkerSurname(),
+                        worker.getWorkerReportId()));
+
                 mainWorker.setWorkerFamilyname(worker.getWorkerFamilyName());
                 mainWorker.setWorkerFirstname(worker.getWorkerFirstname());
                 mainWorker.setWorkerSurname(worker.getWorkerSurname());

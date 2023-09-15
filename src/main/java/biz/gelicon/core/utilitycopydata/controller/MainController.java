@@ -179,7 +179,8 @@ public class MainController {
                 mainWorker.setWorkerTabNumber(searchWorkerTabNumber(worker.getWorkerFamily(),
                         worker.getWorkerFirstname(),
                         worker.getWorkerSurname(),
-                        worker.getWorkerReportId()));
+                        worker.getWorkerReportId())
+                );
 
                 mainWorker.setWorkerFamilyname(worker.getWorkerFamilyName());
                 mainWorker.setWorkerFirstname(worker.getWorkerFirstname());

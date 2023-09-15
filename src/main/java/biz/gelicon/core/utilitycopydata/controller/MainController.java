@@ -89,7 +89,9 @@ public class MainController {
         // *
 
     // Просвирнин
-        public void compareAndTransferRecords() {
+
+    // Перенос таблицы CapCode
+        public void copyCapCodeData() {
 
             List<CapCode> capCodeList = capCodeRepository.findAll();
             for (CapCode capCode : capCodeList) {
@@ -106,7 +108,55 @@ public class MainController {
             }
         }
 
+    // Перенос таблицы CapCodeType
+        public void CopyCapCodeTypeData() {
 
+            List<CapCodeType> capCodeTypeList = capCodeTypeRepository.findAll();
+            for (CapCodeType capCodeType : capCodeTypeList) {
+                Integer CapCodeTypeId = capCodeType.getCapCodeTypeId();
+                if(!maincapCodeTypeRepository.existsById(CapCodeTypeId)){
+                    MainCapCodeType mainCapCodeType = new MainCapCodeType();
+                    mainCapCodeType.setCapCodeTypeId(capCodeType.getCapCodeTypeId());
+                    mainCapCodeType.setCapCodeTypeName(capCodeType.getCapCodeTypeName());
+                    mainCapCodeType.setCapCodeTypeCode(capCodeType.getCapCodeTypeCode());
+                    mainCapCodeType.setCapCodeTypeText(capCodeType.getCapCodeTypeText());
+                }
+            }
+        }
+    // Перенос таблицы Proguser
+
+    public void copyProguserData() {
+
+        List<Proguser> proguserList = proguserRepository.findAll();
+        for (Proguser proguser : proguserList) {
+            Integer ProguserId = proguser.getProguserId();
+            if(!mainproguserRepository.existsById(ProguserId)){
+                MainProguser mainProguser = new MainProguser();
+                mainProguser.setProguserId(proguser.getProguserId());
+                mainProguser.setProguserName(proguser.getProguserName());
+                mainProguser.setProguserFullname(proguser.getProguserFullname());
+                mainProguser.setProguserGroupId(proguser.getProguserGroupId());
+                mainProguser.setProguserType(proguser.getProguserType());
+                mainProguser.setProguserStatusId(proguser.getProguserStatusId());
+                mainProguser.setProguserWebPassWord(proguser.getProguserWebPassWord());
+                mainProguser.setProguserTimeZoneCode(null);
+            }
+        }
+    }
+    // Перенос таблицы ProguserGroup
+    public void copyProguserGroupData() {
+
+        List<ProguserGroup> proguserGroupList = proguserGroupRepository.findAll();
+        for (ProguserGroup proguserGroup : proguserGroupList) {
+            Integer ProguserGroupId = proguserGroup.getProguserGroupId();
+            if(!mainproguserGroupRepository.existsById(ProguserGroupId)){
+                MainProguserGroup mainProguserGroup = new MainProguserGroup();
+                mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
+                mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
+                mainProguserGroup.setProguserGroupNote(proguserGroup.getProguserGroupNote());
+            }
+        }
+    }
 
     // Юшков
     public void copyDepartmentData() {

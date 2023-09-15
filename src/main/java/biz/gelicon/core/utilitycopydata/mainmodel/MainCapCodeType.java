@@ -20,6 +20,10 @@ public class MainCapCodeType {
     @Column(name = "CapCodeType_Text", nullable = true, columnDefinition = "LONGBLOB")
     private byte[] CapCodeTypeText;
 
+    public MainCapCodeType() {
+
+    }
+
     public Integer getCapCodeTypeId() {
         return CapCodeTypeId;
     }

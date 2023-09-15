@@ -37,6 +37,10 @@ public class MainProguser {
     @Column(name = "Proguser_TimeZoneCode", nullable = true)
     private String ProguserTimeZoneCode;
 
+    public MainProguser() {
+
+    }
+
     public Integer getProguserId() {
         return ProguserId;
     }

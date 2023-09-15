@@ -13,7 +13,7 @@ public class ProguserGroup {
     private Integer ProguserGroupId;
     @Size(max = 50)
     @Column(name = "ProguserGroup_Note", nullable = true)
-    private String CapCodeTypeCode;
+    private String ProguserGroupNote;
     @Size(max = 30)
     @Column(name = "ProguserGroup_Name", nullable = false)
     private String ProguserGroupName;
@@ -30,12 +30,12 @@ public class ProguserGroup {
         ProguserGroupId = proguserGroupId;
     }
 
-    public String getCapCodeTypeCode() {
-        return CapCodeTypeCode;
+    public String getProguserGroupNote() {
+        return ProguserGroupNote;
     }
 
-    public void setCapCodeTypeCode(String capCodeTypeCode) {
-        CapCodeTypeCode = capCodeTypeCode;
+    public void setProguserGroupNote(String proguserGroupNote) {
+        ProguserGroupNote = proguserGroupNote;
     }
 
     public String getProguserGroupName() {
@@ -54,9 +54,9 @@ public class ProguserGroup {
         ProguserGroupVisible = proguserGroupVisible;
     }
 
-    public ProguserGroup(Integer proguserGroupId, String capCodeTypeCode, String proguserGroupName, Integer proguserGroupVisible) {
+    public ProguserGroup(Integer proguserGroupId, String proguserGroupNote, String proguserGroupName, Integer proguserGroupVisible) {
         ProguserGroupId = proguserGroupId;
-        CapCodeTypeCode = capCodeTypeCode;
+        ProguserGroupNote = proguserGroupNote;
         ProguserGroupName = proguserGroupName;
         ProguserGroupVisible = proguserGroupVisible;
     }

@@ -214,7 +214,6 @@ public class MainController {
     }
 
 
-    @Async
     @GetMapping("/start-process")
     public ResponseEntity<String> startProcessToCopyData() {
         List<String> failedOperations = new ArrayList<>();

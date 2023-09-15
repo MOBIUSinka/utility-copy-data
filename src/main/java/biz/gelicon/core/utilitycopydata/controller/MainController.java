@@ -4,12 +4,23 @@ import biz.gelicon.core.utilitycopydata.mainmodel.*;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 
 @Controller
+@RequestMapping("/api")
+@EnableAsync
 public class MainController {
 
 
@@ -96,9 +107,8 @@ public class MainController {
             }
         }
 
+
     // Юшков
-
-
     public void copyDepartmentData() {
         List<Department> departmentList = departmentRepository.findAll();
         for(Department department : departmentList) {
@@ -200,6 +210,61 @@ public class MainController {
                 mainProject.setWorkerId(project.getProjectId());
                 mainProject.setDepartmentId(project.getDepartmentId());
             }
+        }
+    }
+
+
+    @Async
+    @GetMapping("/start-process")
+    public ResponseEntity<String> startProcessToCopyData() {
+        List<String> failedOperations = new ArrayList<>();
+
+        CompletableFuture<Void> copyDepartment = CompletableFuture.runAsync(() -> {
+            try {
+                copyDepartmentData();
+            } catch (Exception e) {
+                failedOperations.add("Copy Department Data: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyWorkGroup = CompletableFuture.runAsync(() -> {
+            try {
+                copyWorkGroupData();
+            } catch (Exception e) {
+                failedOperations.add("Copy WorkGroup Data: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyWorker = CompletableFuture.runAsync(() -> {
+            try {
+                copyWorkerData();
+            } catch (Exception e) {
+                failedOperations.add("Copy Worker Data: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProject = CompletableFuture.runAsync(() -> {
+            try {
+                copyProjectData();
+            } catch (Exception e) {
+                failedOperations.add("Copy Project Data: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> allOf =
+                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject);
+
+        try {
+            allOf.get();
+            if (!failedOperations.isEmpty()) {
+                return ResponseEntity.badRequest()
+                        .body("Не удалось выполнить: \n" + String.join("\n", failedOperations));
+            } else {
+                return ResponseEntity.ok("Все данные были успешно перенесены. ");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
         }
     }
 }

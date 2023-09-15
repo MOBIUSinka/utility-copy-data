@@ -103,14 +103,14 @@ public class MainController {
         if (patronymicLower.endsWith("ович") ||
                 patronymicLower.endsWith("евич") ||
                 patronymicLower.endsWith("ич")) {
-            return 2; // мужской пол
+            return 0; // мужской пол
         } else if (patronymicLower.endsWith("овна") ||
                 patronymicLower.endsWith("евна") ||
                 patronymicLower.endsWith("ична") ||
                 patronymicLower.endsWith("инична")) {
             return 1; // женский пол
         } else {
-            return 0; // неизвестно
+            return 2; // неизвестно
         }
     }
 

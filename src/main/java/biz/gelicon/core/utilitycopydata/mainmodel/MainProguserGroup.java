@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "ProguserGroup")
-public class ProguserGroup {
+public class MainProguserGroup {
     @Id
     @Column(name = "ProguserGroup_Id", nullable = false)
     private Integer ProguserGroupId;
@@ -52,7 +52,7 @@ public class ProguserGroup {
         ProguserGroupVisible = proguserGroupVisible;
     }
 
-    public ProguserGroup(Integer proguserGroupId, String capCodeTypeCode, String proguserGroupName, Integer proguserGroupVisible) {
+    public MainProguserGroup(Integer proguserGroupId, String capCodeTypeCode, String proguserGroupName, Integer proguserGroupVisible) {
         ProguserGroupId = proguserGroupId;
         CapCodeTypeCode = capCodeTypeCode;
         ProguserGroupName = proguserGroupName;

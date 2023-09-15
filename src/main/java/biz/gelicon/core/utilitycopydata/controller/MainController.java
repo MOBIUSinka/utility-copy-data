@@ -6,7 +6,6 @@ import biz.gelicon.core.utilitycopydata.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -222,7 +221,7 @@ public class MainController {
             try {
                 copyDepartmentData();
             } catch (Exception e) {
-                failedOperations.add("Copy Department Data: " + e.getMessage());
+                failedOperations.add("Перенос данных Department: " + e.getMessage());
             }
         });
 
@@ -230,7 +229,7 @@ public class MainController {
             try {
                 copyWorkGroupData();
             } catch (Exception e) {
-                failedOperations.add("Copy WorkGroup Data: " + e.getMessage());
+                failedOperations.add("Перенос данных WorkGroup: " + e.getMessage());
             }
         });
 
@@ -238,7 +237,7 @@ public class MainController {
             try {
                 copyWorkerData();
             } catch (Exception e) {
-                failedOperations.add("Copy Worker Data: " + e.getMessage());
+                failedOperations.add("Перенос данных Worker: " + e.getMessage());
             }
         });
 
@@ -246,7 +245,7 @@ public class MainController {
             try {
                 copyProjectData();
             } catch (Exception e) {
-                failedOperations.add("Copy Project Data: " + e.getMessage());
+                failedOperations.add("Перенос данных Project: " + e.getMessage());
             }
         });
 

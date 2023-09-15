@@ -4,6 +4,7 @@ import biz.gelicon.core.utilitycopydata.mainmodel.*;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -89,26 +90,27 @@ public class MainController {
         // *
 
     // Просвирнин
-        public void compareAndTransferRecords() {
-
-            List<CapCode> capCodeList = capCodeRepository.findAll();
-            for (CapCode capCode : capCodeList) {
-                Integer CapCodeId = capCode.getCapCodeId();
-                if(!maincapCodeRepository.existsById(CapCodeId)){
-                    MainCapCode mainCapCode = new MainCapCode();
-                    mainCapCode.setCapCodeId(capCode.getCapCodeId());
-                    mainCapCode.setCapCodeName(capCode.getCapCodeName());
-                    mainCapCode.setCapCodeCode(capCode.getCapCodeCode());
-                    mainCapCode.setCapCodeText(capCode.getCapCodeText());
-                    mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
-                    mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
-                }
-            }
-        }
+//        public void compareAndTransferRecords() {
+//
+//            List<CapCode> capCodeList = capCodeRepository.findAll();
+//            for (CapCode capCode : capCodeList) {
+//                Integer CapCodeId = capCode.getCapCodeId();
+//                if(!maincapCodeRepository.existsById(CapCodeId)){
+//                    MainCapCode mainCapCode = new MainCapCode();
+//                    mainCapCode.setCapCodeId(capCode.getCapCodeId());
+//                    mainCapCode.setCapCodeName(capCode.getCapCodeName());
+//                    mainCapCode.setCapCodeCode(capCode.getCapCodeCode());
+//                    mainCapCode.setCapCodeText(capCode.getCapCodeText());
+//                    mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
+//                    mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
+//                }
+//            }
+//        }
 
 
 
     // Юшков
+
     public void copyDepartmentData() {
         List<Department> departmentList = departmentRepository.findAll();
         for(Department department : departmentList) {
@@ -122,7 +124,6 @@ public class MainController {
             }
         }
     }
-
 
     public void copyWorkGroupData() {
         List<WorkGroup> workGroupList = workGroupRepository.findAll();

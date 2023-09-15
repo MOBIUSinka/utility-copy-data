@@ -10,15 +10,19 @@ public class MainProguserGroup {
     @Id
     @Column(name = "ProguserGroup_Id", nullable = false)
     private Integer ProguserGroupId;
-    @Size(max = 50)
+    @Size(max = 255)
     @Column(name = "ProguserGroup_Note", nullable = true)
-    private String CapCodeTypeCode;
+    private String ProguserGroupNote;
     @Size(max = 30)
     @Column(name = "ProguserGroup_Name", nullable = false)
     private String ProguserGroupName;
 
     @Column(name = "ProguserGroup_Visible", nullable = false)
     private Integer ProguserGroupVisible;
+
+    public MainProguserGroup() {
+
+    }
 
     public Integer getProguserGroupId() {
         return ProguserGroupId;
@@ -28,12 +32,12 @@ public class MainProguserGroup {
         ProguserGroupId = proguserGroupId;
     }
 
-    public String getCapCodeTypeCode() {
-        return CapCodeTypeCode;
+    public String getProguserGroupNote() {
+        return ProguserGroupNote;
     }
 
-    public void setCapCodeTypeCode(String capCodeTypeCode) {
-        CapCodeTypeCode = capCodeTypeCode;
+    public void setProguserGroupNote(String proguserGroupNote) {
+        ProguserGroupNote = proguserGroupNote;
     }
 
     public String getProguserGroupName() {
@@ -52,9 +56,9 @@ public class MainProguserGroup {
         ProguserGroupVisible = proguserGroupVisible;
     }
 
-    public MainProguserGroup(Integer proguserGroupId, String capCodeTypeCode, String proguserGroupName, Integer proguserGroupVisible) {
+    public MainProguserGroup(Integer proguserGroupId, String proguserGroupNote, String proguserGroupName, Integer proguserGroupVisible) {
         ProguserGroupId = proguserGroupId;
-        CapCodeTypeCode = capCodeTypeCode;
+        ProguserGroupNote = proguserGroupNote;
         ProguserGroupName = proguserGroupName;
         ProguserGroupVisible = proguserGroupVisible;
     }

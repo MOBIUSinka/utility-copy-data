@@ -1,4 +1,4 @@
-package biz.gelicon.core.utilitycopydata.model;
+package biz.gelicon.core.utilitycopydata.mainmodel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -6,21 +6,23 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "ProguserGroup")
-public class ProguserGroup {
+public class MainProguserGroup {
     @Id
-    @Size(max = 10)
     @Column(name = "ProguserGroup_Id", nullable = false)
     private Integer ProguserGroupId;
-    @Size(max = 50)
+    @Size(max = 255)
     @Column(name = "ProguserGroup_Note", nullable = true)
     private String ProguserGroupNote;
     @Size(max = 30)
     @Column(name = "ProguserGroup_Name", nullable = false)
     private String ProguserGroupName;
 
-    @Size(max = 10)
     @Column(name = "ProguserGroup_Visible", nullable = false)
     private Integer ProguserGroupVisible;
+
+    public MainProguserGroup() {
+
+    }
 
     public Integer getProguserGroupId() {
         return ProguserGroupId;
@@ -54,7 +56,7 @@ public class ProguserGroup {
         ProguserGroupVisible = proguserGroupVisible;
     }
 
-    public ProguserGroup(Integer proguserGroupId, String proguserGroupNote, String proguserGroupName, Integer proguserGroupVisible) {
+    public MainProguserGroup(Integer proguserGroupId, String proguserGroupNote, String proguserGroupName, Integer proguserGroupVisible) {
         ProguserGroupId = proguserGroupId;
         ProguserGroupNote = proguserGroupNote;
         ProguserGroupName = proguserGroupName;

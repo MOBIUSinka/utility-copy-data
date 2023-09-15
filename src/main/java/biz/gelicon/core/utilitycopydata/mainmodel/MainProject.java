@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Table(name = "project")
-public class Project {
+public class MainProject {
 
     @Id
     @Column(name = "project_id", nullable = false)
@@ -74,11 +74,11 @@ public class Project {
         this.workerId = workerId;
     }
 
-    public Project() {
+    public MainProject() {
 
     }
 
-    public Project(
+    public MainProject(
             Integer projectId,
             String projectCode,
             String projectName,

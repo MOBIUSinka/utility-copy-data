@@ -1,4 +1,4 @@
-package biz.gelicon.core.utilitycopydata.model;
+package biz.gelicon.core.utilitycopydata.mainmodel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -6,21 +6,18 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "Proguser")
-public class Proguser {
+public class MainProguser {
     @Id
-    @Size(max = 10)
     @Column(name = "Proguser_Id", nullable = false)
     private Integer ProguserId;
 
-    @Size(max = 10)
     @Column(name = "Proguser_Group_Id", nullable = false)
     private Integer ProguserGroupId;
 
-    @Size(max = 10)
     @Column(name = "Proguser_Status_Id", nullable = false)
     private Integer ProguserStatusId;
 
-    @Size(max = 10)
+
     @Column(name = "Proguser_Type", nullable = true)
     private Integer ProguserType;
 
@@ -35,6 +32,14 @@ public class Proguser {
     @Size(max = 128)
     @Column(name = "Proguser_WebPassWord", nullable = true)
     private String ProguserWebPassWord;
+
+    @Size(max = 50)
+    @Column(name = "Proguser_TimeZoneCode", nullable = true)
+    private String ProguserTimeZoneCode;
+
+    public MainProguser() {
+
+    }
 
     public Integer getProguserId() {
         return ProguserId;
@@ -92,7 +97,15 @@ public class Proguser {
         ProguserWebPassWord = proguserWebPassWord;
     }
 
-    public Proguser(Integer proguserId, Integer proguserGroupId, Integer proguserStatusId, Integer proguserType, String proguserName, String proguserFullname, String proguserWebPassWord) {
+    public String getProguserTimeZoneCode() {
+        return ProguserTimeZoneCode;
+    }
+
+    public void setProguserTimeZoneCode(String proguserTimeZoneCode) {
+        ProguserTimeZoneCode = proguserTimeZoneCode;
+    }
+
+    public MainProguser(Integer proguserId, Integer proguserGroupId, Integer proguserStatusId, Integer proguserType, String proguserName, String proguserFullname, String proguserWebPassWord, String proguserTimeZoneCode) {
         ProguserId = proguserId;
         ProguserGroupId = proguserGroupId;
         ProguserStatusId = proguserStatusId;
@@ -100,5 +113,6 @@ public class Proguser {
         ProguserName = proguserName;
         ProguserFullname = proguserFullname;
         ProguserWebPassWord = proguserWebPassWord;
+        ProguserTimeZoneCode = proguserTimeZoneCode;
     }
 }

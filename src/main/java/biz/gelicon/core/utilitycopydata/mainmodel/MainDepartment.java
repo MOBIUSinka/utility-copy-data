@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "department")
-public class Department {
+public class MainDepartment {
 
     @Id
     @Column(name = "department_id", nullable = false)
@@ -55,11 +55,11 @@ public class Department {
         this.departmentReportId = departmentReportId;
     }
 
-    public Department() {
+    public MainDepartment() {
 
     }
 
-    public Department(
+    public MainDepartment(
             Integer id,
             String departmentCode,
             String departmentName,

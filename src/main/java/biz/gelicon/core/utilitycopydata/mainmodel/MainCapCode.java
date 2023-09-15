@@ -1,4 +1,4 @@
-package biz.gelicon.core.utilitycopydata.model;
+package biz.gelicon.core.utilitycopydata.mainmodel;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -6,12 +6,11 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "CapCode")
-public class CapCode {
+public class MainCapCode {
     @Id
-    @Size(max = 10)
     @Column(name = "CapCode_Id", nullable = false)
     private Integer CapCodeId;
-    @Size(max = 10)
+
     @Column(name = "CapCodeType_Id", nullable = false)
     private String CapCodeTypeId;
     @Size(max = 10)
@@ -77,12 +76,15 @@ public class CapCode {
         CapCodeText = capCodeText;
     }
 
-    public CapCode(Integer capCodeId, String capCodeTypeId, String capCodeCode, String capCodeName, String capCodeSortCode, byte[] capCodeText) {
+    public MainCapCode(Integer capCodeId, String capCodeTypeId, String capCodeCode, String capCodeName, String capCodeSortCode, byte[] capCodeText) {
         CapCodeId = capCodeId;
         CapCodeTypeId = capCodeTypeId;
         CapCodeCode = capCodeCode;
         CapCodeName = capCodeName;
         CapCodeSortCode = capCodeSortCode;
         CapCodeText = capCodeText;
+    }
+
+    public MainCapCode() {
     }
 }

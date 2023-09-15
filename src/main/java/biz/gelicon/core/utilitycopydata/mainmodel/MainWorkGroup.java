@@ -4,8 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Table(name = "workgroup")
-public class WorkGroup {
+@Table(name = "workgroupgits")
+public class MainWorkGroup {
 
     @Id
     @Column(name = "workgroup_id", nullable = false)
@@ -41,11 +41,11 @@ public class WorkGroup {
         this.departmentOwnerId = departmentOwnerId;
     }
 
-    public WorkGroup() {
+    public MainWorkGroup() {
 
     }
 
-    public WorkGroup(
+    public MainWorkGroup(
             Integer id,
             Integer departmentId,
             Integer departmentOwnerId

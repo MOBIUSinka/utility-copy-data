@@ -42,16 +42,16 @@ public class MainController {
         ///
 
         @Autowired
-        CapCodeRepository maincapCodeRepository;
+        MainCapCodeRepository maincapCodeRepository;
 
         @Autowired
-        CapCodeTypeRepository maincapCodeTypeRepository;
+        MainCapCodeTypeRepository maincapCodeTypeRepository;
 
         @Autowired
-        ProguserRepository mainproguserRepository;
+        MainProguserRepository mainproguserRepository;
 
         @Autowired
-        ProguserGroupRepository mainproguserGroupRepository;
+        MainProguserGroupRepository mainproguserGroupRepository;
 
         // *
 
@@ -107,6 +107,7 @@ public class MainController {
         }
 
 
+
     // Юшков
     public void copyDepartmentData() {
         List<Department> departmentList = departmentRepository.findAll();
@@ -121,6 +122,7 @@ public class MainController {
             }
         }
     }
+
 
     public void copyWorkGroupData() {
         List<WorkGroup> workGroupList = workGroupRepository.findAll();

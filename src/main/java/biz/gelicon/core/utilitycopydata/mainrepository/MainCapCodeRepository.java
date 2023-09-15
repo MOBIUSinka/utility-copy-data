@@ -1,10 +1,10 @@
 package biz.gelicon.core.utilitycopydata.mainrepository;
 
-import biz.gelicon.core.utilitycopydata.mainmodel.ProguserGroup;
+import biz.gelicon.core.utilitycopydata.mainmodel.MainCapCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProguserGroupRepository extends JpaRepository<ProguserGroup, Long> {
+public interface MainCapCodeRepository extends JpaRepository<MainCapCode, Long> {
     boolean existsById(Integer id);
 }

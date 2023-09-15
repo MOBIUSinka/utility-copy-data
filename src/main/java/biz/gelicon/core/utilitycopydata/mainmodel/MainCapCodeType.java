@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "CapCodeType")
-public class CapCodeType {
+public class MainCapCodeType {
     @Id
     @Column(name = "CapCodeType_Id", nullable = false)
     private Integer CapCodeTypeId;
@@ -52,7 +52,7 @@ public class CapCodeType {
         CapCodeTypeText = capCodeTypeText;
     }
 
-    public CapCodeType(Integer capCodeTypeId, String capCodeTypeCode, String capCodeTypeName, byte[] capCodeTypeText) {
+    public MainCapCodeType(Integer capCodeTypeId, String capCodeTypeCode, String capCodeTypeName, byte[] capCodeTypeText) {
         CapCodeTypeId = capCodeTypeId;
         CapCodeTypeCode = capCodeTypeCode;
         CapCodeTypeName = capCodeTypeName;

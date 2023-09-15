@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "Proguser")
-public class Proguser {
+public class MainProguser {
     @Id
     @Column(name = "Proguser_Id", nullable = false)
     private Integer ProguserId;
@@ -101,7 +101,7 @@ public class Proguser {
         ProguserTimeZoneCode = proguserTimeZoneCode;
     }
 
-    public Proguser(Integer proguserId, Integer proguserGroupId, Integer proguserStatusId, Integer proguserType, String proguserName, String proguserFullname, String proguserWebPassWord, String proguserTimeZoneCode) {
+    public MainProguser(Integer proguserId, Integer proguserGroupId, Integer proguserStatusId, Integer proguserType, String proguserName, String proguserFullname, String proguserWebPassWord, String proguserTimeZoneCode) {
         ProguserId = proguserId;
         ProguserGroupId = proguserGroupId;
         ProguserStatusId = proguserStatusId;

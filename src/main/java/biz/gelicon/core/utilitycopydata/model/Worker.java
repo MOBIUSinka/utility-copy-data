@@ -1,10 +1,12 @@
 package biz.gelicon.core.utilitycopydata.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
+@Entity
 @Table(name = "worker")
 public class Worker {
 

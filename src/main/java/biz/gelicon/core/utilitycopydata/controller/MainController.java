@@ -4,6 +4,7 @@ import biz.gelicon.core.utilitycopydata.mainmodel.*;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -187,7 +188,7 @@ public class MainController {
         }
     }
 
-    // поиск и возвращение табельного номера сотрудника
+    // поиск и возвращение табельного номера сотрудника ( ФИО + reportId )
     public String searchWorkerTabNumber(
             String family,
             String firstname,
@@ -268,13 +269,13 @@ public class MainController {
 
     @PostMapping ("/start-process")
     public ResponseEntity<String> startProcessToCopyData() {
-        List<String> failedOperations = new ArrayList<>();
+        List<String> failedOperations = new ArrayList<>(); // список возможных ошибок
 
         CompletableFuture<Void> copyDepartment = CompletableFuture.runAsync(() -> {
             try {
                 copyDepartmentData();
             } catch (Exception e) {
-                failedOperations.add("Перенос данных Department: " + e.getMessage());
+                failedOperations.add("Перенос данных Department: " + e.getMessage()); // если ошибка, то заносится в список
             }
         });
 
@@ -303,7 +304,7 @@ public class MainController {
         });
 
         CompletableFuture<Void> allOf =
-                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject);
+                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject); // всевозможные
 
         try {
             allOf.get();

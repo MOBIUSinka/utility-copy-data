@@ -19,7 +19,6 @@ import java.util.concurrent.ExecutionException;
 
 @Controller
 @RequestMapping("/api")
-@EnableAsync
 public class MainController {
 
 
@@ -228,11 +227,6 @@ public class MainController {
             if (!mainWorkerRepository.existsByWorkerId(workerId)) {
                 MainWorker mainWorker = new MainWorker();
                 mainWorker.setWorkerId(worker.getWorkerId());
-
-//                String fio = (worker.getWorkerFamily().charAt(0) +
-//                        worker.getWorkerFirstname().charAt(0) +
-//                        worker.getWorkerSurname().charAt(0) +
-//                        String.valueOf(worker.getWorkerReportId()));
 
                 mainWorker.setWorkerTabNumber(searchWorkerTabNumber(worker.getWorkerFamily(),
                         worker.getWorkerFirstname(),

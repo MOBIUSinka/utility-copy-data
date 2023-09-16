@@ -79,6 +79,10 @@ public class CapCode {
         CapCodeText = capCodeText;
     }
 
+    public CapCode() {
+
+    }
+
     public CapCode(Integer capCodeId, String capCodeTypeId, String capCodeCode, String capCodeName, String capCodeSortCode, byte[] capCodeText) {
         CapCodeId = capCodeId;
         CapCodeTypeId = capCodeTypeId;

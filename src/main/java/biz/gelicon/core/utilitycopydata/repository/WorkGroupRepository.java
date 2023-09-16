@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WorkGroupRepository extends JpaRepository<WorkGroup, Long> {
 
-    boolean existsById(Integer id);
+    boolean existsByWorkGroupId(Integer WorkGroupId);
 }

@@ -4,7 +4,6 @@ import biz.gelicon.core.utilitycopydata.mainmodel.*;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -105,6 +104,7 @@ public class MainController {
                     mainCapCode.setCapCodeText(capCode.getCapCodeText());
                     mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
                     mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
+                    maincapCodeRepository.save(mainCapCode);
                 }
             }
         }
@@ -121,6 +121,7 @@ public class MainController {
                     mainCapCodeType.setCapCodeTypeName(capCodeType.getCapCodeTypeName());
                     mainCapCodeType.setCapCodeTypeCode(capCodeType.getCapCodeTypeCode());
                     mainCapCodeType.setCapCodeTypeText(capCodeType.getCapCodeTypeText());
+                    maincapCodeTypeRepository.save(mainCapCodeType);
                 }
             }
         }
@@ -141,6 +142,7 @@ public class MainController {
                 mainProguser.setProguserStatusId(proguser.getProguserStatusId());
                 mainProguser.setProguserWebPassWord(proguser.getProguserWebPassWord());
                 mainProguser.setProguserTimeZoneCode(null);
+                mainproguserRepository.save(mainProguser);
             }
         }
     }
@@ -155,6 +157,7 @@ public class MainController {
                 mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
                 mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
                 mainProguserGroup.setProguserGroupNote(proguserGroup.getProguserGroupNote());
+                mainproguserGroupRepository.save(mainProguserGroup);
             }
         }
     }
@@ -170,6 +173,7 @@ public class MainController {
                 mainDepartment.setDepartmentCode(department.getDepartmentCode());
                 mainDepartment.setDepartmentName(department.getDepartmentName());
                 mainDepartment.setDepartmentReportId(department.getDepartmentReportId());
+                mainDepartmentRepository.save(mainDepartment);
             }
         }
     }
@@ -184,6 +188,7 @@ public class MainController {
                 mainWorkGroup.setWorkGroupId(workGroup.getWorkGroupId());
                 mainWorkGroup.setDepartmentId(workGroup.getDepartmentId());
                 mainWorkGroup.setDepartmentOwnerId(workGroup.getDepartmentOwnerId());
+                mainWorkGroupRepository.save(mainWorkGroup);
             }
         }
     }
@@ -246,6 +251,7 @@ public class MainController {
                 mainWorker.setWorkerContactphone(worker.getWorkerPhone());
                 mainWorker.setWorkerRemark(null);
                 mainWorker.setDepartmentId(worker.getDepartmentId());
+                mainWorkerRepository.save(mainWorker);
             }
         }
     }
@@ -262,6 +268,7 @@ public class MainController {
                 mainProject.setProjectStatus(project.getProjectStatus());
                 mainProject.setWorkerId(project.getProjectId());
                 mainProject.setDepartmentId(project.getDepartmentId());
+                mainProjectRepository.save(mainProject);
             }
         }
     }

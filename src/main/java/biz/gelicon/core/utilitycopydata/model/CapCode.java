@@ -87,4 +87,7 @@ public class CapCode {
         CapCodeSortCode = capCodeSortCode;
         CapCodeText = capCodeText;
     }
+
+    public CapCode() {
+    }
 }

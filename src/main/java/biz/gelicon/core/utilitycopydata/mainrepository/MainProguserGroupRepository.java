@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MainProguserGroupRepository extends JpaRepository<MainProguserGroup, Long> {
-    boolean existsById(Integer id);
+    boolean existsByProguserGroupId(Integer ProguserGroupId);
 }

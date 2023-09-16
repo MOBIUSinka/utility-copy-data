@@ -97,7 +97,7 @@ public class MainController {
             List<CapCode> capCodeList = capCodeRepository.findAll();
             for (CapCode capCode : capCodeList) {
                 Integer CapCodeId = capCode.getCapCodeId();
-                if(!maincapCodeRepository.existsById(CapCodeId)){
+                if(!maincapCodeRepository.existsByCapCodeId(CapCodeId)){
                     MainCapCode mainCapCode = new MainCapCode();
                     mainCapCode.setCapCodeId(capCode.getCapCodeId());
                     mainCapCode.setCapCodeName(capCode.getCapCodeName());
@@ -115,7 +115,7 @@ public class MainController {
             List<CapCodeType> capCodeTypeList = capCodeTypeRepository.findAll();
             for (CapCodeType capCodeType : capCodeTypeList) {
                 Integer CapCodeTypeId = capCodeType.getCapCodeTypeId();
-                if(!maincapCodeTypeRepository.existsById(CapCodeTypeId)){
+                if(!maincapCodeTypeRepository.existsByCapCodeTypeId(CapCodeTypeId)){
                     MainCapCodeType mainCapCodeType = new MainCapCodeType();
                     mainCapCodeType.setCapCodeTypeId(capCodeType.getCapCodeTypeId());
                     mainCapCodeType.setCapCodeTypeName(capCodeType.getCapCodeTypeName());
@@ -131,7 +131,7 @@ public class MainController {
         List<Proguser> proguserList = proguserRepository.findAll();
         for (Proguser proguser : proguserList) {
             Integer ProguserId = proguser.getProguserId();
-            if(!mainproguserRepository.existsById(ProguserId)){
+            if(!mainproguserRepository.existsByProguserId(ProguserId)){
                 MainProguser mainProguser = new MainProguser();
                 mainProguser.setProguserId(proguser.getProguserId());
                 mainProguser.setProguserName(proguser.getProguserName());
@@ -150,7 +150,7 @@ public class MainController {
         List<ProguserGroup> proguserGroupList = proguserGroupRepository.findAll();
         for (ProguserGroup proguserGroup : proguserGroupList) {
             Integer ProguserGroupId = proguserGroup.getProguserGroupId();
-            if(!mainproguserGroupRepository.existsById(ProguserGroupId)){
+            if(!mainproguserGroupRepository.existsByProguserGroupId(ProguserGroupId)){
                 MainProguserGroup mainProguserGroup = new MainProguserGroup();
                 mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
                 mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
@@ -164,7 +164,7 @@ public class MainController {
         List<Department> departmentList = departmentRepository.findAll();
         for(Department department : departmentList) {
             Integer departmentId = department.getDepartmentId();
-            if (!mainDepartmentRepository.existsById(departmentId)) {
+            if (!mainDepartmentRepository.existsByDepartmentId(departmentId)) {
                 MainDepartment mainDepartment = new MainDepartment();
                 mainDepartment.setDepartmentId(department.getDepartmentId());
                 mainDepartment.setDepartmentCode(department.getDepartmentCode());
@@ -179,7 +179,7 @@ public class MainController {
         List<WorkGroup> workGroupList = workGroupRepository.findAll();
         for(WorkGroup workGroup : workGroupList) {
             Integer workGroupId = workGroup.getWorkGroupId();
-            if(!mainWorkGroupRepository.existsById(workGroupId)) {
+            if(!mainWorkGroupRepository.existsByWorkGroupId(workGroupId)) {
                 MainWorkGroup mainWorkGroup = new MainWorkGroup();
                 mainWorkGroup.setWorkGroupId(workGroup.getWorkGroupId());
                 mainWorkGroup.setDepartmentId(workGroup.getDepartmentId());
@@ -220,7 +220,7 @@ public class MainController {
         List<Worker> workerList = workerRepository.findAll();
         for(Worker worker : workerList) {
             Integer workerId = worker.getWorkerId();
-            if (!mainWorkerRepository.existsById(workerId)) {
+            if (!mainWorkerRepository.existsByWorkerId(workerId)) {
                 MainWorker mainWorker = new MainWorker();
                 mainWorker.setWorkerId(worker.getWorkerId());
 
@@ -254,7 +254,7 @@ public class MainController {
         List<Project> projectList = projectRepository.findAll();
         for(Project project : projectList) {
             Integer projectId = project.getProjectId();
-            if (!mainProjectRepository.existsById(projectId)) {
+            if (!mainProjectRepository.existsByProjectId(projectId)) {
                 MainProject mainProject = new MainProject();
                 mainProject.setProjectId(project.getProjectId());
                 mainProject.setProjectCode(project.getProjectCode());

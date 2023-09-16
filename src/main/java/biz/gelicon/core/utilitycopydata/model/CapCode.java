@@ -92,6 +92,4 @@ public class CapCode {
         CapCodeText = capCodeText;
     }
 
-    public CapCode() {
-    }
 }

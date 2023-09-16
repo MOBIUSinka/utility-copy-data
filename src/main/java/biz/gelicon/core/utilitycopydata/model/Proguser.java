@@ -103,4 +103,7 @@ public class Proguser {
         ProguserFullname = proguserFullname;
         ProguserWebPassWord = proguserWebPassWord;
     }
+
+    public Proguser() {
+    }
 }

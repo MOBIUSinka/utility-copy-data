@@ -61,4 +61,7 @@ public class CapCodeType {
         this.CapCodeTypeName = CapCodeTypeName;
         this.CapCodeTypeText = CapCodeTypeText;
     }
+
+    public CapCodeType() {
+    }
 }

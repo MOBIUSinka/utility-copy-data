@@ -62,4 +62,7 @@ public class ProguserGroup {
         ProguserGroupName = proguserGroupName;
         ProguserGroupVisible = proguserGroupVisible;
     }
+
+    public ProguserGroup() {
+    }
 }

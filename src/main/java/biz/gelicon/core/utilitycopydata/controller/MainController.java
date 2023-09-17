@@ -109,7 +109,7 @@ public class MainController {
         }
 
     // Перенос таблицы CapCodeType
-        public void CopyCapCodeTypeData() {
+        public void copyCapCodeTypeData() {
 
             List<CapCodeType> capCodeTypeList = capCodeTypeRepository.findAll();
             for (CapCodeType capCodeType : capCodeTypeList) {
@@ -160,6 +160,59 @@ public class MainController {
             }
         }
     }
+
+//    @PostMapping ("/start-process-egor")
+//    public ResponseEntity<String> ErrorFinder() {
+//        List<String> failedOperations = new ArrayList<>(); // список возможных ошибок
+//
+//        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyCapCodeData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
+//            }
+//        });
+//
+//        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyCapCodeTypeData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
+//            }
+//        });
+//
+//        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyProguserData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
+//            }
+//        });
+//
+//        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyProguserGroupData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
+//            }
+//        });
+//
+//        CompletableFuture<Void> allOf2 =
+//                CompletableFuture.allOf(copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup); // всевозможные
+//
+//        try {
+//            allOf2.get();
+//            if (!failedOperations.isEmpty()) {
+//                return ResponseEntity.badRequest()
+//                        .body("Не удалось выполнить: \n" + String.join("\n", failedOperations));
+//            } else {
+//                return ResponseEntity.ok("Все данные были успешно перенесены. ");
+//            }
+//        } catch (InterruptedException | ExecutionException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+//        }
+//    }
 
     // Юшков
     public void copyDepartmentData() {
@@ -304,8 +357,41 @@ public class MainController {
             }
         });
 
+        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
+            try {
+                copyCapCodeData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
+            }
+        });
+
+        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
+            try {
+                copyCapCodeTypeData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
+            try {
+                copyProguserData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
+            try {
+                copyProguserGroupData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
+            }
+        });
+
         CompletableFuture<Void> allOf =
-                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject); // всевозможные
+                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject,
+                                        copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup); // всевозможные
 
         try {
             allOf.get();

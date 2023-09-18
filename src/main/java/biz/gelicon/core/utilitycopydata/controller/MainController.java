@@ -137,6 +137,7 @@ public class MainController {
             Integer ProguserGroupId = proguserGroup.getProguserGroupId();
             if(!mainProguserGroupRepository.existsByProguserGroupId(ProguserGroupId)){
                 MainProguserGroup mainProguserGroup = new MainProguserGroup();
+                mainProguserGroup.setProguserGroupId(proguserGroup.getProguserGroupId());
                 mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
                 mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
                 mainProguserGroup.setProguserGroupNote(proguserGroup.getProguserGroupNote());

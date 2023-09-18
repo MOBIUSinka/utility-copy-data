@@ -12,19 +12,19 @@ public class MainProguserGroup {
     @Id
     @Column(name = "ProguserGroup_Id", nullable = false)
     private Integer proguserGroupId;
-    @Size(max = 255)
-    @Column(name = "ProguserGroup_Note", nullable = true)
-    private String proguserGroupNote;
+
     @Size(max = 30)
     @Column(name = "ProguserGroup_Name", nullable = false)
     private String proguserGroupName;
+    @Size(max = 255)
+    @Column(name = "ProguserGroup_Note", nullable = true)
+    private String proguserGroupNote;
+
 
     @Column(name = "ProguserGroup_Visible", nullable = false)
     private Integer proguserGroupVisible;
 
-    public MainProguserGroup() {
 
-    }
 
     public Integer getProguserGroupId() {
         return proguserGroupId;
@@ -63,5 +63,8 @@ public class MainProguserGroup {
         this.proguserGroupNote = proguserGroupNote;
         this.proguserGroupName = proguserGroupName;
         this.proguserGroupVisible = proguserGroupVisible;
+    }
+    public MainProguserGroup() {
+
     }
 }

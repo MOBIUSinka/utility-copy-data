@@ -247,15 +247,37 @@ public class MainController {
     }
 
     // поиск и возвращение табельного номера сотрудника ( ФИО + reportId )
+
     public String searchWorkerTabNumber(
             String family,
             String firstname,
             String surname,
             Integer reportId
     ) {
-            String fio = (family.charAt(0) + firstname.charAt(0) + surname.charAt(0) + String.valueOf(reportId));
-            return fio;
+            StringBuilder fioBuilder = new StringBuilder();
+        if (reportId == null) {
+
+            fioBuilder.append(family.charAt(0));
+            fioBuilder.append(firstname.charAt(0));
+            fioBuilder.append(surname.charAt(0));
+        } else {
+            fioBuilder.append(family.charAt(0));
+            fioBuilder.append(firstname.charAt(0));
+            fioBuilder.append(surname.charAt(0));
+            fioBuilder.append(reportId);
+        }
+        return fioBuilder.toString();
     }
+
+//    public String searchWorkerTabNumber(
+//            String family,
+//            String firstname,
+//            String surname,
+//            Integer reportId
+//    ) {
+//            String fio = (family.charAt(0) + firstname.charAt(0) + surname.charAt(0) + String.valueOf(reportId));
+//            return fio;
+//    }
 
     // узнать пол по отчеству
     public static Integer getGenderByPatronymic(String patronymic) {

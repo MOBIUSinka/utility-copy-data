@@ -12,7 +12,7 @@ public class Proguser {
     @Id
     @Size(max = 10)
     @Column(name = "Proguser_Id", nullable = false)
-    private Integer ProguserId;
+    private Integer proguserId;
 
     @Size(max = 10)
     @Column(name = "Proguser_Group_Id", nullable = false)
@@ -39,11 +39,11 @@ public class Proguser {
     private String ProguserWebPassWord;
 
     public Integer getProguserId() {
-        return ProguserId;
+        return proguserId;
     }
 
     public void setProguserId(Integer proguserId) {
-        ProguserId = proguserId;
+        proguserId = proguserId;
     }
 
     public Integer getProguserGroupId() {
@@ -95,7 +95,7 @@ public class Proguser {
     }
 
     public Proguser(Integer proguserId, Integer proguserGroupId, Integer proguserStatusId, Integer proguserType, String proguserName, String proguserFullname, String proguserWebPassWord) {
-        ProguserId = proguserId;
+        this.proguserId = proguserId;
         ProguserGroupId = proguserGroupId;
         ProguserStatusId = proguserStatusId;
         ProguserType = proguserType;

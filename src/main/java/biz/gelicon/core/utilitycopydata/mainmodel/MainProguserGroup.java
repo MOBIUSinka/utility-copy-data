@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Size;
 public class MainProguserGroup {
     @Id
     @Column(name = "ProguserGroup_Id", nullable = false)
-    private Integer ProguserGroupId;
+    private Integer proguserGroupId;
     @Size(max = 255)
     @Column(name = "ProguserGroup_Note", nullable = true)
     private String ProguserGroupNote;
@@ -27,11 +27,11 @@ public class MainProguserGroup {
     }
 
     public Integer getProguserGroupId() {
-        return ProguserGroupId;
+        return proguserGroupId;
     }
 
     public void setProguserGroupId(Integer proguserGroupId) {
-        ProguserGroupId = proguserGroupId;
+        proguserGroupId = proguserGroupId;
     }
 
     public String getProguserGroupNote() {
@@ -59,7 +59,7 @@ public class MainProguserGroup {
     }
 
     public MainProguserGroup(Integer proguserGroupId, String proguserGroupNote, String proguserGroupName, Integer proguserGroupVisible) {
-        ProguserGroupId = proguserGroupId;
+        this.proguserGroupId = proguserGroupId;
         ProguserGroupNote = proguserGroupNote;
         ProguserGroupName = proguserGroupName;
         ProguserGroupVisible = proguserGroupVisible;

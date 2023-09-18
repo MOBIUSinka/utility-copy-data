@@ -40,19 +40,19 @@ public class MainController {
 
         ///
 
-//        @Autowired
-//        MainCapCodeRepository mainCapCodeRepository;
-//
-//        @Autowired
-//        MainCapCodeTypeRepository mainCapCodeTypeRepository;
-//
-//        @Autowired
-//        MainProguserRepository mainProguserRepository;
-//
-//        @Autowired
-//        MainProguserGroupRepository mainProguserGroupRepository;
-//
-//        // *
+        @Autowired
+        MainCapCodeRepository mainCapCodeRepository;
+
+        @Autowired
+        MainCapCodeTypeRepository mainCapCodeTypeRepository;
+
+        @Autowired
+        MainProguserRepository mainProguserRepository;
+
+        @Autowired
+        MainProguserGroupRepository mainProguserGroupRepository;
+
+        // *
 
 
 
@@ -71,148 +71,148 @@ public class MainController {
         @Autowired
         biz.gelicon.core.utilitycopydata.repository.WorkGroupRepository workGroupRepository;
 
-//        ///
-//
-//        @Autowired
-//        biz.gelicon.core.utilitycopydata.repository.CapCodeRepository capCodeRepository;
-//
-//        @Autowired
-//        biz.gelicon.core.utilitycopydata.repository.CapCodeTypeRepository capCodeTypeRepository;
-//
-//        @Autowired
-//        biz.gelicon.core.utilitycopydata.repository.ProguserRepository proguserRepository;
-//
-//        @Autowired
-//        biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
-//
-//        // *
-//
-//    // Просвирнин
-//
-//    // Перенос таблицы CapCode
-//        public void copyCapCodeData() {
-//
-//            List<CapCode> capCodeList = capCodeRepository.findAll();
-//            for (CapCode capCode : capCodeList) {
-//                Integer CapCodeId = capCode.getCapCodeId();
-//                if(!mainCapCodeRepository.existsByCapCodeId(CapCodeId)){
-//                    MainCapCode mainCapCode = new MainCapCode();
-//                    mainCapCode.setCapCodeId(capCode.getCapCodeId());
-//                    mainCapCode.setCapCodeName(capCode.getCapCodeName());
-//                    mainCapCode.setCapCodeCode(capCode.getCapCodeCode());
-//                    mainCapCode.setCapCodeText(capCode.getCapCodeText());
-//                    mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
-//                    mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
-//                    mainCapCodeRepository.save(mainCapCode);
-//                }
-//            }
-//        }
-//
-//    // Перенос таблицы CapCodeType
-//        public void copyCapCodeTypeData() {
-//
-//            List<CapCodeType> capCodeTypeList = capCodeTypeRepository.findAll();
-//            for (CapCodeType capCodeType : capCodeTypeList) {
-//                Integer CapCodeTypeId = capCodeType.getCapCodeTypeId();
-//                if(!mainCapCodeTypeRepository.existsByCapCodeTypeId(CapCodeTypeId)){
-//                    MainCapCodeType mainCapCodeType = new MainCapCodeType();
-//                    mainCapCodeType.setCapCodeTypeId(capCodeType.getCapCodeTypeId());
-//                    mainCapCodeType.setCapCodeTypeName(capCodeType.getCapCodeTypeName());
-//                    mainCapCodeType.setCapCodeTypeCode(capCodeType.getCapCodeTypeCode());
-//                    mainCapCodeType.setCapCodeTypeText(capCodeType.getCapCodeTypeText());
-//                    mainCapCodeTypeRepository.save(mainCapCodeType);
-//                }
-//            }
-//        }
-//    // Перенос таблицы Proguser
-//
-//    public void copyProguserData() {
-//
-//        List<Proguser> proguserList = proguserRepository.findAll();
-//        for (Proguser proguser : proguserList) {
-//            Integer ProguserId = proguser.getProguserId();
-//            if(!mainProguserRepository.existsByProguserId(ProguserId)){
-//                MainProguser mainProguser = new MainProguser();
-//                mainProguser.setProguserId(proguser.getProguserId());
-//                mainProguser.setProguserName(proguser.getProguserName());
-//                mainProguser.setProguserFullname(proguser.getProguserFullname());
-//                mainProguser.setProguserGroupId(proguser.getProguserGroupId());
-//                mainProguser.setProguserType(proguser.getProguserType());
-//                mainProguser.setProguserStatusId(proguser.getProguserStatusId());
-//                mainProguser.setProguserWebPassWord(proguser.getProguserWebPassWord());
-//                mainProguser.setProguserTimeZoneCode(null);
-//                mainProguserRepository.save(mainProguser);
-//            }
-//        }
-//    }
-//    // Перенос таблицы ProguserGroup
-//    public void copyProguserGroupData() {
-//
-//        List<ProguserGroup> proguserGroupList = proguserGroupRepository.findAll();
-//        for (ProguserGroup proguserGroup : proguserGroupList) {
-//            Integer ProguserGroupId = proguserGroup.getProguserGroupId();
-//            if(!mainProguserGroupRepository.existsByProguserGroupId(ProguserGroupId)){
-//                MainProguserGroup mainProguserGroup = new MainProguserGroup();
-//                mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
-//                mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
-//                mainProguserGroup.setProguserGroupNote(proguserGroup.getProguserGroupNote());
-//                mainProguserGroupRepository.save(mainProguserGroup);
-//            }
-//        }
-//    }
+        ///
 
-//    @PostMapping ("/start-process-egor")
-//    public ResponseEntity<String> ErrorFinder() {
-//        List<String> failedOperations = new ArrayList<>(); // список возможных ошибок
-//
-//        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyCapCodeData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
-//            }
-//        });
-//
-//        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyCapCodeTypeData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
-//            }
-//        });
-//
-//        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyProguserData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
-//            }
-//        });
-//
-//        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyProguserGroupData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
-//            }
-//        });
-//
-//        CompletableFuture<Void> allOf2 =
-//                CompletableFuture.allOf(copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup); // всевозможные
-//
-//        try {
-//            allOf2.get();
-//            if (!failedOperations.isEmpty()) {
-//                return ResponseEntity.badRequest()
-//                        .body("Не удалось выполнить: \n" + String.join("\n", failedOperations));
-//            } else {
-//                return ResponseEntity.ok("Все данные были успешно перенесены. ");
-//            }
-//        } catch (InterruptedException | ExecutionException e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
-//        }
-//    }
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.CapCodeRepository capCodeRepository;
+
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.CapCodeTypeRepository capCodeTypeRepository;
+
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ProguserRepository proguserRepository;
+
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
+
+        // *
+
+    // Просвирнин
+
+    // Перенос таблицы CapCode
+        public void copyCapCodeData() {
+
+            List<CapCode> capCodeList = capCodeRepository.findAll();
+            for (CapCode capCode : capCodeList) {
+                Integer CapCodeId = capCode.getCapCodeId();
+                if(!mainCapCodeRepository.existsByCapCodeId(CapCodeId)){
+                    MainCapCode mainCapCode = new MainCapCode();
+                    mainCapCode.setCapCodeId(capCode.getCapCodeId());
+                    mainCapCode.setCapCodeName(capCode.getCapCodeName());
+                    mainCapCode.setCapCodeCode(capCode.getCapCodeCode());
+                    mainCapCode.setCapCodeText(capCode.getCapCodeText());
+                    mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
+                    mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
+                    mainCapCodeRepository.save(mainCapCode);
+                }
+            }
+        }
+
+    // Перенос таблицы CapCodeType
+        public void copyCapCodeTypeData() {
+
+            List<CapCodeType> capCodeTypeList = capCodeTypeRepository.findAll();
+            for (CapCodeType capCodeType : capCodeTypeList) {
+                Integer CapCodeTypeId = capCodeType.getCapCodeTypeId();
+                if(!mainCapCodeTypeRepository.existsByCapCodeTypeId(CapCodeTypeId)){
+                    MainCapCodeType mainCapCodeType = new MainCapCodeType();
+                    mainCapCodeType.setCapCodeTypeId(capCodeType.getCapCodeTypeId());
+                    mainCapCodeType.setCapCodeTypeName(capCodeType.getCapCodeTypeName());
+                    mainCapCodeType.setCapCodeTypeCode(capCodeType.getCapCodeTypeCode());
+                    mainCapCodeType.setCapCodeTypeText(capCodeType.getCapCodeTypeText());
+                    mainCapCodeTypeRepository.save(mainCapCodeType);
+                }
+            }
+        }
+    // Перенос таблицы Proguser
+
+    public void copyProguserData() {
+
+        List<Proguser> proguserList = proguserRepository.findAll();
+        for (Proguser proguser : proguserList) {
+            Integer ProguserId = proguser.getProguserId();
+            if(!mainProguserRepository.existsByProguserId(ProguserId)){
+                MainProguser mainProguser = new MainProguser();
+                mainProguser.setProguserId(proguser.getProguserId());
+                mainProguser.setProguserName(proguser.getProguserName());
+                mainProguser.setProguserFullname(proguser.getProguserFullname());
+                mainProguser.setProguserGroupId(proguser.getProguserGroupId());
+                mainProguser.setProguserType(proguser.getProguserType());
+                mainProguser.setProguserStatusId(proguser.getProguserStatusId());
+                mainProguser.setProguserWebPassWord(proguser.getProguserWebPassWord());
+                mainProguser.setProguserTimeZoneCode(null);
+                mainProguserRepository.save(mainProguser);
+            }
+        }
+    }
+    // Перенос таблицы ProguserGroup
+    public void copyProguserGroupData() {
+
+        List<ProguserGroup> proguserGroupList = proguserGroupRepository.findAll();
+        for (ProguserGroup proguserGroup : proguserGroupList) {
+            Integer ProguserGroupId = proguserGroup.getProguserGroupId();
+            if(!mainProguserGroupRepository.existsByProguserGroupId(ProguserGroupId)){
+                MainProguserGroup mainProguserGroup = new MainProguserGroup();
+                mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
+                mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
+                mainProguserGroup.setProguserGroupNote(proguserGroup.getProguserGroupNote());
+                mainProguserGroupRepository.save(mainProguserGroup);
+            }
+        }
+    }
+
+    @PostMapping ("/start-process-egor")
+    public ResponseEntity<String> ErrorFinder() {
+        List<String> failedOperations = new ArrayList<>(); // список возможных ошибок
+
+        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
+            try {
+                copyCapCodeData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
+            }
+        });
+
+        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
+            try {
+                copyCapCodeTypeData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
+            try {
+                copyProguserData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
+            try {
+                copyProguserGroupData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> allOf2 =
+                CompletableFuture.allOf(copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup); // всевозможные
+
+        try {
+            allOf2.get();
+            if (!failedOperations.isEmpty()) {
+                return ResponseEntity.badRequest()
+                        .body("Не удалось выполнить: \n" + String.join("\n", failedOperations));
+            } else {
+                return ResponseEntity.ok("Все данные были успешно перенесены. ");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
 
     // Юшков
     public void copyDepartmentData() {
@@ -357,42 +357,42 @@ public class MainController {
             }
         });
 
-//        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyCapCodeData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
-//            }
-//        });
-//
-//        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyCapCodeTypeData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
-//            }
-//        });
-//
-//        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyProguserData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
-//            }
-//        });
-//
-//        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
-//            try {
-//                copyProguserGroupData();
-//            } catch (Exception e) {
-//                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
-//            }
-//        });
+        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
+            try {
+                copyCapCodeData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
+            }
+        });
+
+        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
+            try {
+                copyCapCodeTypeData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
+            try {
+                copyProguserData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
+            try {
+                copyProguserGroupData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
+            }
+        });
 
         CompletableFuture<Void> allOf =
-                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject
+                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject, copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup
                                         ); // всевозможные
-      //  copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup
+
 
         try {
             allOf.get();

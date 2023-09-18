@@ -127,9 +127,6 @@ public class MainController {
         }
     // Перенос таблицы Proguser
 
-    public void CheckSysDBA(){
-
-    }
 
     public void copyProguserData() {
 

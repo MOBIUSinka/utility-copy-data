@@ -11,57 +11,57 @@ import jakarta.validation.constraints.Size;
 public class MainProguserGroup {
     @Id
     @Column(name = "ProguserGroup_Id", nullable = false)
-    private Integer ProguserGroupId;
+    private Integer proguserGroupId;
     @Size(max = 255)
     @Column(name = "ProguserGroup_Note", nullable = true)
-    private String ProguserGroupNote;
+    private String proguserGroupNote;
     @Size(max = 30)
     @Column(name = "ProguserGroup_Name", nullable = false)
-    private String ProguserGroupName;
+    private String proguserGroupName;
 
     @Column(name = "ProguserGroup_Visible", nullable = false)
-    private Integer ProguserGroupVisible;
+    private Integer proguserGroupVisible;
 
     public MainProguserGroup() {
 
     }
 
     public Integer getProguserGroupId() {
-        return ProguserGroupId;
+        return proguserGroupId;
     }
 
     public void setProguserGroupId(Integer proguserGroupId) {
-        ProguserGroupId = proguserGroupId;
+        this.proguserGroupId = proguserGroupId;
     }
 
     public String getProguserGroupNote() {
-        return ProguserGroupNote;
+        return proguserGroupNote;
     }
 
     public void setProguserGroupNote(String proguserGroupNote) {
-        ProguserGroupNote = proguserGroupNote;
+        this.proguserGroupNote = proguserGroupNote;
     }
 
     public String getProguserGroupName() {
-        return ProguserGroupName;
+        return proguserGroupName;
     }
 
     public void setProguserGroupName(String proguserGroupName) {
-        ProguserGroupName = proguserGroupName;
+        this.proguserGroupName = proguserGroupName;
     }
 
     public Integer getProguserGroupVisible() {
-        return ProguserGroupVisible;
+        return proguserGroupVisible;
     }
 
     public void setProguserGroupVisible(Integer proguserGroupVisible) {
-        ProguserGroupVisible = proguserGroupVisible;
+        this.proguserGroupVisible = proguserGroupVisible;
     }
 
     public MainProguserGroup(Integer proguserGroupId, String proguserGroupNote, String proguserGroupName, Integer proguserGroupVisible) {
-        ProguserGroupId = proguserGroupId;
-        ProguserGroupNote = proguserGroupNote;
-        ProguserGroupName = proguserGroupName;
-        ProguserGroupVisible = proguserGroupVisible;
+        this.proguserGroupId = proguserGroupId;
+        this.proguserGroupNote = proguserGroupNote;
+        this.proguserGroupName = proguserGroupName;
+        this.proguserGroupVisible = proguserGroupVisible;
     }
 }

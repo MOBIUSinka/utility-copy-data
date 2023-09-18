@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CapCodeTypeRepository extends JpaRepository<CapCodeType, Long> {
-    boolean existsByCapCodeTypeId(Integer CapCodeTypeId);
+    boolean existsByCapCodeTypeId(Integer capCodeTypeId);
 }

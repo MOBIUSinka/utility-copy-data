@@ -12,71 +12,70 @@ public class CapCode {
     @Id
     @Size(max = 10)
     @Column(name = "CapCode_Id", nullable = false)
-    private Integer CapCodeId;
+    private Integer capCodeId;
     @Size(max = 10)
     @Column(name = "CapCodeType_Id", nullable = false)
-    private String CapCodeTypeId;
+    private String capCodeTypeId;
     @Size(max = 10)
     @Column(name = "CapCode_Code", nullable = false)
-    private String CapCodeCode;
+    private String capCodeCode;
 
     @Size(max = 50)
     @Column(name = "CapCode_Name", nullable = false)
-    private String CapCodeName;
+    private String capCodeName;
 
     @Size(max = 10)
     @Column(name = "CapCode_SortCode", nullable = true)
-    private String CapCodeSortCode;
+    private String capCodeSortCode;
 
     @Column(name = "CapCode_Text", nullable = true, columnDefinition = "LONGBLOB")
-    private byte[] CapCodeText;
+    private byte[] capCodeText;
 
     public Integer getCapCodeId() {
-        return CapCodeId;
+        return capCodeId;
     }
 
     public void setCapCodeId(Integer capCodeId) {
-        CapCodeId = capCodeId;
+        this.capCodeId = capCodeId;
     }
 
     public String getCapCodeTypeId() {
-        return CapCodeTypeId;
+        return capCodeTypeId;
     }
 
     public void setCapCodeTypeId(String capCodeTypeId) {
-        CapCodeTypeId = capCodeTypeId;
+        this.capCodeTypeId = capCodeTypeId;
     }
 
     public String getCapCodeCode() {
-        return CapCodeCode;
+        return capCodeCode;
     }
 
-    public void setCapCodeCode(String capCodeCode) {
-        CapCodeCode = capCodeCode;
+    public void setCapCodeCode(String capCodeCode) { this.capCodeCode = capCodeCode;
     }
 
     public String getCapCodeName() {
-        return CapCodeName;
+        return capCodeName;
     }
 
     public void setCapCodeName(String capCodeName) {
-        CapCodeName = capCodeName;
+        this.capCodeName = capCodeName;
     }
 
     public String getCapCodeSortCode() {
-        return CapCodeSortCode;
+        return capCodeSortCode;
     }
 
     public void setCapCodeSortCode(String capCodeSortCode) {
-        CapCodeSortCode = capCodeSortCode;
+        this.capCodeSortCode = capCodeSortCode;
     }
 
     public byte[] getCapCodeText() {
-        return CapCodeText;
+        return capCodeText;
     }
 
     public void setCapCodeText(byte[] capCodeText) {
-        CapCodeText = capCodeText;
+        this.capCodeText = capCodeText;
     }
 
     public CapCode() {
@@ -84,12 +83,12 @@ public class CapCode {
     }
 
     public CapCode(Integer capCodeId, String capCodeTypeId, String capCodeCode, String capCodeName, String capCodeSortCode, byte[] capCodeText) {
-        CapCodeId = capCodeId;
-        CapCodeTypeId = capCodeTypeId;
-        CapCodeCode = capCodeCode;
-        CapCodeName = capCodeName;
-        CapCodeSortCode = capCodeSortCode;
-        CapCodeText = capCodeText;
+        this.capCodeId = capCodeId;
+        this.capCodeTypeId = capCodeTypeId;
+        this.capCodeCode = capCodeCode;
+        this.capCodeName = capCodeName;
+        this.capCodeSortCode = capCodeSortCode;
+        this.capCodeText = capCodeText;
     }
 
 }

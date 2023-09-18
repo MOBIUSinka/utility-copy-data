@@ -11,57 +11,57 @@ import jakarta.validation.constraints.Size;
 public class MainCapCodeType {
     @Id
     @Column(name = "CapCodeType_Id", nullable = false)
-    private Integer CapCodeTypeId;
+    private Integer capCodeTypeId;
     @Size(max = 10)
     @Column(name = "CapCodeType_Code", nullable = false)
-    private String CapCodeTypeCode;
+    private String capCodeTypeCode;
     @Size(max = 50)
     @Column(name = "CapCodeType_Name", nullable = false)
-    private String CapCodeTypeName;
+    private String capCodeTypeName;
 
     @Column(name = "CapCodeType_Text", nullable = true, columnDefinition = "LONGBLOB")
-    private byte[] CapCodeTypeText;
+    private byte[] capCodeTypeText;
 
     public MainCapCodeType() {
 
     }
 
     public Integer getCapCodeTypeId() {
-        return CapCodeTypeId;
+        return capCodeTypeId;
     }
 
     public void setCapCodeTypeId(Integer capCodeTypeId) {
-        CapCodeTypeId = capCodeTypeId;
+        this.capCodeTypeId = capCodeTypeId;
     }
 
     public String getCapCodeTypeCode() {
-        return CapCodeTypeCode;
+        return capCodeTypeCode;
     }
 
     public void setCapCodeTypeCode(String capCodeTypeCode) {
-        CapCodeTypeCode = capCodeTypeCode;
+        this.capCodeTypeCode = capCodeTypeCode;
     }
 
     public String getCapCodeTypeName() {
-        return CapCodeTypeName;
+        return capCodeTypeName;
     }
 
     public void setCapCodeTypeName(String capCodeTypeName) {
-        CapCodeTypeName = capCodeTypeName;
+        this.capCodeTypeName = capCodeTypeName;
     }
 
     public byte[] getCapCodeTypeText() {
-        return CapCodeTypeText;
+        return capCodeTypeText;
     }
 
     public void setCapCodeTypeText(byte[] capCodeTypeText) {
-        CapCodeTypeText = capCodeTypeText;
+        this.capCodeTypeText = capCodeTypeText;
     }
 
     public MainCapCodeType(Integer capCodeTypeId, String capCodeTypeCode, String capCodeTypeName, byte[] capCodeTypeText) {
-        CapCodeTypeId = capCodeTypeId;
-        CapCodeTypeCode = capCodeTypeCode;
-        CapCodeTypeName = capCodeTypeName;
-        CapCodeTypeText = capCodeTypeText;
+        this.capCodeTypeId = capCodeTypeId;
+        this.capCodeTypeCode = capCodeTypeCode;
+        this.capCodeTypeName = capCodeTypeName;
+        this.capCodeTypeText = capCodeTypeText;
     }
 }

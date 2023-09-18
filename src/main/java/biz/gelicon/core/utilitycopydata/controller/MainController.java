@@ -392,7 +392,7 @@ public class MainController {
         CompletableFuture<Void> allOf =
                 CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject, copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup
                                         ); // всевозможные
-
+        //
 
         try {
             allOf.get();

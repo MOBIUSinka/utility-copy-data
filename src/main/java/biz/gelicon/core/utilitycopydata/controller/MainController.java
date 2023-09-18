@@ -3,6 +3,7 @@ package biz.gelicon.core.utilitycopydata.controller;
 import biz.gelicon.core.utilitycopydata.mainmodel.*;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
+import biz.gelicon.core.utilitycopydata.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,35 +23,47 @@ import java.util.concurrent.ExecutionException;
 public class MainController {
 
 
+    //
+    // - main db repositories
+    //
 
-        //
-        // - main db repositories
-        //
-        @Autowired
-        MainDepartmentRepository mainDepartmentRepository;
+        public final MainDepartmentRepository mainDepartmentRepository;
+
+        private final MainProjectRepository mainProjectRepository;
+
+        private final MainWorkerRepository mainWorkerRepository;
+
+        private final MainWorkGroupRepository mainWorkGroupRepository;
+
+        private final MainCapCodeRepository maincapCodeRepository;
+
+        private final MainCapCodeTypeRepository maincapCodeTypeRepository;
+
+        private final MainProguserRepository mainproguserRepository;
+
+        private final MainProguserGroupRepository mainproguserGroupRepository;
 
         @Autowired
-        MainProjectRepository mainProjectRepository;
+        public MainController(MainDepartmentRepository mainDepartmentRepository,
+                              MainProjectRepository mainProjectRepository,
+                              MainWorkerRepository mainWorkerRepository,
+                              MainWorkGroupRepository mainWorkGroupRepository,
+                              MainCapCodeRepository maincapCodeRepository,
+                              MainCapCodeTypeRepository maincapCodeTypeRepository,
+                              MainProguserRepository mainproguserRepository,
+                              MainProguserGroupRepository mainproguserGroupRepository) {
+            this.mainDepartmentRepository = mainDepartmentRepository;
+            this.mainProjectRepository = mainProjectRepository;
+            this.mainWorkerRepository = mainWorkerRepository;
+            this.mainWorkGroupRepository = mainWorkGroupRepository;
 
-        @Autowired
-        MainWorkerRepository mainWorkerRepository;
-
-        @Autowired
-        MainWorkGroupRepository mainWorkGroupRepository;
+            this.maincapCodeRepository = maincapCodeRepository;
+            this.maincapCodeTypeRepository = maincapCodeTypeRepository;
+            this.mainproguserRepository = mainproguserRepository;
+            this.mainproguserGroupRepository = mainproguserGroupRepository;
+        }
 
         ///
-
-        @Autowired
-        MainCapCodeRepository maincapCodeRepository;
-
-        @Autowired
-        MainCapCodeTypeRepository maincapCodeTypeRepository;
-
-        @Autowired
-        MainProguserRepository mainproguserRepository;
-
-        @Autowired
-        MainProguserGroupRepository mainproguserGroupRepository;
 
         // *
 
@@ -60,30 +73,30 @@ public class MainController {
         // - test db repositories
         //
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.DepartmentRepository departmentRepository;
+        DepartmentRepository departmentRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProjectRepository projectRepository;
+        ProjectRepository projectRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.WorkerRepository workerRepository;
+        WorkerRepository workerRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.WorkGroupRepository workGroupRepository;
+        WorkGroupRepository workGroupRepository;
 
         ///
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.CapCodeRepository capCodeRepository;
+        CapCodeRepository capCodeRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.CapCodeTypeRepository capCodeTypeRepository;
+        CapCodeTypeRepository capCodeTypeRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProguserRepository proguserRepository;
+        ProguserRepository proguserRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
+        ProguserGroupRepository proguserGroupRepository;
 
         // *
 

@@ -127,6 +127,10 @@ public class MainController {
         }
     // Перенос таблицы Proguser
 
+    public void CheckSysDBA(){
+
+    }
+
     public void copyProguserData() {
 
         List<Proguser> proguserList = proguserRepository.findAll();

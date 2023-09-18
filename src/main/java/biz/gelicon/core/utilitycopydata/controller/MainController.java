@@ -390,8 +390,7 @@ public class MainController {
         });
 
         CompletableFuture<Void> allOf =
-                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject, copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup
-                                        ); // всевозможные
+                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject, copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup); // всевозможные
         //
 
         try {

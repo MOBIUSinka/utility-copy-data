@@ -261,10 +261,16 @@ public class MainController {
             fioBuilder.append(firstname.charAt(0));
             fioBuilder.append(surname.charAt(0));
         } else {
-            fioBuilder.append(family.charAt(0));
-            fioBuilder.append(firstname.charAt(0));
-            fioBuilder.append(surname.charAt(0));
-            fioBuilder.append(reportId);
+            if (surname == null) {
+                fioBuilder.append(family.charAt(0));
+                fioBuilder.append(firstname.charAt(0));
+                fioBuilder.append(reportId);
+            } else {
+                fioBuilder.append(family.charAt(0));
+                fioBuilder.append(firstname.charAt(0));
+                fioBuilder.append(surname.charAt(0));
+                fioBuilder.append(reportId);
+            }
         }
         return fioBuilder.toString();
     }
@@ -343,6 +349,11 @@ public class MainController {
         }
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        copyWorkerData();
+        return ResponseEntity.ok("Succ");
+    }
 
     @GetMapping("/start-process")
     public ResponseEntity<String> startProcessToCopyData() {

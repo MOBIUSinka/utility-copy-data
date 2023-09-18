@@ -3,7 +3,6 @@ package biz.gelicon.core.utilitycopydata.controller;
 import biz.gelicon.core.utilitycopydata.mainmodel.*;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
-import biz.gelicon.core.utilitycopydata.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,49 +22,37 @@ import java.util.concurrent.ExecutionException;
 public class MainController {
 
 
-    //
-    // - main db repositories
-    //
 
-        public final MainDepartmentRepository mainDepartmentRepository;
-
-        private final MainProjectRepository mainProjectRepository;
-
-        private final MainWorkerRepository mainWorkerRepository;
-
-        private final MainWorkGroupRepository mainWorkGroupRepository;
-
-        private final MainCapCodeRepository maincapCodeRepository;
-
-        private final MainCapCodeTypeRepository maincapCodeTypeRepository;
-
-        private final MainProguserRepository mainproguserRepository;
-
-        private final MainProguserGroupRepository mainproguserGroupRepository;
+        //
+        // - main db repositories
+        //
+        @Autowired
+        MainDepartmentRepository mainDepartmentRepository;
 
         @Autowired
-        public MainController(MainDepartmentRepository mainDepartmentRepository,
-                              MainProjectRepository mainProjectRepository,
-                              MainWorkerRepository mainWorkerRepository,
-                              MainWorkGroupRepository mainWorkGroupRepository,
-                              MainCapCodeRepository maincapCodeRepository,
-                              MainCapCodeTypeRepository maincapCodeTypeRepository,
-                              MainProguserRepository mainproguserRepository,
-                              MainProguserGroupRepository mainproguserGroupRepository) {
-            this.mainDepartmentRepository = mainDepartmentRepository;
-            this.mainProjectRepository = mainProjectRepository;
-            this.mainWorkerRepository = mainWorkerRepository;
-            this.mainWorkGroupRepository = mainWorkGroupRepository;
+        MainProjectRepository mainProjectRepository;
 
-            this.maincapCodeRepository = maincapCodeRepository;
-            this.maincapCodeTypeRepository = maincapCodeTypeRepository;
-            this.mainproguserRepository = mainproguserRepository;
-            this.mainproguserGroupRepository = mainproguserGroupRepository;
-        }
+        @Autowired
+        MainWorkerRepository mainWorkerRepository;
+
+        @Autowired
+        MainWorkGroupRepository mainWorkGroupRepository;
 
         ///
 
-        // *
+//        @Autowired
+//        MainCapCodeRepository mainCapCodeRepository;
+//
+//        @Autowired
+//        MainCapCodeTypeRepository mainCapCodeTypeRepository;
+//
+//        @Autowired
+//        MainProguserRepository mainProguserRepository;
+//
+//        @Autowired
+//        MainProguserGroupRepository mainProguserGroupRepository;
+//
+//        // *
 
 
 
@@ -73,106 +60,106 @@ public class MainController {
         // - test db repositories
         //
         @Autowired
-        DepartmentRepository departmentRepository;
+        biz.gelicon.core.utilitycopydata.repository.DepartmentRepository departmentRepository;
 
         @Autowired
-        ProjectRepository projectRepository;
+        biz.gelicon.core.utilitycopydata.repository.ProjectRepository projectRepository;
 
         @Autowired
-        WorkerRepository workerRepository;
+        biz.gelicon.core.utilitycopydata.repository.WorkerRepository workerRepository;
 
         @Autowired
-        WorkGroupRepository workGroupRepository;
+        biz.gelicon.core.utilitycopydata.repository.WorkGroupRepository workGroupRepository;
 
-        ///
-
-        @Autowired
-        CapCodeRepository capCodeRepository;
-
-        @Autowired
-        CapCodeTypeRepository capCodeTypeRepository;
-
-        @Autowired
-        ProguserRepository proguserRepository;
-
-        @Autowired
-        ProguserGroupRepository proguserGroupRepository;
-
-        // *
-
-    // Просвирнин
-
-    // Перенос таблицы CapCode
-        public void copyCapCodeData() {
-
-            List<CapCode> capCodeList = capCodeRepository.findAll();
-            for (CapCode capCode : capCodeList) {
-                Integer CapCodeId = capCode.getCapCodeId();
-                if(!maincapCodeRepository.existsByCapCodeId(CapCodeId)){
-                    MainCapCode mainCapCode = new MainCapCode();
-                    mainCapCode.setCapCodeId(capCode.getCapCodeId());
-                    mainCapCode.setCapCodeName(capCode.getCapCodeName());
-                    mainCapCode.setCapCodeCode(capCode.getCapCodeCode());
-                    mainCapCode.setCapCodeText(capCode.getCapCodeText());
-                    mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
-                    mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
-                    maincapCodeRepository.save(mainCapCode);
-                }
-            }
-        }
-
-    // Перенос таблицы CapCodeType
-        public void copyCapCodeTypeData() {
-
-            List<CapCodeType> capCodeTypeList = capCodeTypeRepository.findAll();
-            for (CapCodeType capCodeType : capCodeTypeList) {
-                Integer CapCodeTypeId = capCodeType.getCapCodeTypeId();
-                if(!maincapCodeTypeRepository.existsByCapCodeTypeId(CapCodeTypeId)){
-                    MainCapCodeType mainCapCodeType = new MainCapCodeType();
-                    mainCapCodeType.setCapCodeTypeId(capCodeType.getCapCodeTypeId());
-                    mainCapCodeType.setCapCodeTypeName(capCodeType.getCapCodeTypeName());
-                    mainCapCodeType.setCapCodeTypeCode(capCodeType.getCapCodeTypeCode());
-                    mainCapCodeType.setCapCodeTypeText(capCodeType.getCapCodeTypeText());
-                    maincapCodeTypeRepository.save(mainCapCodeType);
-                }
-            }
-        }
-    // Перенос таблицы Proguser
-
-    public void copyProguserData() {
-
-        List<Proguser> proguserList = proguserRepository.findAll();
-        for (Proguser proguser : proguserList) {
-            Integer ProguserId = proguser.getProguserId();
-            if(!mainproguserRepository.existsByProguserId(ProguserId)){
-                MainProguser mainProguser = new MainProguser();
-                mainProguser.setProguserId(proguser.getProguserId());
-                mainProguser.setProguserName(proguser.getProguserName());
-                mainProguser.setProguserFullname(proguser.getProguserFullname());
-                mainProguser.setProguserGroupId(proguser.getProguserGroupId());
-                mainProguser.setProguserType(proguser.getProguserType());
-                mainProguser.setProguserStatusId(proguser.getProguserStatusId());
-                mainProguser.setProguserWebPassWord(proguser.getProguserWebPassWord());
-                mainProguser.setProguserTimeZoneCode(null);
-                mainproguserRepository.save(mainProguser);
-            }
-        }
-    }
-    // Перенос таблицы ProguserGroup
-    public void copyProguserGroupData() {
-
-        List<ProguserGroup> proguserGroupList = proguserGroupRepository.findAll();
-        for (ProguserGroup proguserGroup : proguserGroupList) {
-            Integer ProguserGroupId = proguserGroup.getProguserGroupId();
-            if(!mainproguserGroupRepository.existsByProguserGroupId(ProguserGroupId)){
-                MainProguserGroup mainProguserGroup = new MainProguserGroup();
-                mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
-                mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
-                mainProguserGroup.setProguserGroupNote(proguserGroup.getProguserGroupNote());
-                mainproguserGroupRepository.save(mainProguserGroup);
-            }
-        }
-    }
+//        ///
+//
+//        @Autowired
+//        biz.gelicon.core.utilitycopydata.repository.CapCodeRepository capCodeRepository;
+//
+//        @Autowired
+//        biz.gelicon.core.utilitycopydata.repository.CapCodeTypeRepository capCodeTypeRepository;
+//
+//        @Autowired
+//        biz.gelicon.core.utilitycopydata.repository.ProguserRepository proguserRepository;
+//
+//        @Autowired
+//        biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
+//
+//        // *
+//
+//    // Просвирнин
+//
+//    // Перенос таблицы CapCode
+//        public void copyCapCodeData() {
+//
+//            List<CapCode> capCodeList = capCodeRepository.findAll();
+//            for (CapCode capCode : capCodeList) {
+//                Integer CapCodeId = capCode.getCapCodeId();
+//                if(!mainCapCodeRepository.existsByCapCodeId(CapCodeId)){
+//                    MainCapCode mainCapCode = new MainCapCode();
+//                    mainCapCode.setCapCodeId(capCode.getCapCodeId());
+//                    mainCapCode.setCapCodeName(capCode.getCapCodeName());
+//                    mainCapCode.setCapCodeCode(capCode.getCapCodeCode());
+//                    mainCapCode.setCapCodeText(capCode.getCapCodeText());
+//                    mainCapCode.setCapCodeTypeId(capCode.getCapCodeTypeId());
+//                    mainCapCode.setCapCodeSortCode(capCode.getCapCodeSortCode());
+//                    mainCapCodeRepository.save(mainCapCode);
+//                }
+//            }
+//        }
+//
+//    // Перенос таблицы CapCodeType
+//        public void copyCapCodeTypeData() {
+//
+//            List<CapCodeType> capCodeTypeList = capCodeTypeRepository.findAll();
+//            for (CapCodeType capCodeType : capCodeTypeList) {
+//                Integer CapCodeTypeId = capCodeType.getCapCodeTypeId();
+//                if(!mainCapCodeTypeRepository.existsByCapCodeTypeId(CapCodeTypeId)){
+//                    MainCapCodeType mainCapCodeType = new MainCapCodeType();
+//                    mainCapCodeType.setCapCodeTypeId(capCodeType.getCapCodeTypeId());
+//                    mainCapCodeType.setCapCodeTypeName(capCodeType.getCapCodeTypeName());
+//                    mainCapCodeType.setCapCodeTypeCode(capCodeType.getCapCodeTypeCode());
+//                    mainCapCodeType.setCapCodeTypeText(capCodeType.getCapCodeTypeText());
+//                    mainCapCodeTypeRepository.save(mainCapCodeType);
+//                }
+//            }
+//        }
+//    // Перенос таблицы Proguser
+//
+//    public void copyProguserData() {
+//
+//        List<Proguser> proguserList = proguserRepository.findAll();
+//        for (Proguser proguser : proguserList) {
+//            Integer ProguserId = proguser.getProguserId();
+//            if(!mainProguserRepository.existsByProguserId(ProguserId)){
+//                MainProguser mainProguser = new MainProguser();
+//                mainProguser.setProguserId(proguser.getProguserId());
+//                mainProguser.setProguserName(proguser.getProguserName());
+//                mainProguser.setProguserFullname(proguser.getProguserFullname());
+//                mainProguser.setProguserGroupId(proguser.getProguserGroupId());
+//                mainProguser.setProguserType(proguser.getProguserType());
+//                mainProguser.setProguserStatusId(proguser.getProguserStatusId());
+//                mainProguser.setProguserWebPassWord(proguser.getProguserWebPassWord());
+//                mainProguser.setProguserTimeZoneCode(null);
+//                mainProguserRepository.save(mainProguser);
+//            }
+//        }
+//    }
+//    // Перенос таблицы ProguserGroup
+//    public void copyProguserGroupData() {
+//
+//        List<ProguserGroup> proguserGroupList = proguserGroupRepository.findAll();
+//        for (ProguserGroup proguserGroup : proguserGroupList) {
+//            Integer ProguserGroupId = proguserGroup.getProguserGroupId();
+//            if(!mainProguserGroupRepository.existsByProguserGroupId(ProguserGroupId)){
+//                MainProguserGroup mainProguserGroup = new MainProguserGroup();
+//                mainProguserGroup.setProguserGroupName(proguserGroup.getProguserGroupName());
+//                mainProguserGroup.setProguserGroupVisible(proguserGroup.getProguserGroupVisible());
+//                mainProguserGroup.setProguserGroupNote(proguserGroup.getProguserGroupNote());
+//                mainProguserGroupRepository.save(mainProguserGroup);
+//            }
+//        }
+//    }
 
 //    @PostMapping ("/start-process-egor")
 //    public ResponseEntity<String> ErrorFinder() {
@@ -370,41 +357,42 @@ public class MainController {
             }
         });
 
-        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
-            try {
-                copyCapCodeData();
-            } catch (Exception e) {
-                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
-            }
-        });
-
-        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
-            try {
-                copyCapCodeTypeData();
-            } catch (Exception e) {
-                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
-            }
-        });
-
-        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
-            try {
-                copyProguserData();
-            } catch (Exception e) {
-                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
-            }
-        });
-
-        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
-            try {
-                copyProguserGroupData();
-            } catch (Exception e) {
-                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
-            }
-        });
+//        CompletableFuture<Void> copyCapCode = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyCapCodeData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных CapCode: " + e.getMessage()); // если ошибка, то заносится в список
+//            }
+//        });
+//
+//        CompletableFuture<Void> copyCapCodeType = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyCapCodeTypeData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных CapCodeType: " + e.getMessage());
+//            }
+//        });
+//
+//        CompletableFuture<Void> copyProguser = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyProguserData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных Proguser: " + e.getMessage());
+//            }
+//        });
+//
+//        CompletableFuture<Void> copyProguserGroup = CompletableFuture.runAsync(() -> {
+//            try {
+//                copyProguserGroupData();
+//            } catch (Exception e) {
+//                failedOperations.add("Перенос данных ProguserGroup: " + e.getMessage());
+//            }
+//        });
 
         CompletableFuture<Void> allOf =
-                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject,
-                                        copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup); // всевозможные
+                CompletableFuture.allOf(copyDepartment, copyWorkGroup, copyWorker, copyProject
+                                        ); // всевозможные
+      //  copyCapCode, copyCapCodeType, copyProguser, copyProguserGroup
 
         try {
             allOf.get();

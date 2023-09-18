@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
-    boolean existsByDepartmentId(Integer DepartmentId);
+    boolean existsByDepartmentId(Integer departmentId);
 }

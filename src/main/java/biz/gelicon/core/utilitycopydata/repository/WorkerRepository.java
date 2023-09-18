@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
-    boolean existsByWorkerId(Integer WorkerId);
+    boolean existsByWorkerId(Integer workerId);
 }

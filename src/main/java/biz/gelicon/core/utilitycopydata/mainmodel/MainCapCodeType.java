@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Size;
 public class MainCapCodeType {
     @Id
     @Column(name = "CapCodeType_Id", nullable = false)
-    private Integer CapCodeTypeId;
+    private Integer capCodeTypeId;
     @Size(max = 10)
     @Column(name = "CapCodeType_Code", nullable = false)
     private String CapCodeTypeCode;
@@ -27,11 +27,11 @@ public class MainCapCodeType {
     }
 
     public Integer getCapCodeTypeId() {
-        return CapCodeTypeId;
+        return capCodeTypeId;
     }
 
     public void setCapCodeTypeId(Integer capCodeTypeId) {
-        CapCodeTypeId = capCodeTypeId;
+        capCodeTypeId = capCodeTypeId;
     }
 
     public String getCapCodeTypeCode() {
@@ -59,7 +59,7 @@ public class MainCapCodeType {
     }
 
     public MainCapCodeType(Integer capCodeTypeId, String capCodeTypeCode, String capCodeTypeName, byte[] capCodeTypeText) {
-        CapCodeTypeId = capCodeTypeId;
+        this.capCodeTypeId = capCodeTypeId;
         CapCodeTypeCode = capCodeTypeCode;
         CapCodeTypeName = capCodeTypeName;
         CapCodeTypeText = capCodeTypeText;

@@ -12,7 +12,7 @@ public class ProguserGroup {
     @Id
     @Size(max = 10)
     @Column(name = "ProguserGroup_Id", nullable = false)
-    private Integer ProguserGroupId;
+    private Integer proguserGroupId;
     @Size(max = 50)
     @Column(name = "ProguserGroup_Note", nullable = true)
     private String ProguserGroupNote;
@@ -25,11 +25,11 @@ public class ProguserGroup {
     private Integer ProguserGroupVisible;
 
     public Integer getProguserGroupId() {
-        return ProguserGroupId;
+        return proguserGroupId;
     }
 
     public void setProguserGroupId(Integer proguserGroupId) {
-        ProguserGroupId = proguserGroupId;
+        proguserGroupId = proguserGroupId;
     }
 
     public String getProguserGroupNote() {
@@ -57,7 +57,7 @@ public class ProguserGroup {
     }
 
     public ProguserGroup(Integer proguserGroupId, String proguserGroupNote, String proguserGroupName, Integer proguserGroupVisible) {
-        ProguserGroupId = proguserGroupId;
+        this.proguserGroupId = proguserGroupId;
         ProguserGroupNote = proguserGroupNote;
         ProguserGroupName = proguserGroupName;
         ProguserGroupVisible = proguserGroupVisible;

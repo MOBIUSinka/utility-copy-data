@@ -15,7 +15,7 @@ public class CapCode {
     private Integer capCodeId;
     @Size(max = 10)
     @Column(name = "CapCodeType_Id", nullable = false)
-    private String capCodeTypeId;
+    private Integer capCodeTypeId;
     @Size(max = 10)
     @Column(name = "CapCode_Code", nullable = false)
     private String capCodeCode;
@@ -39,11 +39,11 @@ public class CapCode {
         this.capCodeId = capCodeId;
     }
 
-    public String getCapCodeTypeId() {
+    public Integer getCapCodeTypeId() {
         return capCodeTypeId;
     }
 
-    public void setCapCodeTypeId(String capCodeTypeId) {
+    public void setCapCodeTypeId(Integer capCodeTypeId) {
         this.capCodeTypeId = capCodeTypeId;
     }
 
@@ -82,7 +82,7 @@ public class CapCode {
 
     }
 
-    public CapCode(Integer capCodeId, String capCodeTypeId, String capCodeCode, String capCodeName, String capCodeSortCode, byte[] capCodeText) {
+    public CapCode(Integer capCodeId, Integer capCodeTypeId, String capCodeCode, String capCodeName, String capCodeSortCode, byte[] capCodeText) {
         this.capCodeId = capCodeId;
         this.capCodeTypeId = capCodeTypeId;
         this.capCodeCode = capCodeCode;

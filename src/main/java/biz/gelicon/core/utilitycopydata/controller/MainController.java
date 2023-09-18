@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -125,6 +126,7 @@ public class MainController {
             }
         }
     // Перенос таблицы Proguser
+
 
     public void copyProguserData() {
 
@@ -246,30 +248,67 @@ public class MainController {
     }
 
     // поиск и возвращение табельного номера сотрудника ( ФИО + reportId )
+
     public String searchWorkerTabNumber(
             String family,
             String firstname,
             String surname,
             Integer reportId
     ) {
-            String fio = (family.charAt(0) + firstname.charAt(0) + surname.charAt(0) + String.valueOf(reportId));
-            return fio;
+
+            if (surname == null) {
+                surname = "-";
+            }
+
+            StringBuilder fioBuilder = new StringBuilder();
+        if (reportId == null) {
+
+            fioBuilder.append(family.charAt(0));
+            fioBuilder.append(firstname.charAt(0));
+            fioBuilder.append(surname.charAt(0));
+        } else {
+            if (surname == null) {
+                fioBuilder.append(family.charAt(0));
+                fioBuilder.append(firstname.charAt(0));
+                fioBuilder.append(reportId);
+            } else {
+                fioBuilder.append(family.charAt(0));
+                fioBuilder.append(firstname.charAt(0));
+                fioBuilder.append(surname.charAt(0));
+                fioBuilder.append(reportId);
+            }
+        }
+        return fioBuilder.toString();
     }
+
+//    public String searchWorkerTabNumber(
+//            String family,
+//            String firstname,
+//            String surname,
+//            Integer reportId
+//    ) {
+//            String fio = (family.charAt(0) + firstname.charAt(0) + surname.charAt(0) + String.valueOf(reportId));
+//            return fio;
+//    }
 
     // узнать пол по отчеству
     public static Integer getGenderByPatronymic(String patronymic) {
-        String patronymicLower = patronymic.toLowerCase();
-        if (patronymicLower.endsWith("ович") ||
-                patronymicLower.endsWith("евич") ||
-                patronymicLower.endsWith("ич")) {
-            return 0; // мужской пол
-        } else if (patronymicLower.endsWith("овна") ||
-                patronymicLower.endsWith("евна") ||
-                patronymicLower.endsWith("ична") ||
-                patronymicLower.endsWith("инична")) {
-            return 1; // женский пол
+        if (patronymic != null && !patronymic.isEmpty()) {
+            String patronymicLower = patronymic.toLowerCase();
+            if (patronymicLower.endsWith("ович") ||
+                    patronymicLower.endsWith("евич") ||
+                    patronymicLower.endsWith("ич")) {
+                return 0; // мужской пол
+            } else if (patronymicLower.endsWith("овна") ||
+                    patronymicLower.endsWith("евна") ||
+                    patronymicLower.endsWith("ична") ||
+                    patronymicLower.endsWith("инична")) {
+                return 1; // женский пол
+            } else {
+                return 2; // неизвестно
+            }
         } else {
-            return 2; // неизвестно
+            return 2;
         }
     }
 
@@ -281,6 +320,12 @@ public class MainController {
                 MainWorker mainWorker = new MainWorker();
                 mainWorker.setWorkerId(worker.getWorkerId());
 
+                if (worker.getWorkerSurname() == null) {
+                    mainWorker.setWorkerSurname("-");
+                } else {
+                    mainWorker.setWorkerSurname(worker.getWorkerSurname());
+                }
+
                 mainWorker.setWorkerTabNumber(searchWorkerTabNumber(worker.getWorkerFamily(),
                         worker.getWorkerFirstname(),
                         worker.getWorkerSurname(),
@@ -289,7 +334,9 @@ public class MainController {
 
                 mainWorker.setWorkerFamilyname(worker.getWorkerFamilyName());
                 mainWorker.setWorkerFirstname(worker.getWorkerFirstname());
-                mainWorker.setWorkerSurname(worker.getWorkerSurname());
+
+
+
                 mainWorker.setWorkerSex(getGenderByPatronymic(worker.getWorkerSurname()));
                 mainWorker.setWorkerBirthday(null);
                 mainWorker.setWorkerEmail(worker.getWorkerEmail());
@@ -320,8 +367,18 @@ public class MainController {
         }
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        copyWorkerData();
+        return ResponseEntity.ok("Succ");
+    }
 
-    @PostMapping ("/start-process")
+    @GetMapping("/test-all")
+    public ResponseEntity<List<Worker>> allWorkers() {
+            return ResponseEntity.ok(workerRepository.findAll());
+    }
+
+    @GetMapping("/start-process")
     public ResponseEntity<String> startProcessToCopyData() {
         List<String> failedOperations = new ArrayList<>(); // список возможных ошибок
 

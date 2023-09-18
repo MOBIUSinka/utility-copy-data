@@ -15,7 +15,7 @@ public class Proguser {
     private Integer proguserId;
 
     @Size(max = 10)
-    @Column(name = "Proguser_Group_Id", nullable = false)
+    @Column(name = "ProguserGroup_Id", nullable = false)
     private Integer proguserGroupId;
 
     @Size(max = 10)

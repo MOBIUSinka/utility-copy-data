@@ -13,7 +13,7 @@ public class MainProguser {
     @Column(name = "Proguser_Id", nullable = false)
     private Integer proguserId;
 
-    @Column(name = "Proguser_Group_Id", nullable = false)
+    @Column(name = "ProguserGroup_Id", nullable = false)
     private Integer proguserGroupId;
 
     @Column(name = "Proguser_Status_Id", nullable = false)

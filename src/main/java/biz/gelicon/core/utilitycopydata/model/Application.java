@@ -1,4 +1,4 @@
-package biz.gelicon.core.utilitycopydata.mainmodel;
+package biz.gelicon.core.utilitycopydata.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,9 +29,10 @@ public class Application {
 
     @Column(name = "application_blob", nullable = true, columnDefinition = "LONGBLOB")
     private byte[] applicationBlob;
-    @Size(max = 255)
-    @Column(name = "application_desc", nullable = true)
-    private String applicationDesc;
+
+    @Size(max = 10)
+    @Column(name = "application_status", nullable = false)
+    private Integer applicationStatus;
 
     public Integer getApplicationId() {
         return applicationId;
@@ -81,22 +82,22 @@ public class Application {
         this.applicationBlob = applicationBlob;
     }
 
-    public String getApplicationDesc() {
-        return applicationDesc;
+    public Integer getApplicationStatus() {
+        return applicationStatus;
     }
 
-    public void setApplicationDesc(String applicationDesc) {
-        this.applicationDesc = applicationDesc;
+    public void setApplicationStatus(Integer applicationStatus) {
+        this.applicationStatus = applicationStatus;
     }
 
-    public Application(Integer applicationId, Integer applicationType, String applicationCode, String applicationName, String applicationExe, byte[] applicationBlob, String applicationDesc) {
+    public Application(Integer applicationId, Integer applicationType, String applicationCode, String applicationName, String applicationExe, byte[] applicationBlob, Integer applicationStatus) {
         this.applicationId = applicationId;
         this.applicationType = applicationType;
         this.applicationCode = applicationCode;
         this.applicationName = applicationName;
         this.applicationExe = applicationExe;
         this.applicationBlob = applicationBlob;
-        this.applicationDesc = applicationDesc;
+        this.applicationStatus = applicationStatus;
     }
 
     public Application() {

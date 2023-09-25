@@ -319,6 +319,7 @@ public class MainController {
             return ResponseEntity.ok(workerRepository.findAll());
     }
 
+    // запуск процесса
     @GetMapping("/start-process")
     public ResponseEntity<String> startProcessToCopyData() {
         List<String> failedOperations = new ArrayList<>(); // список возможных ошибок

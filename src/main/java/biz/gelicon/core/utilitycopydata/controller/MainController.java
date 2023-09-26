@@ -355,7 +355,7 @@ public class MainController {
                 mainApplication.setApplicationName(application.getApplicationName());
                 mainApplication.setApplicationExe(application.getApplicationExe());
                 mainApplication.setApplicationBlob(application.getApplicationBlob());
-                mainApplication.setApplicationDesc(application.getApplicationStatus());
+                mainApplication.setApplicationDesc(String.valueOf(application.getApplicationStatus()));
                 mainApplicationRep.save(mainApplication);
             }
         }

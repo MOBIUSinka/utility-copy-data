@@ -379,6 +379,25 @@ public class MainController {
             }
         }
     }
+    // Перенос таблицы Application
+    public void copyApplication() {
+
+        List<Application> applicationList = applicationRep.findAll();
+        for (Application application : applicationList) {
+            Integer applicationId = application.getApplicationId();
+            if(!mainApplicationRep.existsByapplicationId(applicationId)){
+                MainApplication mainApplication = new MainApplication();
+                mainApplication.setApplicationId(application.getApplicationId());
+                mainApplication.setApplicationType(application.getApplicationType());
+                mainApplication.setApplicationCode(application.getApplicationCode());
+                mainApplication.setApplicationName(application.getApplicationName());
+                mainApplication.setApplicationExe(application.getApplicationExe());
+                mainApplication.setApplicationBlob(application.getApplicationBlob());
+                mainApplication.setApplicationDesc(String.valueOf(application.getApplicationStatus()));
+                mainApplicationRep.save(mainApplication);
+            }
+        }
+    }
 
 
     // Юшков
@@ -749,6 +768,144 @@ public class MainController {
 
         try {
             allOf.get();
+            if (!failedOperations.isEmpty()) {
+                return ResponseEntity.badRequest()
+                        .body("Не удалось выполнить: \n" + String.join("\n", failedOperations));
+            } else {
+                return ResponseEntity.ok("Все данные были успешно перенесены. ");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-second-process")
+    public ResponseEntity<String> startSecondProcessToCopyData() {
+        List<String> failedOperations = new ArrayList<>();
+
+        CompletableFuture<Void> copyErrorLink = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorLinkData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorLink: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorStatus = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorStatusData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorStatus: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorComment = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorCommentData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorComment: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyWorkNow = CompletableFuture.runAsync(() -> {
+            try {
+                copyWorkerData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных WorkNow: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyApplcation = CompletableFuture.runAsync(() -> {
+            try {
+                copyApplication();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Application: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyClient = CompletableFuture.runAsync(() -> {
+            try {
+                copyClient();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Client: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorTransitType = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorTransitType();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorTransitType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorTransit = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorTransitData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorTransit: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorType = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorType();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProjectAccountType = CompletableFuture.runAsync(() -> {
+            try {
+                copyProjectAccountType();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProjectAccountType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProjectAccount = CompletableFuture.runAsync(() -> {
+            try {
+                copyProjectAccount();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProjectAccount: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProjectAccountWork = CompletableFuture.runAsync(() -> {
+            try {
+                copyProjectAccountWork();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProjectAccountWork: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyError = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Error: " + e.getMessage());
+            }
+        });
+
+
+
+        CompletableFuture<Void> copyManager = CompletableFuture.runAsync(() -> {
+            try {
+                copyManager();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Manager: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> allOfSecond =
+                CompletableFuture.allOf(copyErrorLink, copyErrorStatus, copyErrorComment, copyWorkNow,
+                        copyApplcation, copyErrorType, copyClient, copyErrorTransitType,
+                        copyManager, copyProjectAccount, copyProjectAccountType,
+                        copyProjectAccountWork, copyError, copyErrorTransit);
+
+        try {
+            allOfSecond.get();
             if (!failedOperations.isEmpty()) {
                 return ResponseEntity.badRequest()
                         .body("Не удалось выполнить: \n" + String.join("\n", failedOperations));

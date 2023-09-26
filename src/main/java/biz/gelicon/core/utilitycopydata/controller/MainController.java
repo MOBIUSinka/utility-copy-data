@@ -810,7 +810,7 @@ public class MainController {
 
         CompletableFuture<Void> copyWorkNow = CompletableFuture.runAsync(() -> {
             try {
-                copyWorkerData();
+                copyWorkNowData();
             } catch (Exception e) {
                 failedOperations.add("Перенос данных WorkNow: " + e.getMessage());
             }

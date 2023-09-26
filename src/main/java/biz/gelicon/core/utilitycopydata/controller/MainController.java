@@ -3,6 +3,9 @@ package biz.gelicon.core.utilitycopydata.controller;
 import biz.gelicon.core.utilitycopydata.mainmodel.*;
 import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
+import biz.gelicon.core.utilitycopydata.model.Error;
+import biz.gelicon.core.utilitycopydata.repository.*;
+import com.sun.tools.javac.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -27,6 +31,8 @@ public class MainController {
         //
         // - main db repositories
         //
+
+    // Юшков
         @Autowired
         MainDepartmentRepository mainDepartmentRepository;
 
@@ -39,7 +45,27 @@ public class MainController {
         @Autowired
         MainWorkGroupRepository mainWorkGroupRepository;
 
+        @Autowired
+        MainErrorRepository mainErrorRepository;
+
+        @Autowired
+        MainErrorLinkRepository mainErrorLinkRepository;
+
+        @Autowired
+        MainErrorTransitRepository mainErrorTransitRepository;
+
+        @Autowired
+        MainErrorCommentRepository mainErrorCommentRepository;
+
+        @Autowired
+        MainErrorStatusRepository mainErrorStatusRepository;
+
+        @Autowired
+        MainWorkNowRepository mainWorkNowRepository;
+
         ///
+
+    // Просвирнин
 
         @Autowired
         MainCapCodeRepository mainCapCodeRepository;
@@ -53,6 +79,23 @@ public class MainController {
         @Autowired
         MainProguserGroupRepository mainProguserGroupRepository;
 
+        @Autowired
+        MainApplicationRep mainApplicationRep;
+        @Autowired
+        MainErrorTypeRep mainErrorTypeRep;
+        @Autowired
+        MainClientRep mainClientRep;
+        @Autowired
+        MainProjectAccountTypeRep mainProjectAccountTypeRep;
+        @Autowired
+        MainProjectAccountRep mainProjectAccountRep;
+        @Autowired
+        MainProjectAccountWorkRep mainProjectAccountWorkRep;
+        @Autowired
+        MainErrorTransitTypeRep mainErrorTransitTypeRep;
+        @Autowired
+        MainManagerRep mainManagerRep;
+
         // *
 
 
@@ -60,6 +103,8 @@ public class MainController {
         //
         // - test db repositories
         //
+
+    // Юшков
         @Autowired
         biz.gelicon.core.utilitycopydata.repository.DepartmentRepository departmentRepository;
 
@@ -72,7 +117,27 @@ public class MainController {
         @Autowired
         biz.gelicon.core.utilitycopydata.repository.WorkGroupRepository workGroupRepository;
 
+        @Autowired
+        ErrorRepository errorRepository;
+
+        @Autowired
+        ErrorLinkRepository errorLinkRepository;
+
+        @Autowired
+        ErrorCommentRepository errorCommentRepository;
+
+        @Autowired
+        ErrorStatusRepository errorStatusRepository;
+
+        @Autowired
+        ErrorTransitRepository errorTransitRepository;
+
+        @Autowired
+        WorkNowRepository workNowRepository;
+
         ///
+
+    // Просвирнин
 
         @Autowired
         biz.gelicon.core.utilitycopydata.repository.CapCodeRepository capCodeRepository;
@@ -85,6 +150,23 @@ public class MainController {
 
         @Autowired
         biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
+
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ErrorTypeRep errorTypeRep;
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ClientRep clientRep;
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ProjectAccountTypeRep projectAccountTypeRep;
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ProjectAccountRep projectAccountRep;
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ProjectAccountWorkRep projectAccountWorkRep;
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ApplicationRep applicationRep;
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ErrorTransitTypeRep errorTransitTypeRep;
+        @Autowired
+        biz.gelicon.core.utilitycopydata.repository.ManagerRep managerRep;
 
         // *
 
@@ -162,6 +244,138 @@ public class MainController {
                 mainProguser.setProguserWebPassWord(proguser.getProguserWebPassWord());
                 mainProguser.setProguserTimeZoneCode(null);
                 mainProguserRepository.save(mainProguser);
+            }
+        }
+    }
+
+    // Перенос таблицы ErrorTransitType
+    public void copyErrorTransitType() {
+
+        List<ErrorTransitType> errorTransitTypeList = errorTransitTypeRep.findAll();
+        for (ErrorTransitType errorTransitType : errorTransitTypeList) {
+            Integer errortransittypeId = errorTransitType.getErrorTransitTypeId();
+            if(!mainErrorTransitTypeRep.existsByerrortransittypeId(errortransittypeId)){
+                MainErrorTransitType mainErrorTransitType = new MainErrorTransitType();
+                mainErrorTransitType.setErrortransittypeId(errorTransitType.getErrorTransitTypeId());
+                mainErrorTransitType.setErrortransittypeCode(errorTransitType.getErrorTransitTypeCode());
+                mainErrorTransitType.setErrortransittypeDescript(errorTransitType.getErrorTransitTypeDescript());
+                mainErrorTransitType.setErrortransittypeDirection(errorTransitType.getErrorTransitTypeDirection());
+                mainErrorTransitType.setErrortransittypeModule(errorTransitType.getErrorTransitTypeModule());
+                mainErrorTransitType.setErrortransittypeClose(errorTransitType.getErrorTransitTypeClose());
+                mainErrorTransitType.setErrortransittypeName(errorTransitType.getErrorTransitTypeName());
+                mainErrorTransitType.setErrortransittypeResult(errorTransitType.getErrorTransitTypeResult());
+                mainErrorTransitType.setErrortransittypeSendtoskv(errorTransitType.getErrorTransitTypeSendtoskv());
+                mainErrorTransitType.setErrortransittypeNotificexcl(errorTransitType.getErrorTransitTypeNotificexcl());
+                mainErrorTransitType.setTowhomId(errorTransitType.getTowHomId());
+                mainErrorTransitType.setWitherrortransittypeId(errorTransitType.getWithErrorTransitTypeId());
+                mainErrorTransitTypeRep.save(mainErrorTransitType);
+            }
+        }
+    }
+
+    // Перенос таблицы ErrorType
+    public void copyErrorType() {
+
+        List<ErrorType> errorTypeList = errorTypeRep.findAll();
+        for (ErrorType errorType : errorTypeList) {
+            Integer errortypeId = errorType.getErrortypeId();
+            if(!mainErrorTypeRep.existsByerrortypeId(errortypeId)){
+                MainErrorType mainErrorType = new MainErrorType();
+                mainErrorType.setErrortypeId(errorType.getErrortypeId());
+                mainErrorType.setErrortypeCode(errorType.getErrortypeCode());
+                mainErrorType.setErrortypeName(errorType.getErrortypeName());
+                mainErrorTypeRep.save(mainErrorType);
+            }
+        }
+    }
+
+    // Перенос таблицы Client
+    public void copyClient() {
+
+        List<Client> clientList = clientRep.findAll();
+        for (Client client : clientList) {
+            Integer clientId = client.getClientId();
+            if(!mainClientRep.existsByClientId(clientId)){
+                MainClient mainClient = new MainClient();
+                mainClient.setClientId(client.getClientId());
+                mainClient.setClientCode(client.getClientCode());
+                mainClient.setClientStatus(client.getClientStatus());
+                mainClient.setClientReportId(client.getClientReportId());
+                mainClient.setClientName(client.getClientName());
+                mainClientRep.save(mainClient);
+            }
+        }
+    }
+
+    // Перенос таблицы ProjectAccountType
+    public void copyProjectAccountType() {
+
+        List<ProjectAccountType> projectAccountTypeList = projectAccountTypeRep.findAll();
+        for (ProjectAccountType projectAccountType : projectAccountTypeList) {
+            Integer projectaccounttypeId = projectAccountType.getProjectaccounttypeId();
+            if(!mainProjectAccountTypeRep.existsByprojectaccounttypeId(projectaccounttypeId)){
+                MainProjectAccountType mainProjectAccountType = new MainProjectAccountType();
+                mainProjectAccountType.setProjectaccounttypeId(projectAccountType.getProjectaccounttypeId());
+                mainProjectAccountType.setProjectaccounttypeName(projectAccountType.getProjectaccounttypeName());
+                mainProjectAccountTypeRep.save(mainProjectAccountType);
+            }
+        }
+    }
+    // Перенос таблицы ProjectAccount
+    public void copyProjectAccount() {
+
+        List<ProjectAccount> projectAccountList = projectAccountRep.findAll();
+        for (ProjectAccount projectAccount : projectAccountList) {
+            Integer projectAccountId = projectAccount.getProjectaccountid();
+            if(!mainProjectAccountRep.existsByprojectaccountid(projectAccountId)){
+                MainProjectAccount mainProjectAccount = new MainProjectAccount();
+                mainProjectAccount.setProjectaccountid(projectAccount.getProjectaccountid());
+                mainProjectAccount.setProjectaccountCode(projectAccount.getProjectaccountCode());
+                mainProjectAccount.setClientid(projectAccount.getClientid());
+                mainProjectAccount.setProjectaccounttypeId(projectAccount.getProjectaccounttypeId());
+                mainProjectAccount.setProjectaccountName(projectAccount.getProjectaccountName());
+                mainProjectAccount.setProjectaccountStatus(projectAccount.getProjectaccountStatus());
+                mainProjectAccount.setProjectaccountreportId(projectAccount.getProjectaccountreportId());
+                mainProjectAccount.setWorkerId(projectAccount.getWorkerId());
+                mainProjectAccountRep.save(mainProjectAccount);
+            }
+        }
+    }
+    // Перенос таблицы ProjectAccountWork
+    public void copyProjectAccountWork() {
+
+        List<ProjectAccountWork> projectAccountWorkList = projectAccountWorkRep.findAll();
+        for (ProjectAccountWork projectAccountWork : projectAccountWorkList) {
+            Integer projectAccountWorkId = projectAccountWork.getProjectaccountingworkId();
+            if(!mainProjectAccountWorkRep.existsByprojectaccountingworkId(projectAccountWorkId)){
+                MainProjectAccountWork mainProjectAccountWork = new MainProjectAccountWork();
+                mainProjectAccountWork.setProjectaccountingworkId(projectAccountWork.getProjectaccountingworkId());
+                mainProjectAccountWork.setProjectaccountId(projectAccountWork.getProjectaccountId());
+                mainProjectAccountWork.setProjectaccountworkName(projectAccountWork.getProjectaccountworkName());
+                mainProjectAccountWork.setProjectaccountworkReportId(projectAccountWork.getProjectaccountworkReportId());
+                mainProjectAccountWork.setProjectaccountworkStatus(projectAccountWork.getProjectaccountworkStatus());
+                mainProjectAccountWorkRep.save(mainProjectAccountWork);
+            }
+        }
+    }
+
+    // Перенос таблицы Manager
+    public void copyManager() {
+
+        List<Manager> managerList = managerRep.findAll();
+        for (Manager manager : managerList) {
+            Integer managerId = manager.getManagerId();
+            if(!mainManagerRep.existsBymanagerId(managerId)){
+                MainManager mainManager = new MainManager();
+                mainManager.setManagerId(manager.getManagerId());
+                mainManager.setWorkerId(manager.getWorkerId());
+                mainManager.setErrortransittypeId(manager.getErrortransittypeId());
+                mainManager.setProjectId(manager.getProjectId());
+                mainManager.setApplicationId(manager.getApplicationId());
+                mainManager.setProjectaccountId(manager.getProjectaccountId());
+                mainManager.setProjectaccountingworkId(manager.getProjectaccountingworkId());
+                mainManager.setDepartmentId(manager.getDepartmentId());
+                mainManagerRep.save(mainManager);
             }
         }
     }
@@ -304,6 +518,144 @@ public class MainController {
                 mainProject.setWorkerId(project.getProjectId());
                 mainProject.setDepartmentId(project.getDepartmentId());
                 mainProjectRepository.save(mainProject);
+            }
+        }
+    }
+
+    public void copyErrorData() {
+        List<Error> errorList = errorRepository.findAll();
+        for (Error error : errorList) {
+            Integer errorId = error.getErrorId();
+            if (!mainErrorRepository.existsByErrorId(errorId)) {
+                MainError mainError = new MainError();
+                mainError.setErrorId(error.getErrorId());
+                mainError.setErrorTypeId(error.getErrorTypeId());
+                mainError.setProjectId(error.getProjectId());
+                mainError.setClientId(error.getClientId());
+                mainError.setWorkerId(error.getWorkerId());
+
+                Date dateErrorDate = new Date(error.getErrorDate().getTime());
+                mainError.setErrorDate(dateErrorDate);
+                Date dateErrorDateNeed = new Date(error.getErrorDateNeed().getTime());
+                mainError.setErrorDateNeed(dateErrorDateNeed);
+                mainError.setErrorText(error.getErrorText());
+
+                String strErrorKeeping = new String(error.getErrorKeeping());
+                mainError.setErrorKeeping(strErrorKeeping);
+                mainError.setErrorOle(error.getErrorOle());
+                mainError.setErrorStatus(error.getErrorStatus());
+                mainError.setErrorPlan(error.getErrorPlan().floatValue());
+                mainError.setErrorFact(error.getErrorFact().floatValue());
+
+                String strErrorCorrectionText = new String(error.getErrorCorrectionText());
+                mainError.setErrorCorrectionText(strErrorCorrectionText);
+
+                String strErrorDescription = new String(error.getErrorDescription());
+                mainError.setErrorDescription(strErrorDescription);
+                mainError.setErrorKindId(error.getErrorKindId());
+                mainError.setErrorSeverityId(error.getErrorSeverityId());
+                mainError.setErrorPriority(error.getErrorPriority());
+                mainError.setProjectAccountId(error.getProjectAccountId());
+                mainError.setProjectAccountingWorkId(error.getProjectAccountWorkId());
+                mainErrorRepository.save(mainError);
+            }
+        }
+    }
+
+    public void copyErrorCommentData() {
+        List<ErrorComment> errorCommentList = errorCommentRepository.findAll();
+        for (ErrorComment errorComment : errorCommentList) {
+            Integer errorCommentId = errorComment.getErrorCommentId();
+            if (!mainErrorCommentRepository.existsByErrorCommentId(errorCommentId)) {
+                MainErrorComment mainErrorComment = new MainErrorComment();
+                mainErrorComment.setErrorCommentId(errorComment.getErrorCommentId());
+                mainErrorComment.setErrorId(errorComment.getErrorId());
+                mainErrorComment.setParentErrorCommentId(errorComment.getParentErrorCommentId());
+                mainErrorComment.setAuthorId(errorComment.getAuthorId());
+                mainErrorComment.setAddresseeId(errorComment.getAddresseeId());
+
+                Date dateErrorCommentDate = new Date(errorComment.getErrorCommentDate().getTime());
+                mainErrorComment.setErrorCommentDate(dateErrorCommentDate);
+
+                String strErrorCommentText = new String(errorComment.getErrorCommentText());
+                mainErrorComment.setErrorCommentText(strErrorCommentText);
+                mainErrorComment.setErrorCommentNeedAnswer(errorComment.getErrorCommentNeedAnswer());
+                mainErrorCommentRepository.save(mainErrorComment);
+            }
+        }
+    }
+
+    public void copyErrorStatusData() {
+        List<ErrorStatus> errorStatusList = errorStatusRepository.findAll();
+        for (ErrorStatus errorStatus : errorStatusList) {
+            Integer errorStatusId = errorStatus.getErrorId();
+            if (!mainErrorStatusRepository.existsByErrorId(errorStatusId)) {
+                MainErrorStatus mainErrorStatus = new MainErrorStatus();
+                mainErrorStatus.setErrorId(errorStatus.getErrorId());
+                mainErrorStatus.setErrorTransitId(errorStatus.getErrorTransitId());
+                mainErrorStatusRepository.save(mainErrorStatus);
+            }
+        }
+    }
+
+    public void copyErrorTransitData() {
+        List<ErrorTransit> errorTransitList = errorTransitRepository.findAll();
+        for (ErrorTransit errorTransit : errorTransitList) {
+            Integer errorTransitId = errorTransit.getErrorTransitId();
+            if (!mainErrorTransitRepository.existsByErrorTransitId(errorTransitId)) {
+                MainErrorTransit mainErrorTransit = new MainErrorTransit();
+                mainErrorTransit.setErrorTransitId(errorTransit.getErrorTransitId());
+                mainErrorTransit.setErrorTransitTypeId(errorTransit.getErrorTransitTypeId());
+                mainErrorTransit.setErrorId(errorTransit.getErrorId());
+                mainErrorTransit.setWorkerId(errorTransit.getWorkerId());
+
+                Date dateErrorTransitDate = new Date(errorTransit.getErrorTransitDate().getTime());
+                mainErrorTransit.setErrorTransitDate(dateErrorTransitDate);
+
+                String strErrorTransitText = new String(errorTransit.getErrorTransitText());
+                mainErrorTransit.setErrorTransitText(strErrorTransitText);
+                mainErrorTransit.setErrorTransitPlan(errorTransit.getErrorTransitPlan().floatValue());
+                mainErrorTransit.setErrorTransitFact(errorTransit.getErrorTransitFact().floatValue());
+
+                Date dateErrorTransitDateNeed = new Date(errorTransit.getErrorTransitDateNeed().getTime());
+                mainErrorTransit.setErrorTransitDateNeed(dateErrorTransitDateNeed);
+                mainErrorTransit.setFromWorkerId(errorTransit.getFromWorkerId());
+                mainErrorTransit.setTransitPlanFlag(errorTransit.getTransitPlanFlag());
+                mainErrorTransitRepository.save(mainErrorTransit);
+            }
+        }
+    }
+
+    public void copyErrorLinkData() {
+        List<ErrorLink> errorLinkList = errorLinkRepository.findAll();
+        for (ErrorLink errorLink : errorLinkList) {
+            Integer errorLinkId = errorLink.getErrorLinkId();
+            if (!mainErrorLinkRepository.existsByErrorLinkId(errorLinkId)) {
+                MainErrorLink mainErrorLink = new MainErrorLink();
+                mainErrorLink.setErrorLinkId(errorLink.getErrorLinkId());
+                mainErrorLink.setErrorMainId(errorLink.getErrorMainId());
+                mainErrorLink.setErrorId(errorLink.getErrorId());
+                mainErrorLinkRepository.save(mainErrorLink);
+            }
+        }
+    }
+
+    public void copyWorkNowData() {
+        List<WorkNow> workNowList = workNowRepository.findAll();
+        for (WorkNow workNow : workNowList) {
+            Integer workNowId = workNow.getWorkNowId();
+            if (!mainWorkNowRepository.existsByWorkNowId(workNowId)) {
+                MainWorkNow mainWorkNow = new MainWorkNow();
+                mainWorkNow.setWorkNowId(workNow.getWorkNowId());
+                mainWorkNow.setWorkerId(workNow.getWorkerId());
+                mainWorkNow.setErrorId(workNow.getErrorId());
+
+                Date dateWorkNowDateBeg = new Date(workNow.getWorkNowDateBeg().getTime());
+                mainWorkNow.setWorkNowDateBeg(dateWorkNowDateBeg);
+
+                Date dateWorkNowDateEnd = new Date(workNow.getWorkNowDateEnd().getTime());
+                mainWorkNow.setWorkNowDateEnd(dateWorkNowDateEnd);
+                mainWorkNowRepository.save(mainWorkNow);
             }
         }
     }

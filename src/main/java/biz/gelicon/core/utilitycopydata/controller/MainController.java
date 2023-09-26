@@ -840,6 +840,14 @@ public class MainController {
             }
         });
 
+        CompletableFuture<Void> copyErrorTransit = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorTransitData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorTransit: " + e.getMessage());
+            }
+        });
+
         CompletableFuture<Void> copyErrorType = CompletableFuture.runAsync(() -> {
             try {
                 copyErrorType();
@@ -872,6 +880,16 @@ public class MainController {
             }
         });
 
+        CompletableFuture<Void> copyError = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Error: " + e.getMessage());
+            }
+        });
+
+
+
         CompletableFuture<Void> copyManager = CompletableFuture.runAsync(() -> {
             try {
                 copyManager();
@@ -881,7 +899,10 @@ public class MainController {
         });
 
         CompletableFuture<Void> allOfSecond =
-                CompletableFuture.allOf(copyErrorLink, copyErrorStatus, copyErrorComment, copyWorkNow, copyApplcation, copyErrorType, copyClient, copyErrorTransitType, copyManager, copyProjectAccount, copyProjectAccountType, copyProjectAccountWork);
+                CompletableFuture.allOf(copyErrorLink, copyErrorStatus, copyErrorComment, copyWorkNow,
+                        copyApplcation, copyErrorType, copyClient, copyErrorTransitType,
+                        copyManager, copyProjectAccount, copyProjectAccountType,
+                        copyProjectAccountWork, copyError, copyErrorTransit);
 
         try {
             allOfSecond.get();

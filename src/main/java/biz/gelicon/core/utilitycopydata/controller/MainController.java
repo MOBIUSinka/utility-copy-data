@@ -341,6 +341,25 @@ public class MainController {
             }
         }
     }
+    // Перенос таблицы Application
+    public void copyApplication() {
+
+        List<Application> applicationList = applicationRep.findAll();
+        for (Application application : applicationList) {
+            Integer applicationId = application.getApplicationId();
+            if(!mainApplicationRep.existsByapplicationId(applicationId)){
+                MainApplication mainApplication = new MainApplication();
+                mainApplication.setApplicationId(application.getApplicationId());
+                mainApplication.setApplicationType(application.getApplicationType());
+                mainApplication.setApplicationCode(application.getApplicationCode());
+                mainApplication.setApplicationName(application.getApplicationName());
+                mainApplication.setApplicationExe(application.getApplicationExe());
+                mainApplication.setApplicationBlob(application.getApplicationBlob());
+                mainApplication.setApplicationDesc(application.getApplicationStatus());
+                mainApplicationRep.save(mainApplication);
+            }
+        }
+    }
 
 
     // Юшков

@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "ErrorTransitType")
+@Table(name = "errortransittype")
 public class ErrorTransitType {
     @Id
     @Column(name = "errortransittype_id", nullable = false)

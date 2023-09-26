@@ -248,7 +248,7 @@ public class MainController {
         }
     }
 
-    // Перенос таблицы ErrorTransitType!
+    // Перенос таблицы ErrorTransitType
     public void copyErrorTransitType() {
 
         List<ErrorTransitType> errorTransitTypeList = errorTransitTypeRep.findAll();
@@ -258,16 +258,16 @@ public class MainController {
                 MainErrorTransitType mainErrorTransitType = new MainErrorTransitType();
                 mainErrorTransitType.setErrortransittypeId(errorTransitType.getErrortransittypeId());
                 mainErrorTransitType.setErrortransittypeCode(errorTransitType.getErrortransittypeCode());
-                mainErrorTransitType.setErrortransittypeDescript(errorTransitType.getErrortransittypeDescript());
-                mainErrorTransitType.setErrortransittypeDirection(errorTransitType.getErrortransittypeDirection());
-                mainErrorTransitType.setErrortransittypeModule(errorTransitType.getErrortransittypeModule());
-                mainErrorTransitType.setErrortransittypeClose(errorTransitType.getErrortransittypeClose());
                 mainErrorTransitType.setErrortransittypeName(errorTransitType.getErrortransittypeName());
-                mainErrorTransitType.setErrortransittypeResult(errorTransitType.getErrortransittypeResult());
-                mainErrorTransitType.setErrortransittypeSendtoskv(errorTransitType.getErrortransittypeSendtoskv());
-                mainErrorTransitType.setErrortransittypeNotificexcl(errorTransitType.getErrortransittypeNotificexcl());
+                mainErrorTransitType.setErrortransittypeDirection(errorTransitType.getErrortransittypeDirection());
                 mainErrorTransitType.setTowhomId(errorTransitType.getTowhomId());
                 mainErrorTransitType.setWitherrortransittypeId(errorTransitType.getWitherrortransittypeId());
+                mainErrorTransitType.setErrortransittypeSendtoskv(errorTransitType.getErrortransittypeSendtoskv());
+                mainErrorTransitType.setErrortransittypeDescript(errorTransitType.getErrortransittypeDescript());
+                mainErrorTransitType.setErrortransittypeResult(errorTransitType.getErrortransittypeResult());
+                mainErrorTransitType.setErrortransittypeClose(errorTransitType.getErrortransittypeClose());
+                mainErrorTransitType.setErrortransittypeNotificexcl(errorTransitType.getErrortransittypeNotificexcl());
+                mainErrorTransitType.setErrortransittypeModule(errorTransitType.getErrortransittypeModule());
                 mainErrorTransitTypeRep.save(mainErrorTransitType);
             }
         }

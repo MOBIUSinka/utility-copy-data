@@ -248,7 +248,7 @@ public class MainController {
         }
     }
 
-    // Перенос таблицы ErrorTransitType
+    // Перенос таблицы ErrorTransitType!
     public void copyErrorTransitType() {
 
         List<ErrorTransitType> errorTransitTypeList = errorTransitTypeRep.findAll();

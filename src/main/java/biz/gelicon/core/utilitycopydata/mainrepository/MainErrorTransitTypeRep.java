@@ -5,5 +5,5 @@ import biz.gelicon.core.utilitycopydata.mainmodel.MainErrorTransitType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MainErrorTransitTypeRep extends JpaRepository<MainErrorTransitType, Long> {
-    boolean existsByErrorTransitTypeId(Integer ErrorTransitTypeId);
+    boolean existsByerrortransittypeId(Integer errortransittypeId);
 }

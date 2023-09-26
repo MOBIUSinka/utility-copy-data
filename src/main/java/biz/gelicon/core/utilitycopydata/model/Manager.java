@@ -15,26 +15,27 @@ public class Manager {
 
     @Size(max = 10)
     @Column(name = "worker_id", nullable = false)
-    private Integer worker_id;
+    private Integer workerId;
 
     @Size(max = 10)
     @Column(name = "errortransittype_id", nullable = false)
-    private Integer errortransittype_id;
+    private Integer errortransittypeId;
     @Size(max = 10)
     @Column(name = "project_id", nullable = true)
-    private Integer project_id;
+    private Integer projectId;
     @Size(max = 10)
     @Column(name = "application_id", nullable = true)
-    private Integer application_id;
+    private Integer applicationId;
     @Size(max = 10)
     @Column(name = "projectaccount_id", nullable = true)
-    private Integer projectaccount_id;
+    private Integer projectaccountId;
     @Size(max = 10)
     @Column(name = "projectaccountingwork_id", nullable = true)
-    private Integer projectaccountingwork_id;
+    private Integer projectaccountingworkId;
     @Size(max = 10)
     @Column(name = "department_id", nullable = true)
-    private Integer department_id;
+    private Integer departmentId;
+
 
     public Integer getManagerId() {
         return managerId;
@@ -44,71 +45,71 @@ public class Manager {
         this.managerId = managerId;
     }
 
-    public Integer getWorker_id() {
-        return worker_id;
+    public Integer getWorkerId() {
+        return workerId;
     }
 
-    public void setWorker_id(Integer worker_id) {
-        this.worker_id = worker_id;
+    public void setWorkerId(Integer workerId) {
+        this.workerId = workerId;
     }
 
-    public Integer getErrortransittype_id() {
-        return errortransittype_id;
+    public Integer getErrortransittypeId() {
+        return errortransittypeId;
     }
 
-    public void setErrortransittype_id(Integer errortransittype_id) {
-        this.errortransittype_id = errortransittype_id;
+    public void setErrortransittypeId(Integer errortransittypeId) {
+        this.errortransittypeId = errortransittypeId;
     }
 
-    public Integer getProject_id() {
-        return project_id;
+    public Integer getProjectId() {
+        return projectId;
     }
 
-    public void setProject_id(Integer project_id) {
-        this.project_id = project_id;
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 
-    public Integer getApplication_id() {
-        return application_id;
+    public Integer getApplicationId() {
+        return applicationId;
     }
 
-    public void setApplication_id(Integer application_id) {
-        this.application_id = application_id;
+    public void setApplicationId(Integer applicationId) {
+        this.applicationId = applicationId;
     }
 
-    public Integer getProjectaccount_id() {
-        return projectaccount_id;
+    public Integer getProjectaccountId() {
+        return projectaccountId;
     }
 
-    public void setProjectaccount_id(Integer projectaccount_id) {
-        this.projectaccount_id = projectaccount_id;
+    public void setProjectaccountId(Integer projectaccountId) {
+        this.projectaccountId = projectaccountId;
     }
 
-    public Integer getProjectaccountingwork_id() {
-        return projectaccountingwork_id;
+    public Integer getProjectaccountingworkId() {
+        return projectaccountingworkId;
     }
 
-    public void setProjectaccountingwork_id(Integer projectaccountingwork_id) {
-        this.projectaccountingwork_id = projectaccountingwork_id;
+    public void setProjectaccountingworkId(Integer projectaccountingworkId) {
+        this.projectaccountingworkId = projectaccountingworkId;
     }
 
-    public Integer getDepartment_id() {
-        return department_id;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment_id(Integer department_id) {
-        this.department_id = department_id;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public Manager(Integer managerId, Integer worker_id, Integer errortransittype_id, Integer project_id, Integer application_id, Integer projectaccount_id, Integer projectaccountingwork_id, Integer department_id) {
+    public Manager(Integer managerId, Integer workerId, Integer errortransittypeId, Integer projectId, Integer applicationId, Integer projectaccountId, Integer projectaccountingworkId, Integer departmentId) {
         this.managerId = managerId;
-        this.worker_id = worker_id;
-        this.errortransittype_id = errortransittype_id;
-        this.project_id = project_id;
-        this.application_id = application_id;
-        this.projectaccount_id = projectaccount_id;
-        this.projectaccountingwork_id = projectaccountingwork_id;
-        this.department_id = department_id;
+        this.workerId = workerId;
+        this.errortransittypeId = errortransittypeId;
+        this.projectId = projectId;
+        this.applicationId = applicationId;
+        this.projectaccountId = projectaccountId;
+        this.projectaccountingworkId = projectaccountingworkId;
+        this.departmentId = departmentId;
     }
 
     public Manager() {

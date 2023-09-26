@@ -152,21 +152,21 @@ public class MainController {
         biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ErrorTypeRep errorTypeRep;
+        ErrorTypeRep errorTypeRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ClientRep clientRep;
+        ClientRep clientRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProjectAccountTypeRep projectAccountTypeRep;
+        ProjectAccountTypeRep projectAccountTypeRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProjectAccountRep projectAccountRep;
+        ProjectAccountRep projectAccountRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProjectAccountWorkRep projectAccountWorkRep;
+        ProjectAccountWorkRep projectAccountWorkRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ApplicationRep applicationRep;
+        ApplicationRep applicationRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ErrorTransitTypeRep errorTransitTypeRep;
+        ErrorTransitTypeRep errorTransitTypeRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ManagerRep managerRep;
+        ManagerRep managerRep;
 
         // *
 

@@ -816,8 +816,72 @@ public class MainController {
             }
         });
 
+        CompletableFuture<Void> copyApplcation = CompletableFuture.runAsync(() -> {
+            try {
+                copyApplication();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Application: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyClient = CompletableFuture.runAsync(() -> {
+            try {
+                copyClient();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Client: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorTransitType = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorTransitType();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorTransitType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorType = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorType();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProjectAccountType = CompletableFuture.runAsync(() -> {
+            try {
+                copyProjectAccountType();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProjectAccountType: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProjectAccount = CompletableFuture.runAsync(() -> {
+            try {
+                copyProjectAccount();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProjectAccount: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyProjectAccountWork = CompletableFuture.runAsync(() -> {
+            try {
+                copyProjectAccountWork();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ProjectAccountWork: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyManager = CompletableFuture.runAsync(() -> {
+            try {
+                copyManager();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных Manager: " + e.getMessage());
+            }
+        });
+
         CompletableFuture<Void> allOfSecond =
-                CompletableFuture.allOf(copyErrorLink, copyErrorStatus, copyErrorComment, copyWorkNow);
+                CompletableFuture.allOf(copyErrorLink, copyErrorStatus, copyErrorComment, copyWorkNow, copyApplcation, copyErrorType, copyClient, copyErrorTransitType, copyManager, copyProjectAccount, copyProjectAccountType, copyProjectAccountWork);
 
         try {
             allOfSecond.get();

@@ -760,4 +760,57 @@ public class MainController {
                     .body("Произошла ошибка при выполнении операций: " + e.getMessage());
         }
     }
+
+    @GetMapping("/start-second-process")
+    public ResponseEntity<String> startSecondProcessToCopyData() {
+        List<String> failedOperations = new ArrayList<>();
+
+        CompletableFuture<Void> copyErrorLink = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorLinkData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorLink: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorStatus = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorStatusData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorStatus: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyErrorComment = CompletableFuture.runAsync(() -> {
+            try {
+                copyErrorCommentData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных ErrorComment: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> copyWorkNow = CompletableFuture.runAsync(() -> {
+            try {
+                copyWorkerData();
+            } catch (Exception e) {
+                failedOperations.add("Перенос данных WorkNow: " + e.getMessage());
+            }
+        });
+
+        CompletableFuture<Void> allOfSecond =
+                CompletableFuture.allOf(copyErrorLink, copyErrorStatus, copyErrorComment, copyWorkNow);
+
+        try {
+            allOfSecond.get();
+            if (!failedOperations.isEmpty()) {
+                return ResponseEntity.badRequest()
+                        .body("Не удалось выполнить: \n" + String.join("\n", failedOperations));
+            } else {
+                return ResponseEntity.ok("Все данные были успешно перенесены. ");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
 }

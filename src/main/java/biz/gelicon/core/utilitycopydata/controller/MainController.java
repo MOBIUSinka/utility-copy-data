@@ -253,21 +253,21 @@ public class MainController {
 
         List<ErrorTransitType> errorTransitTypeList = errorTransitTypeRep.findAll();
         for (ErrorTransitType errorTransitType : errorTransitTypeList) {
-            Integer errortransittypeId = errorTransitType.getErrorTransitTypeId();
+            Integer errortransittypeId = errorTransitType.getErrortransittypeId();
             if(!mainErrorTransitTypeRep.existsByerrortransittypeId(errortransittypeId)){
                 MainErrorTransitType mainErrorTransitType = new MainErrorTransitType();
-                mainErrorTransitType.setErrortransittypeId(errorTransitType.getErrorTransitTypeId());
-                mainErrorTransitType.setErrortransittypeCode(errorTransitType.getErrorTransitTypeCode());
-                mainErrorTransitType.setErrortransittypeDescript(errorTransitType.getErrorTransitTypeDescript());
-                mainErrorTransitType.setErrortransittypeDirection(errorTransitType.getErrorTransitTypeDirection());
-                mainErrorTransitType.setErrortransittypeModule(errorTransitType.getErrorTransitTypeModule());
-                mainErrorTransitType.setErrortransittypeClose(errorTransitType.getErrorTransitTypeClose());
-                mainErrorTransitType.setErrortransittypeName(errorTransitType.getErrorTransitTypeName());
-                mainErrorTransitType.setErrortransittypeResult(errorTransitType.getErrorTransitTypeResult());
-                mainErrorTransitType.setErrortransittypeSendtoskv(errorTransitType.getErrorTransitTypeSendtoskv());
-                mainErrorTransitType.setErrortransittypeNotificexcl(errorTransitType.getErrorTransitTypeNotificexcl());
-                mainErrorTransitType.setTowhomId(errorTransitType.getTowHomId());
-                mainErrorTransitType.setWitherrortransittypeId(errorTransitType.getWithErrorTransitTypeId());
+                mainErrorTransitType.setErrortransittypeId(errorTransitType.getErrortransittypeId());
+                mainErrorTransitType.setErrortransittypeCode(errorTransitType.getErrortransittypeCode());
+                mainErrorTransitType.setErrortransittypeDescript(errorTransitType.getErrortransittypeDescript());
+                mainErrorTransitType.setErrortransittypeDirection(errorTransitType.getErrortransittypeDirection());
+                mainErrorTransitType.setErrortransittypeModule(errorTransitType.getErrortransittypeModule());
+                mainErrorTransitType.setErrortransittypeClose(errorTransitType.getErrortransittypeClose());
+                mainErrorTransitType.setErrortransittypeName(errorTransitType.getErrortransittypeName());
+                mainErrorTransitType.setErrortransittypeResult(errorTransitType.getErrortransittypeResult());
+                mainErrorTransitType.setErrortransittypeSendtoskv(errorTransitType.getErrortransittypeSendtoskv());
+                mainErrorTransitType.setErrortransittypeNotificexcl(errorTransitType.getErrortransittypeNotificexcl());
+                mainErrorTransitType.setTowhomId(errorTransitType.getTowhomId());
+                mainErrorTransitType.setWitherrortransittypeId(errorTransitType.getWitherrortransittypeId());
                 mainErrorTransitTypeRep.save(mainErrorTransitType);
             }
         }

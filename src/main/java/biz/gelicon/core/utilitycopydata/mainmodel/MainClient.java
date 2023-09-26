@@ -7,73 +7,65 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "Client")
+@Table(name = "client")
 public class MainClient {
-        @Id
-        @Column(name = "Client_Id", nullable = false)
-        private Integer ClientId;
+    @Id
+    @Column(name = "client_id", nullable = false)
+    private Integer clientId;
 
-        @Size(max = 10)
-        @Column(name = "Client_Code", nullable = true)
-        private String ClientCode;
-        @Size(max = 50)
-        @Column(name = "Client_Name", nullable = false)
-        private String ClientName;
+    @Size(max = 10)
+    @Column(name = "client_code", nullable = true)
+    private String clientCode;
+    @Size(max = 50)
+    @Column(name = "client_name", nullable = false)
+    private String clientName;
 
-        @Size(max = 10)
-        @Column(name = "Client_Status", nullable = false)
-        private Integer ClientStatus;
+    @Size(max = 10)
+    @Column(name = "client_status", nullable = false)
+    private Integer clientStatus;
 
-        @Size(max = 10)
-        @Column(name = "Client_Report_Id", nullable = true)
-        private Integer ClientReportId;
+    @Size(max = 10)
+    @Column(name = "client_report_id", nullable = true)
+    private Integer clientReportId;
 
     public Integer getClientId() {
-        return ClientId;
+        return clientId;
     }
 
     public void setClientId(Integer clientId) {
-        ClientId = clientId;
+        this.clientId = clientId;
     }
 
     public String getClientCode() {
-        return ClientCode;
+        return clientCode;
     }
 
     public void setClientCode(String clientCode) {
-        ClientCode = clientCode;
+        this.clientCode = clientCode;
     }
 
     public String getClientName() {
-        return ClientName;
+        return clientName;
     }
 
     public void setClientName(String clientName) {
-        ClientName = clientName;
+        this.clientName = clientName;
     }
 
     public Integer getClientStatus() {
-        return ClientStatus;
+        return clientStatus;
     }
 
     public void setClientStatus(Integer clientStatus) {
-        ClientStatus = clientStatus;
+        this.clientStatus = clientStatus;
     }
 
     public Integer getClientReportId() {
-        return ClientReportId;
+        return clientReportId;
     }
 
     public void setClientReportId(Integer clientReportId) {
-        ClientReportId = clientReportId;
-    }
-
-    public MainClient(Integer clientId, String clientCode, String clientName, Integer clientStatus, Integer clientReportId) {
-        ClientId = clientId;
-        ClientCode = clientCode;
-        ClientName = clientName;
-        ClientStatus = clientStatus;
-        ClientReportId = clientReportId;
+        this.clientReportId = clientReportId;
     }
 
     public MainClient() {

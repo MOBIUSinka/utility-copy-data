@@ -30,12 +30,11 @@ public class Manager {
     @Column(name = "projectaccount_id", nullable = true)
     private Integer projectaccountId;
     @Size(max = 10)
-    @Column(name = "projectaccountingwork_id", nullable = true)
-    private Integer projectaccountingworkId;
+    @Column(name = "projectaccountwork_id", nullable = true)
+    private Integer projectaccountworkId;
     @Size(max = 10)
     @Column(name = "department_id", nullable = true)
     private Integer departmentId;
-
 
     public Integer getManagerId() {
         return managerId;
@@ -85,12 +84,12 @@ public class Manager {
         this.projectaccountId = projectaccountId;
     }
 
-    public Integer getProjectaccountingworkId() {
-        return projectaccountingworkId;
+    public Integer getProjectaccountworkId() {
+        return projectaccountworkId;
     }
 
-    public void setProjectaccountingworkId(Integer projectaccountingworkId) {
-        this.projectaccountingworkId = projectaccountingworkId;
+    public void setProjectaccountworkId(Integer projectaccountworkId) {
+        this.projectaccountworkId = projectaccountworkId;
     }
 
     public Integer getDepartmentId() {
@@ -101,14 +100,14 @@ public class Manager {
         this.departmentId = departmentId;
     }
 
-    public Manager(Integer managerId, Integer workerId, Integer errortransittypeId, Integer projectId, Integer applicationId, Integer projectaccountId, Integer projectaccountingworkId, Integer departmentId) {
+    public Manager(Integer managerId, Integer workerId, Integer errortransittypeId, Integer projectId, Integer applicationId, Integer projectaccountId, Integer projectaccountworkId, Integer departmentId) {
         this.managerId = managerId;
         this.workerId = workerId;
         this.errortransittypeId = errortransittypeId;
         this.projectId = projectId;
         this.applicationId = applicationId;
         this.projectaccountId = projectaccountId;
-        this.projectaccountingworkId = projectaccountingworkId;
+        this.projectaccountworkId = projectaccountworkId;
         this.departmentId = departmentId;
     }
 

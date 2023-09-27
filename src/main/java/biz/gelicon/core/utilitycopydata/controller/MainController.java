@@ -373,7 +373,7 @@ public class MainController {
                 mainManager.setProjectId(manager.getProjectId());
                 mainManager.setApplicationId(manager.getApplicationId());
                 mainManager.setProjectaccountId(manager.getProjectaccountId());
-                mainManager.setProjectaccountingworkId(manager.getProjectaccountingworkId());
+                mainManager.setProjectaccountingworkId(manager.getProjectaccountworkId());
                 mainManager.setDepartmentId(manager.getDepartmentId());
                 mainManagerRep.save(mainManager);
             }

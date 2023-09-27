@@ -346,10 +346,10 @@ public class MainController {
 
         List<ProjectAccountWork> projectAccountWorkList = projectAccountWorkRep.findAll();
         for (ProjectAccountWork projectAccountWork : projectAccountWorkList) {
-            Integer projectAccountWorkId = projectAccountWork.getProjectaccountingworkId();
+            Integer projectAccountWorkId = projectAccountWork.getProjectaccountworkId();
             if(!mainProjectAccountWorkRep.existsByprojectaccountingworkId(projectAccountWorkId)){
                 MainProjectAccountWork mainProjectAccountWork = new MainProjectAccountWork();
-                mainProjectAccountWork.setProjectaccountingworkId(projectAccountWork.getProjectaccountingworkId());
+                mainProjectAccountWork.setProjectaccountingworkId(projectAccountWork.getProjectaccountworkId());
                 mainProjectAccountWork.setProjectaccountId(projectAccountWork.getProjectaccountId());
                 mainProjectAccountWork.setProjectaccountworkName(projectAccountWork.getProjectaccountworkName());
                 mainProjectAccountWork.setProjectaccountworkReportId(projectAccountWork.getProjectaccountworkReportId());

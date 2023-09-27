@@ -4,5 +4,5 @@ import biz.gelicon.core.utilitycopydata.model.ProjectAccountWork;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProjectAccountWorkRep extends JpaRepository<ProjectAccountWork, Long> {
-    boolean existsByprojectaccountingworkId(Integer projectaccountingworkId);
+    boolean existsByprojectaccountworkId(Integer projectaccountworkId);
 }

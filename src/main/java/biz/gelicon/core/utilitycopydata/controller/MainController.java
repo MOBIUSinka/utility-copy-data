@@ -918,8 +918,8 @@ public class MainController {
         }
     }
 
-    @GetMapping("/start-single-process")
-    public ResponseEntity<String> startSingleProcessToCopyData() {
+    @GetMapping("/start-single-process-project-account-work")
+    public ResponseEntity<String> startSinglePAWProcessToCopyData() {
             try {
                 copyProjectAccountWork();
                 return ResponseEntity.ok("Все данные были успешно перенесены. ");
@@ -928,5 +928,17 @@ public class MainController {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("Произошла ошибка при выполнении операций: " + e.getMessage());
             }
+    }
+
+    @GetMapping("/start-single-process-manager")
+    public ResponseEntity<String> startSingleMProcessToCopyData() {
+        try {
+            copyManager();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
     }
 }

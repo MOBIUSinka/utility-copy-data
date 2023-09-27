@@ -917,4 +917,16 @@ public class MainController {
                     .body("Произошла ошибка при выполнении операций: " + e.getMessage());
         }
     }
+
+    @GetMapping("/start-single-process")
+    public ResponseEntity<String> startSingleProcessToCopyData() {
+            try {
+                copyErrorData();
+                return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+            }
+    }
 }

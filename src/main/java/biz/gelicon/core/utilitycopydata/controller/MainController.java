@@ -921,7 +921,7 @@ public class MainController {
     @GetMapping("/start-single-process")
     public ResponseEntity<String> startSingleProcessToCopyData() {
             try {
-                copyErrorData();
+                copyProjectAccountWork();
                 return ResponseEntity.ok("Все данные были успешно перенесены. ");
 
             } catch (Exception e) {

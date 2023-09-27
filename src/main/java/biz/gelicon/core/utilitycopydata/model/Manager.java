@@ -18,7 +18,7 @@ public class Manager {
     private Integer workerId;
 
     @Size(max = 10)
-    @Column(name = "errortransittype_id", nullable = false)
+    @Column(name = "errortransittype_id", nullable = true)
     private Integer errortransittypeId;
     @Size(max = 10)
     @Column(name = "project_id", nullable = true)

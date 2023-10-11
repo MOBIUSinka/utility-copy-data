@@ -7,152 +7,152 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "ErrorTransitType")
+@Table(name = "errortransittype")
 public class ErrorTransitType {
     @Id
-    @Column(name = "ErrorTransitType_Id", nullable = false)
-    private Integer ErrorTransitTypeId;
+    @Column(name = "errortransittype_id", nullable = false)
+    private Integer errortransittypeId;
 
     @Size(max = 10)
-    @Column(name = "ErrorTransitType_Code", nullable = false)
-    private String ErrorTransitTypeCode;
+    @Column(name = "errortransittype_code", nullable = false)
+    private String errortransittypeCode;
     @Size(max = 50)
-    @Column(name = "ErrorTransitType_Name", nullable = false)
-    private String ErrorTransitTypeName;
+    @Column(name = "errortransittype_name", nullable = false)
+    private String errortransittypeName;
 
-    @Column(name = "ErrorTransitType_Direction", nullable = true)
-    private Integer ErrorTransitTypeDirection;
+    @Column(name = "errortransittype_direction", nullable = true)
+    private Integer errortransittypeDirection;
 
 
-    @Column(name = "TowHom_Id", nullable = false)
-    private Integer TowHomId;
+    @Column(name = "towhom_id", nullable = false)
+    private Integer towhomId;
 
-    @Column(name = "WithErrorTransitType_Id", nullable = true)
-    private Integer WithErrorTransitTypeId;
+    @Column(name = "witherrortransittype_id", nullable = true)
+    private Integer witherrortransittypeId;
 
-    @Column(name = "ErrorTransitType_Sendtoskv", nullable = false)
-    private Integer ErrorTransitTypeSendtoskv;
-    @Column(name = "ErrorTransitType_Module", nullable = false)
-    private Integer ErrorTransitTypeModule;
-    @Column(name = "ErrorTransitType_Result", nullable = false)
-    private Integer ErrorTransitTypeResult;
-    @Column(name = "ErrorTransitType_Descript", nullable = false)
-    private Integer ErrorTransitTypeDescript;
-    @Column(name = "ErrorTransitType_Close", nullable = false)
-    private Integer ErrorTransitTypeClose;
+    @Column(name = "errortransittype_sendtoskv", nullable = false)
+    private Integer errortransittypeSendtoskv;
+    @Column(name = "errortransittype_module", nullable = false)
+    private Integer errortransittypeModule;
+    @Column(name = "errortransittype_result", nullable = false)
+    private Integer errortransittypeResult;
+    @Column(name = "errortransittype_descript", nullable = false)
+    private Integer errortransittypeDescript;
+    @Column(name = "errortransittype_close", nullable = false)
+    private Integer errortransittypeClose;
 
-    @Column(name = "ErrorTransitType_Notificexcl", nullable = false)
-    private Integer ErrorTransitTypeNotificexcl;
+    @Column(name = "errortransittype_notificexcl", nullable = false)
+    private Integer errortransittypeNotificexcl;
 
-    public Integer getErrorTransitTypeId() {
-        return ErrorTransitTypeId;
+    public Integer getErrortransittypeId() {
+        return errortransittypeId;
     }
 
-    public void setErrorTransitTypeId(Integer errorTransitTypeId) {
-        ErrorTransitTypeId = errorTransitTypeId;
+    public void setErrortransittypeId(Integer errortransittypeId) {
+        this.errortransittypeId = errortransittypeId;
     }
 
-    public String getErrorTransitTypeCode() {
-        return ErrorTransitTypeCode;
+    public String getErrortransittypeCode() {
+        return errortransittypeCode;
     }
 
-    public void setErrorTransitTypeCode(String errorTransitTypeCode) {
-        ErrorTransitTypeCode = errorTransitTypeCode;
+    public void setErrortransittypeCode(String errortransittypeCode) {
+        this.errortransittypeCode = errortransittypeCode;
     }
 
-    public String getErrorTransitTypeName() {
-        return ErrorTransitTypeName;
+    public String getErrortransittypeName() {
+        return errortransittypeName;
     }
 
-    public void setErrorTransitTypeName(String errorTransitTypeName) {
-        ErrorTransitTypeName = errorTransitTypeName;
+    public void setErrortransittypeName(String errortransittypeName) {
+        this.errortransittypeName = errortransittypeName;
     }
 
-    public Integer getErrorTransitTypeDirection() {
-        return ErrorTransitTypeDirection;
+    public Integer getErrortransittypeDirection() {
+        return errortransittypeDirection;
     }
 
-    public void setErrorTransitTypeDirection(Integer errorTransitTypeDirection) {
-        ErrorTransitTypeDirection = errorTransitTypeDirection;
+    public void setErrortransittypeDirection(Integer errortransittypeDirection) {
+        this.errortransittypeDirection = errortransittypeDirection;
     }
 
-    public Integer getTowHomId() {
-        return TowHomId;
+    public Integer getTowhomId() {
+        return towhomId;
     }
 
-    public void setTowHomId(Integer towHomId) {
-        TowHomId = towHomId;
+    public void setTowhomId(Integer towhomId) {
+        this.towhomId = towhomId;
     }
 
-    public Integer getWithErrorTransitTypeId() {
-        return WithErrorTransitTypeId;
+    public Integer getWitherrortransittypeId() {
+        return witherrortransittypeId;
     }
 
-    public void setWithErrorTransitTypeId(Integer withErrorTransitTypeId) {
-        WithErrorTransitTypeId = withErrorTransitTypeId;
+    public void setWitherrortransittypeId(Integer witherrortransittypeId) {
+        this.witherrortransittypeId = witherrortransittypeId;
     }
 
-    public Integer getErrorTransitTypeSendtoskv() {
-        return ErrorTransitTypeSendtoskv;
+    public Integer getErrortransittypeSendtoskv() {
+        return errortransittypeSendtoskv;
     }
 
-    public void setErrorTransitTypeSendtoskv(Integer errorTransitTypeSendtoskv) {
-        ErrorTransitTypeSendtoskv = errorTransitTypeSendtoskv;
+    public void setErrortransittypeSendtoskv(Integer errortransittypeSendtoskv) {
+        this.errortransittypeSendtoskv = errortransittypeSendtoskv;
     }
 
-    public Integer getErrorTransitTypeModule() {
-        return ErrorTransitTypeModule;
+    public Integer getErrortransittypeModule() {
+        return errortransittypeModule;
     }
 
-    public void setErrorTransitTypeModule(Integer errorTransitTypeModule) {
-        ErrorTransitTypeModule = errorTransitTypeModule;
+    public void setErrortransittypeModule(Integer errortransittypeModule) {
+        this.errortransittypeModule = errortransittypeModule;
     }
 
-    public Integer getErrorTransitTypeResult() {
-        return ErrorTransitTypeResult;
+    public Integer getErrortransittypeResult() {
+        return errortransittypeResult;
     }
 
-    public void setErrorTransitTypeResult(Integer errorTransitTypeResult) {
-        ErrorTransitTypeResult = errorTransitTypeResult;
+    public void setErrortransittypeResult(Integer errortransittypeResult) {
+        this.errortransittypeResult = errortransittypeResult;
     }
 
-    public Integer getErrorTransitTypeDescript() {
-        return ErrorTransitTypeDescript;
+    public Integer getErrortransittypeDescript() {
+        return errortransittypeDescript;
     }
 
-    public void setErrorTransitTypeDescript(Integer errorTransitTypeDescript) {
-        ErrorTransitTypeDescript = errorTransitTypeDescript;
+    public void setErrortransittypeDescript(Integer errortransittypeDescript) {
+        this.errortransittypeDescript = errortransittypeDescript;
     }
 
-    public Integer getErrorTransitTypeClose() {
-        return ErrorTransitTypeClose;
+    public Integer getErrortransittypeClose() {
+        return errortransittypeClose;
     }
 
-    public void setErrorTransitTypeClose(Integer errorTransitTypeClose) {
-        ErrorTransitTypeClose = errorTransitTypeClose;
+    public void setErrortransittypeClose(Integer errortransittypeClose) {
+        this.errortransittypeClose = errortransittypeClose;
     }
 
-    public Integer getErrorTransitTypeNotificexcl() {
-        return ErrorTransitTypeNotificexcl;
+    public Integer getErrortransittypeNotificexcl() {
+        return errortransittypeNotificexcl;
     }
 
-    public void setErrorTransitTypeNotificexcl(Integer errorTransitTypeNotificexcl) {
-        ErrorTransitTypeNotificexcl = errorTransitTypeNotificexcl;
+    public void setErrortransittypeNotificexcl(Integer errortransittypeNotificexcl) {
+        this.errortransittypeNotificexcl = errortransittypeNotificexcl;
     }
 
-    public ErrorTransitType(Integer errorTransitTypeId, String errorTransitTypeCode, String errorTransitTypeName, Integer errorTransitTypeDirection, Integer towHomId, Integer withErrorTransitTypeId, Integer errorTransitTypeSendtoskv, Integer errorTransitTypeModule, Integer errorTransitTypeResult, Integer errorTransitTypeDescript, Integer errorTransitTypeClose, Integer errorTransitTypeNotificexcl) {
-        ErrorTransitTypeId = errorTransitTypeId;
-        ErrorTransitTypeCode = errorTransitTypeCode;
-        ErrorTransitTypeName = errorTransitTypeName;
-        ErrorTransitTypeDirection = errorTransitTypeDirection;
-        TowHomId = towHomId;
-        WithErrorTransitTypeId = withErrorTransitTypeId;
-        ErrorTransitTypeSendtoskv = errorTransitTypeSendtoskv;
-        ErrorTransitTypeModule = errorTransitTypeModule;
-        ErrorTransitTypeResult = errorTransitTypeResult;
-        ErrorTransitTypeDescript = errorTransitTypeDescript;
-        ErrorTransitTypeClose = errorTransitTypeClose;
-        ErrorTransitTypeNotificexcl = errorTransitTypeNotificexcl;
+    public ErrorTransitType(Integer errortransittypeId, String errortransittypeCode, String errortransittypeName, Integer errortransittypeDirection, Integer towhomId, Integer witherrortransittypeId, Integer errortransittypeSendtoskv, Integer errortransittypeModule, Integer errortransittypeResult, Integer errortransittypeDescript, Integer errortransittypeClose, Integer errortransittypeNotificexcl) {
+        this.errortransittypeId = errortransittypeId;
+        this.errortransittypeCode = errortransittypeCode;
+        this.errortransittypeName = errortransittypeName;
+        this.errortransittypeDirection = errortransittypeDirection;
+        this.towhomId = towhomId;
+        this.witherrortransittypeId = witherrortransittypeId;
+        this.errortransittypeSendtoskv = errortransittypeSendtoskv;
+        this.errortransittypeModule = errortransittypeModule;
+        this.errortransittypeResult = errortransittypeResult;
+        this.errortransittypeDescript = errortransittypeDescript;
+        this.errortransittypeClose = errortransittypeClose;
+        this.errortransittypeNotificexcl = errortransittypeNotificexcl;
     }
 
     public ErrorTransitType() {

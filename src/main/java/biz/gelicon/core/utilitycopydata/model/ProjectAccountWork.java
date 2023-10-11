@@ -10,10 +10,10 @@ import jakarta.validation.constraints.Size;
 @Table(name = "projectaccountwork")
 public class ProjectAccountWork {
     @Id
-    @Column(name = "projectaccountingwork_id", nullable = false)
-    private Integer projectaccountingworkId;
+    @Column(name = "projectaccountwork_id", nullable = false)
+    private Integer projectaccountworkId;
 
-    @Column(name = "projectaccount_id", nullable = true)
+    @Column(name = "projectaccount_id", nullable = false)
     private Integer projectaccountId;
 
     @Size(max = 128)
@@ -24,12 +24,12 @@ public class ProjectAccountWork {
     @Column(name = "projectaccountwork_report_id", nullable = true)
     private Integer projectaccountworkReportId;
 
-    public Integer getProjectaccountingworkId() {
-        return projectaccountingworkId;
+    public Integer getProjectaccountworkId() {
+        return projectaccountworkId;
     }
 
-    public void setProjectaccountingworkId(Integer projectaccountingworkId) {
-        this.projectaccountingworkId = projectaccountingworkId;
+    public void setProjectaccountworkId(Integer projectaccountworkId) {
+        this.projectaccountworkId = projectaccountworkId;
     }
 
     public Integer getProjectaccountId() {
@@ -64,8 +64,8 @@ public class ProjectAccountWork {
         this.projectaccountworkReportId = projectaccountworkReportId;
     }
 
-    public ProjectAccountWork(Integer projectaccountingworkId, Integer projectaccountId, String projectaccountworkName, Integer projectaccountworkStatus, Integer projectaccountworkReportId) {
-        this.projectaccountingworkId = projectaccountingworkId;
+    public ProjectAccountWork(Integer projectaccountworkId, Integer projectaccountId, String projectaccountworkName, Integer projectaccountworkStatus, Integer projectaccountworkReportId) {
+        this.projectaccountworkId = projectaccountworkId;
         this.projectaccountId = projectaccountId;
         this.projectaccountworkName = projectaccountworkName;
         this.projectaccountworkStatus = projectaccountworkStatus;

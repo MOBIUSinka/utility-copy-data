@@ -5,21 +5,26 @@ import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
 import biz.gelicon.core.utilitycopydata.model.Error;
 import biz.gelicon.core.utilitycopydata.repository.*;
-import com.sun.tools.javac.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -152,23 +157,41 @@ public class MainController {
         biz.gelicon.core.utilitycopydata.repository.ProguserGroupRepository proguserGroupRepository;
 
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ErrorTypeRep errorTypeRep;
+        ErrorTypeRep errorTypeRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ClientRep clientRep;
+        ClientRep clientRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProjectAccountTypeRep projectAccountTypeRep;
+        ProjectAccountTypeRep projectAccountTypeRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProjectAccountRep projectAccountRep;
+        ProjectAccountRep projectAccountRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ProjectAccountWorkRep projectAccountWorkRep;
+        ProjectAccountWorkRep projectAccountWorkRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ApplicationRep applicationRep;
+        ApplicationRep applicationRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ErrorTransitTypeRep errorTransitTypeRep;
+        ErrorTransitTypeRep errorTransitTypeRep;
         @Autowired
-        biz.gelicon.core.utilitycopydata.repository.ManagerRep managerRep;
+        ManagerRep managerRep;
 
         // *
+
+    public String decryptBlob(byte[] encryptedBlob, String encryptionKey) throws Exception {
+        // Декодируем ключ из строки (предполагается, что ключ был предварительно закодирован)
+        byte[] decodedKey = Base64.getDecoder().decode(encryptionKey);
+        SecretKey secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+
+        // Создаем объект шифрования
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+
+        // Расшифровываем бинарные данные
+        byte[] decryptedBytes = cipher.doFinal(encryptedBlob);
+
+        // Преобразуем расшифрованные бинарные данные в строку
+        String decryptedString = new String(decryptedBytes, StandardCharsets.UTF_8);
+
+        return decryptedString;
+    }
 
     // Просвирнин
 
@@ -253,21 +276,21 @@ public class MainController {
 
         List<ErrorTransitType> errorTransitTypeList = errorTransitTypeRep.findAll();
         for (ErrorTransitType errorTransitType : errorTransitTypeList) {
-            Integer errortransittypeId = errorTransitType.getErrorTransitTypeId();
+            Integer errortransittypeId = errorTransitType.getErrortransittypeId();
             if(!mainErrorTransitTypeRep.existsByerrortransittypeId(errortransittypeId)){
                 MainErrorTransitType mainErrorTransitType = new MainErrorTransitType();
-                mainErrorTransitType.setErrortransittypeId(errorTransitType.getErrorTransitTypeId());
-                mainErrorTransitType.setErrortransittypeCode(errorTransitType.getErrorTransitTypeCode());
-                mainErrorTransitType.setErrortransittypeDescript(errorTransitType.getErrorTransitTypeDescript());
-                mainErrorTransitType.setErrortransittypeDirection(errorTransitType.getErrorTransitTypeDirection());
-                mainErrorTransitType.setErrortransittypeModule(errorTransitType.getErrorTransitTypeModule());
-                mainErrorTransitType.setErrortransittypeClose(errorTransitType.getErrorTransitTypeClose());
-                mainErrorTransitType.setErrortransittypeName(errorTransitType.getErrorTransitTypeName());
-                mainErrorTransitType.setErrortransittypeResult(errorTransitType.getErrorTransitTypeResult());
-                mainErrorTransitType.setErrortransittypeSendtoskv(errorTransitType.getErrorTransitTypeSendtoskv());
-                mainErrorTransitType.setErrortransittypeNotificexcl(errorTransitType.getErrorTransitTypeNotificexcl());
-                mainErrorTransitType.setTowhomId(errorTransitType.getTowHomId());
-                mainErrorTransitType.setWitherrortransittypeId(errorTransitType.getWithErrorTransitTypeId());
+                mainErrorTransitType.setErrortransittypeId(errorTransitType.getErrortransittypeId());
+                mainErrorTransitType.setErrortransittypeCode(errorTransitType.getErrortransittypeCode());
+                mainErrorTransitType.setErrortransittypeName(errorTransitType.getErrortransittypeName());
+                mainErrorTransitType.setErrortransittypeDirection(errorTransitType.getErrortransittypeDirection());
+                mainErrorTransitType.setTowhomId(errorTransitType.getTowhomId());
+                mainErrorTransitType.setWitherrortransittypeId(errorTransitType.getWitherrortransittypeId());
+                mainErrorTransitType.setErrortransittypeSendtoskv(errorTransitType.getErrortransittypeSendtoskv());
+                mainErrorTransitType.setErrortransittypeDescript(errorTransitType.getErrortransittypeDescript());
+                mainErrorTransitType.setErrortransittypeResult(errorTransitType.getErrortransittypeResult());
+                mainErrorTransitType.setErrortransittypeClose(errorTransitType.getErrortransittypeClose());
+                mainErrorTransitType.setErrortransittypeNotificexcl(errorTransitType.getErrortransittypeNotificexcl());
+                mainErrorTransitType.setErrortransittypeModule(errorTransitType.getErrortransittypeModule());
                 mainErrorTransitTypeRep.save(mainErrorTransitType);
             }
         }
@@ -346,10 +369,10 @@ public class MainController {
 
         List<ProjectAccountWork> projectAccountWorkList = projectAccountWorkRep.findAll();
         for (ProjectAccountWork projectAccountWork : projectAccountWorkList) {
-            Integer projectAccountWorkId = projectAccountWork.getProjectaccountingworkId();
+            Integer projectAccountWorkId = projectAccountWork.getProjectaccountworkId();
             if(!mainProjectAccountWorkRep.existsByprojectaccountingworkId(projectAccountWorkId)){
                 MainProjectAccountWork mainProjectAccountWork = new MainProjectAccountWork();
-                mainProjectAccountWork.setProjectaccountingworkId(projectAccountWork.getProjectaccountingworkId());
+                mainProjectAccountWork.setProjectaccountingworkId(projectAccountWork.getProjectaccountworkId());
                 mainProjectAccountWork.setProjectaccountId(projectAccountWork.getProjectaccountId());
                 mainProjectAccountWork.setProjectaccountworkName(projectAccountWork.getProjectaccountworkName());
                 mainProjectAccountWork.setProjectaccountworkReportId(projectAccountWork.getProjectaccountworkReportId());
@@ -373,7 +396,7 @@ public class MainController {
                 mainManager.setProjectId(manager.getProjectId());
                 mainManager.setApplicationId(manager.getApplicationId());
                 mainManager.setProjectaccountId(manager.getProjectaccountId());
-                mainManager.setProjectaccountingworkId(manager.getProjectaccountingworkId());
+                mainManager.setProjectaccountingworkId(manager.getProjectaccountworkId());
                 mainManager.setDepartmentId(manager.getDepartmentId());
                 mainManagerRep.save(mainManager);
             }
@@ -581,9 +604,193 @@ public class MainController {
         }
     }
 
+    public void copySecondError() {
+        List<MainError> mainErrorList = new ArrayList<>();
+        errorRepository.findAll().forEach(each -> {
+            if (!mainErrorRepository.existsByErrorId(each.getErrorId())){
+                MainError mainError = new MainError();
+                mainError.setErrorId(each.getErrorId());
+                mainError.setErrorTypeId(each.getErrorTypeId());
+                mainError.setProjectId(each.getProjectId());
+                mainError.setClientId(each.getClientId());
+                mainError.setWorkerId(each.getWorkerId());
+
+                Date dateErrorDate = new Date(each.getErrorDate().getTime());
+                mainError.setErrorDate(dateErrorDate);
+                Date dateErrorDateNeed = new Date(each.getErrorDateNeed().getTime());
+                mainError.setErrorDateNeed(dateErrorDateNeed);
+                mainError.setErrorText(each.getErrorText());
+
+                String strErrorKeeping = new String(each.getErrorKeeping());
+                mainError.setErrorKeeping(strErrorKeeping);
+                mainError.setErrorOle(each.getErrorOle());
+                mainError.setErrorStatus(each.getErrorStatus());
+                mainError.setErrorPlan(each.getErrorPlan().floatValue());
+                mainError.setErrorFact(each.getErrorFact().floatValue());
+
+                String strErrorCorrectionText = new String(each.getErrorCorrectionText());
+                mainError.setErrorCorrectionText(strErrorCorrectionText);
+
+                String strErrorDescription = new String(each.getErrorDescription());
+                mainError.setErrorDescription(strErrorDescription);
+                mainError.setErrorKindId(each.getErrorKindId());
+                mainError.setErrorSeverityId(each.getErrorSeverityId());
+                mainError.setErrorPriority(each.getErrorPriority());
+                mainError.setProjectAccountId(each.getProjectAccountId());
+                mainError.setProjectAccountingWorkId(each.getProjectAccountWorkId());
+                mainErrorList.add(mainError);
+            }
+        });
+        mainErrorRepository.saveAll(mainErrorList);
+    }
+
+    @GetMapping("/copy-error-{fromId}-{toId}")
+    public ResponseEntity<String> copyErrorDataParam(@PathVariable(name = "fromId") Integer fromId, @PathVariable(name = "toId") Integer toId) {
+        try {
+            List<Error> errorList = errorRepository.findAllByErrorIdBetween(fromId, toId);
+            for (Error error : errorList) {
+                Integer errorId = error.getErrorId();
+                if (!mainErrorRepository.existsByErrorId(errorId)) {
+                    MainError mainError = new MainError();
+                    mainError.setErrorId(error.getErrorId());
+                    mainError.setErrorTypeId(error.getErrorTypeId());
+                    mainError.setProjectId(error.getProjectId());
+                    mainError.setClientId(error.getClientId());
+                    mainError.setWorkerId(error.getWorkerId());
+
+                    Date dateErrorDate = new Date(error.getErrorDate().getTime());
+                    mainError.setErrorDate(dateErrorDate);
+                    Date dateErrorDateNeed = new Date(error.getErrorDateNeed().getTime());
+                    mainError.setErrorDateNeed(dateErrorDateNeed);
+                    mainError.setErrorText(error.getErrorText());
+
+
+                    if (error.getErrorKeeping() == null) {
+                        mainError.setErrorKeeping(null);
+                    } else {
+                        String strErrorKeepingUTF8 = new String(error.getErrorKeeping(), "Windows-1251");
+                        strErrorKeepingUTF8 = strErrorKeepingUTF8.replace("\u0000", "");
+                        byte[] utfBytes = strErrorKeepingUTF8.getBytes("UTF-8");
+                        String strErrorKeeping = new String(utfBytes, "UTF-8");
+                        mainError.setErrorKeeping(strErrorKeeping);
+                    }
+                    mainError.setErrorOle(error.getErrorOle());
+                    mainError.setErrorStatus(error.getErrorStatus());
+                    if (error.getErrorPlan() == null) {
+                        mainError.setErrorPlan(0.0F);
+                    } else {
+                        mainError.setErrorPlan(error.getErrorPlan().floatValue());
+                    }
+
+                    if (error.getErrorFact() == null) {
+                        mainError.setErrorFact(0.0F);
+                    } else {
+                        mainError.setErrorFact(error.getErrorFact().floatValue());
+                    }
+
+                    if (error.getErrorCorrectionText() == null) {
+                        mainError.setErrorCorrectionText(null);
+                    } else {
+                        String strErrorCorrectionText = new String(error.getErrorCorrectionText());
+                        mainError.setErrorCorrectionText(strErrorCorrectionText);
+                    }
+
+                    if (error.getErrorDescription() == null) {
+                        mainError.setErrorDescription(null);
+                    } else {
+                        String strErrorDescription = new String(error.getErrorDescription());
+                        mainError.setErrorDescription(strErrorDescription);
+                    }
+                    mainError.setErrorKindId(error.getErrorKindId());
+                    mainError.setErrorSeverityId(error.getErrorSeverityId());
+                    mainError.setErrorPriority(error.getErrorPriority());
+                    mainError.setProjectAccountId(error.getProjectAccountId());
+                    mainError.setProjectAccountingWorkId(error.getProjectAccountWorkId());
+                    mainErrorRepository.save(mainError);
+                }
+            }
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    // перенос данных ERRORTRANSIT
+    @GetMapping("/copy-error-transit-{fromId}-{toId}")
+    public ResponseEntity<String> copyErrorTransitDataFromTo(@PathVariable(name = "fromId") Integer fromId, @PathVariable(name = "toId") Integer toId) {
+
+        try {
+            List<ErrorTransit> errorTransitList = errorTransitRepository.findAllByErrorTransitIdBetween(fromId, toId);
+            for (ErrorTransit errorTransit : errorTransitList) {
+                Integer errorTransitId = errorTransit.getErrorTransitId();
+                if (!mainErrorTransitRepository.existsByErrorTransitId(errorTransitId)) {
+                    MainErrorTransit mainErrorTransit = new MainErrorTransit();
+                    mainErrorTransit.setErrorTransitId(errorTransit.getErrorTransitId());
+                    mainErrorTransit.setErrorTransitTypeId(errorTransit.getErrorTransitTypeId());
+                    mainErrorTransit.setErrorId(errorTransit.getErrorId());
+                    mainErrorTransit.setWorkerId(errorTransit.getWorkerId());
+
+                    Date dateErrorTransitDate = new Date(errorTransit.getErrorTransitDate().getTime());
+                    mainErrorTransit.setErrorTransitDate(dateErrorTransitDate);
+
+                    if (errorTransit.getErrorTransitText() == null ||
+                        errorTransit.getErrorTransitText().toString()
+                                .contains("Could not extract column [5] from JDBC ResultSet [invalid BLOB ID [SQLState:42000, ISC error code:335544329]] [n/a]; SQL [n/a]")) {
+                        mainErrorTransit.setErrorTransitText(null);
+                    } else {
+                        try {
+                            String strErrorTransitTextUTF8 = new String(errorTransit.getErrorTransitText(), "Windows-1251");
+                            strErrorTransitTextUTF8 = strErrorTransitTextUTF8.replace("\u0000", "");
+                            byte[] utfBytes = strErrorTransitTextUTF8.getBytes("UTF-8");
+                            String strErrorTransitText = new String(utfBytes, "UTF-8");
+                            mainErrorTransit.setErrorTransitText(strErrorTransitText);
+                        } catch (Exception e) {
+                            mainErrorTransit.setErrorTransitText(null);
+                        }
+                    }
+
+                    if (errorTransit.getErrorTransitPlan() == null) {
+                        mainErrorTransit.setErrorTransitPlan(null);
+                    } else {
+                        mainErrorTransit.setErrorTransitPlan(errorTransit.getErrorTransitPlan().floatValue());
+                    }
+
+                    if (errorTransit.getErrorTransitFact() == null) {
+                        mainErrorTransit.setErrorTransitFact(null);
+                    } else {
+                        mainErrorTransit.setErrorTransitFact(errorTransit.getErrorTransitFact().floatValue());
+
+                    }
+
+                    if (errorTransit.getErrorTransitDateNeed() == null) {
+                        mainErrorTransit.setErrorTransitDateNeed(null);
+                    } else {
+                        Date dateErrorTransitDateNeed = new Date(errorTransit.getErrorTransitDateNeed().getTime());
+                        mainErrorTransit.setErrorTransitDateNeed(dateErrorTransitDateNeed);
+                    }
+                    mainErrorTransit.setFromWorkerId(errorTransit.getFromWorkerId());
+                    mainErrorTransit.setTransitPlanFlag(errorTransit.getTransitPlanFlag());
+                    mainErrorTransitRepository.save(mainErrorTransit);
+                }
+            }
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+
+        }
+    }
+
     public void copyErrorCommentData() {
-        List<ErrorComment> errorCommentList = errorCommentRepository.findAll();
-        for (ErrorComment errorComment : errorCommentList) {
+        Integer maxId = errorCommentRepository.findTopByOrderByErrorCommentIdDesc().getErrorCommentId();
+        List<ErrorComment> errorCommentList = errorCommentRepository.findAllByErrorCommentIdBetween(0, maxId);
+        List<ErrorComment> sortErrorCommentList = errorCommentList.stream()
+                                                                    .sorted(Comparator.comparing(ErrorComment::getErrorCommentId))
+                                                                    .collect(Collectors.toList());
+        for (ErrorComment errorComment : sortErrorCommentList) {
             Integer errorCommentId = errorComment.getErrorCommentId();
             if (!mainErrorCommentRepository.existsByErrorCommentId(errorCommentId)) {
                 MainErrorComment mainErrorComment = new MainErrorComment();
@@ -617,6 +824,28 @@ public class MainController {
         }
     }
 
+    @GetMapping("/copy-single-error-status")
+    public ResponseEntity<String> copySingleErrorStatusData() {
+        try {
+            Integer maxId = errorStatusRepository.findTopByOrderByErrorTransitIdDesc().getErrorTransitId();
+            List<ErrorStatus> errorStatusList = errorStatusRepository.findAllByErrorTransitIdBetween(0, maxId);
+            for (ErrorStatus errorStatus : errorStatusList) {
+                Integer errorStatusId = errorStatus.getErrorId();
+                if (!mainErrorStatusRepository.existsByErrorId(errorStatusId)) {
+                    MainErrorStatus mainErrorStatus = new MainErrorStatus();
+                    mainErrorStatus.setErrorId(errorStatus.getErrorId());
+                    mainErrorStatus.setErrorTransitId(errorStatus.getErrorTransitId());
+                    mainErrorStatusRepository.save(mainErrorStatus);
+                }
+            }
+
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
     public void copyErrorTransitData() {
         List<ErrorTransit> errorTransitList = errorTransitRepository.findAll();
         for (ErrorTransit errorTransit : errorTransitList) {
@@ -631,8 +860,12 @@ public class MainController {
                 Date dateErrorTransitDate = new Date(errorTransit.getErrorTransitDate().getTime());
                 mainErrorTransit.setErrorTransitDate(dateErrorTransitDate);
 
-                String strErrorTransitText = new String(errorTransit.getErrorTransitText());
-                mainErrorTransit.setErrorTransitText(strErrorTransitText);
+                if (errorTransit.getErrorTransitText() == null) {
+                    mainErrorTransit.setErrorTransitText(null);
+                } else {
+                    String strErrorTransitText = new String(errorTransit.getErrorTransitText());
+                    mainErrorTransit.setErrorTransitText(strErrorTransitText);
+                }
                 mainErrorTransit.setErrorTransitPlan(errorTransit.getErrorTransitPlan().floatValue());
                 mainErrorTransit.setErrorTransitFact(errorTransit.getErrorTransitFact().floatValue());
 
@@ -672,8 +905,12 @@ public class MainController {
                 Date dateWorkNowDateBeg = new Date(workNow.getWorkNowDateBeg().getTime());
                 mainWorkNow.setWorkNowDateBeg(dateWorkNowDateBeg);
 
-                Date dateWorkNowDateEnd = new Date(workNow.getWorkNowDateEnd().getTime());
-                mainWorkNow.setWorkNowDateEnd(dateWorkNowDateEnd);
+                if (workNow.getWorkNowDateEnd() == null) {
+                    mainWorkNow.setWorkNowDateEnd(null);
+                } else {
+                    Date dateWorkNowDateEnd = new Date(workNow.getWorkNowDateEnd().getTime());
+                    mainWorkNow.setWorkNowDateEnd(dateWorkNowDateEnd);
+                }
                 mainWorkNowRepository.save(mainWorkNow);
             }
         }
@@ -913,6 +1150,102 @@ public class MainController {
                 return ResponseEntity.ok("Все данные были успешно перенесены. ");
             }
         } catch (InterruptedException | ExecutionException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-single-process-project-account-work")
+    public ResponseEntity<String> startSinglePAWProcessToCopyData() {
+            try {
+                copyProjectAccountWork();
+                return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+            }
+    }
+
+    @GetMapping("/start-single-process-manager")
+    public ResponseEntity<String> startSingleMProcessToCopyData() {
+        try {
+            copyManager();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-single-process-error-transit-type")
+    public ResponseEntity<String> startSingleETTProcessToCopyData() {
+        try {
+            copyErrorTransitType();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-single-process-error-status")
+    public ResponseEntity<String> startSingleESProcessToCopyData() {
+        try {
+            copyErrorStatusData();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-single-process-error")
+    public ResponseEntity<String> startSingleEProcessToCopyData() {
+        try {
+            copySecondError();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-single-process-error-comment")
+    public ResponseEntity<String> startSingleECProcessToCopyData() {
+        try {
+            copyErrorCommentData();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-single-process-work-now")
+    public ResponseEntity<String> startSingleWNProcessToCopyData() {
+        try {
+            copyWorkNowData();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/start-single-process-error-link")
+    public ResponseEntity<String> startSingleELProcessToCopyData() {
+        try {
+            copyErrorLinkData();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Произошла ошибка при выполнении операций: " + e.getMessage());
         }

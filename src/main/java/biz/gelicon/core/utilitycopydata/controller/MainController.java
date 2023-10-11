@@ -5,11 +5,9 @@ import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
 import biz.gelicon.core.utilitycopydata.model.Error;
 import biz.gelicon.core.utilitycopydata.repository.*;
-import com.sun.tools.javac.Main;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
-import java.sql.Time;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Comparator;
@@ -719,6 +717,7 @@ public class MainController {
         }
     }
 
+    // перенос данных ERRORTRANSIT
     @GetMapping("/copy-error-transit-{fromId}-{toId}")
     public ResponseEntity<String> copyErrorTransitDataFromTo(@PathVariable(name = "fromId") Integer fromId, @PathVariable(name = "toId") Integer toId) {
 
@@ -736,7 +735,9 @@ public class MainController {
                     Date dateErrorTransitDate = new Date(errorTransit.getErrorTransitDate().getTime());
                     mainErrorTransit.setErrorTransitDate(dateErrorTransitDate);
 
-                    if (errorTransit.getErrorTransitText() == null) {
+                    if (errorTransit.getErrorTransitText() == null ||
+                        errorTransit.getErrorTransitText().toString()
+                                .contains("Could not extract column [5] from JDBC ResultSet [invalid BLOB ID [SQLState:42000, ISC error code:335544329]] [n/a]; SQL [n/a]")) {
                         mainErrorTransit.setErrorTransitText(null);
                     } else {
                         try {
@@ -745,8 +746,8 @@ public class MainController {
                             byte[] utfBytes = strErrorTransitTextUTF8.getBytes("UTF-8");
                             String strErrorTransitText = new String(utfBytes, "UTF-8");
                             mainErrorTransit.setErrorTransitText(strErrorTransitText);
-                        } catch (UnsupportedEncodingException e) {
-                            mainErrorTransit.setErrorTransitText("Невозможно прочитать текст");
+                        } catch (Exception e) {
+                            mainErrorTransit.setErrorTransitText(null);
                         }
                     }
 
@@ -776,8 +777,10 @@ public class MainController {
             }
             return ResponseEntity.ok("Все данные были успешно перенесены. ");
         } catch (Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+
         }
     }
 

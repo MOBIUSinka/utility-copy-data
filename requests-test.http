@@ -1,0 +1,36 @@
+
+### запуск переноса (1ый)
+GET http://localhost:8080/api/start-process
+
+
+
+
+
+
+
+### перенос Project Account Work
+GET http://localhost:8080/api/start-single-process-project-account-work
+
+### перенос Manager
+GET http://localhost:8080/api/start-single-process-manager
+
+### перенос Error Transit Type
+GET http://localhost:8080/api/start-single-process-error-transit-type
+
+### перенос Error Comment
+GET http://localhost:8080/api/start-single-process-error-comment
+
+### перенос Work Now
+GET http://localhost:8080/api/start-single-process-work-now
+
+### перенос Error copy-error- с ID - до ID
+GET http://localhost:8080/api/copy-error-6700-6730
+
+### перенос Error Link
+GET http://localhost:8080/api/start-single-process-error-link
+
+### перенос Error Transit copy-error-transit- с ID - до ID
+GET http://localhost:8080/api/copy-error-transit-2460-2500
+
+### перенос Error Status
+GET http://localhost:8080/api/start-single-process-error-status

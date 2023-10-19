@@ -153,7 +153,7 @@ public class ErrorTransit {
                         Integer errorId,
                         Integer workerId,
                         Timestamp errorTransitDate,
-                        byte[] errorTransitText,
+                        //  byte[] errorTransitText,
                         Double errorTransitPlan,
                         Double errorTransitFact,
                         Timestamp errorTransitDateNeed,
@@ -164,7 +164,7 @@ public class ErrorTransit {
         this.errorId = errorId;
         this.workerId = workerId;
         this.errorTransitDate = errorTransitDate;
-        ErrorTransitText = errorTransitText;
+        //  ErrorTransitText = errorTransitText;
         ErrorTransitPlan = errorTransitPlan;
         ErrorTransitFact = errorTransitFact;
         ErrorTransitDateNeed = errorTransitDateNeed;

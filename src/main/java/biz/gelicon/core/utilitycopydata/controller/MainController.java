@@ -5,7 +5,11 @@ import biz.gelicon.core.utilitycopydata.mainrepository.*;
 import biz.gelicon.core.utilitycopydata.model.*;
 import biz.gelicon.core.utilitycopydata.model.Error;
 import biz.gelicon.core.utilitycopydata.repository.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.validation.ConstraintViolation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,14 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -173,7 +173,7 @@ public class MainController {
         @Autowired
         ManagerRep managerRep;
 
-        // *
+    // *
 
     public String decryptBlob(byte[] encryptedBlob, String encryptionKey) throws Exception {
         // Декодируем ключ из строки (предполагается, что ключ был предварительно закодирован)
@@ -644,6 +644,7 @@ public class MainController {
         mainErrorRepository.saveAll(mainErrorList);
     }
 
+    // перенос данных ERROR
     @GetMapping("/copy-error-{fromId}-{toId}")
     public ResponseEntity<String> copyErrorDataParam(@PathVariable(name = "fromId") Integer fromId, @PathVariable(name = "toId") Integer toId) {
         try {
@@ -717,12 +718,13 @@ public class MainController {
         }
     }
 
+
     // перенос данных ERRORTRANSIT
     @GetMapping("/copy-error-transit-{fromId}-{toId}")
     public ResponseEntity<String> copyErrorTransitDataFromTo(@PathVariable(name = "fromId") Integer fromId, @PathVariable(name = "toId") Integer toId) {
 
         try {
-            List<ErrorTransit> errorTransitList = errorTransitRepository.findAllByErrorTransitIdBetween(fromId, toId);
+            List<ErrorTransit> errorTransitList = errorTransitRepository.findAllBetweenSQL(fromId, toId);
             for (ErrorTransit errorTransit : errorTransitList) {
                 Integer errorTransitId = errorTransit.getErrorTransitId();
                 if (!mainErrorTransitRepository.existsByErrorTransitId(errorTransitId)) {
@@ -735,20 +737,20 @@ public class MainController {
                     Date dateErrorTransitDate = new Date(errorTransit.getErrorTransitDate().getTime());
                     mainErrorTransit.setErrorTransitDate(dateErrorTransitDate);
 
-                    if (errorTransit.getErrorTransitText() == null ||
-                        errorTransit.getErrorTransitText().toString()
-                                .contains("Could not extract column [5] from JDBC ResultSet [invalid BLOB ID [SQLState:42000, ISC error code:335544329]] [n/a]; SQL [n/a]")) {
-                        mainErrorTransit.setErrorTransitText(null);
-                    } else {
-                        try {
-                            String strErrorTransitTextUTF8 = new String(errorTransit.getErrorTransitText(), "Windows-1251");
+
+                    try {
+                        byte[] strErrorTransitText = errorTransitRepository.findErrorTransitTextByIdSql(mainErrorTransit.getErrorTransitId());
+                        if (strErrorTransitText == null) {
+                            mainErrorTransit.setErrorTransitText(null);
+                        } else {
+                            String strErrorTransitTextUTF8 = new String(strErrorTransitText, "Windows-1251");
                             strErrorTransitTextUTF8 = strErrorTransitTextUTF8.replace("\u0000", "");
                             byte[] utfBytes = strErrorTransitTextUTF8.getBytes("UTF-8");
-                            String strErrorTransitText = new String(utfBytes, "UTF-8");
-                            mainErrorTransit.setErrorTransitText(strErrorTransitText);
-                        } catch (Exception e) {
-                            mainErrorTransit.setErrorTransitText(null);
+                            String stringErrorTransitText = new String(utfBytes, "UTF-8");
+                            mainErrorTransit.setErrorTransitText(stringErrorTransitText);
                         }
+                    } catch (Exception e) {
+                        mainErrorTransit.setErrorTransitText(null);
                     }
 
                     if (errorTransit.getErrorTransitPlan() == null) {

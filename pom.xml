@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>org.firebirdsql.jdbc</groupId>
 			<artifactId>jaybird-jdk17</artifactId>
-			<version>3.0.12</version>
+			<version>4.0.9.java7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>

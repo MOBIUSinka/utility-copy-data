@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -644,7 +645,7 @@ public class MainController {
         mainErrorRepository.saveAll(mainErrorList);
     }
 
-    // перенос данных ERROR
+    // перенос данных ERROR с ID по ID
     @GetMapping("/copy-error-{fromId}-{toId}")
     public ResponseEntity<String> copyErrorDataParam(@PathVariable(name = "fromId") Integer fromId, @PathVariable(name = "toId") Integer toId) {
         try {
@@ -719,7 +720,7 @@ public class MainController {
     }
 
 
-    // перенос данных ERRORTRANSIT
+    // перенос данных ERRORTRANSIT с ID по ID
     @GetMapping("/copy-error-transit-{fromId}-{toId}")
     public ResponseEntity<String> copyErrorTransitDataFromTo(@PathVariable(name = "fromId") Integer fromId, @PathVariable(name = "toId") Integer toId) {
 
@@ -786,7 +787,7 @@ public class MainController {
         }
     }
 
-    public void copyErrorCommentData() {
+    public void copyErrorCommentData() throws UnsupportedEncodingException {
         Integer maxId = errorCommentRepository.findTopByOrderByErrorCommentIdDesc().getErrorCommentId();
         List<ErrorComment> errorCommentList = errorCommentRepository.findAllByErrorCommentIdBetween(0, maxId);
         List<ErrorComment> sortErrorCommentList = errorCommentList.stream()
@@ -805,8 +806,14 @@ public class MainController {
                 Date dateErrorCommentDate = new Date(errorComment.getErrorCommentDate().getTime());
                 mainErrorComment.setErrorCommentDate(dateErrorCommentDate);
 
-                String strErrorCommentText = new String(errorComment.getErrorCommentText());
-                mainErrorComment.setErrorCommentText(strErrorCommentText);
+
+
+                String strErrorCommentTextUTF8 = new String(errorComment.getErrorCommentText(), "Windows-1251");
+                strErrorCommentTextUTF8 = strErrorCommentTextUTF8.replace("\u0000", "");
+                byte[] utfBytes = strErrorCommentTextUTF8.getBytes("UTF-8");
+                String stringErrorCommentText = new String(utfBytes, "UTF-8");
+                mainErrorComment.setErrorCommentText(stringErrorCommentText);
+
                 mainErrorComment.setErrorCommentNeedAnswer(errorComment.getErrorCommentNeedAnswer());
                 mainErrorCommentRepository.save(mainErrorComment);
             }

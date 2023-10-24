@@ -101,6 +101,8 @@ public class MainController {
         MainErrorTransitTypeRep mainErrorTransitTypeRep;
         @Autowired
         MainManagerRep mainManagerRep;
+        @Autowired
+        MainProgUserWorkerRepository mainProgUserWorkerRepository;
 
         // *
 
@@ -140,6 +142,9 @@ public class MainController {
 
         @Autowired
         WorkNowRepository workNowRepository;
+
+        @Autowired
+        ProgUserWorkerRepository progUserWorkerRepository;
 
         ///
 
@@ -925,6 +930,20 @@ public class MainController {
         }
     }
 
+    public void copyProgUserWorker() {
+        List<ProgUserWorker> progUserWorkerList = progUserWorkerRepository.findAll();
+        for (ProgUserWorker progUserWorker : progUserWorkerList) {
+            Integer progUserWorkerId = progUserWorker.getProgUserId();
+            if (!mainProgUserWorkerRepository.existsByProgUserId(progUserWorkerId)) {
+                MainProgUserWorker mainProgUserWorker = new MainProgUserWorker();
+                mainProgUserWorker.setProgUserId(progUserWorker.getProgUserId());
+                mainProgUserWorker.setWorkerId(progUserWorker.getWorkerId());
+
+                mainProgUserWorkerRepository.save(mainProgUserWorker);
+            }
+        }
+    }
+
     @GetMapping("/test")
     public ResponseEntity<String> test() {
         copyWorkerData();
@@ -1257,6 +1276,19 @@ public class MainController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Произошла ошибка при выполнении операций: " + e.getMessage());
+        }
+    }
+
+
+
+    @GetMapping("/start-process-proguserworker")
+    public  ResponseEntity<String> processCopyProgUserWorker() {
+        try {
+            copyProgUserWorker();
+            return ResponseEntity.ok("Все данные были успешно перенесены. ");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Произошла ошибка при выполнении операции: " + e.getMessage());
         }
     }
 }
